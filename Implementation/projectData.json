@@ -1,17 +1,13 @@
 {
-  "Project1": {
-    "KanbanBoard": {
-      "Columns": [
-        {
-          "name": "Todo"
-        },
-        {
-          "name": "Doing"
-        },
-        {
-          "name": "Done"
-        }
-      ]
+  "Column": [
+    {
+      "name": "Todo"
+    },
+    {
+      "name": "Doing"
+    },
+    {
+      "name": "Done"
     }
-  }
+  ]
 }
