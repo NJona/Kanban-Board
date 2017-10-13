@@ -31,7 +31,7 @@ public class ColumnService {
 	private boolean readJSONFile(){
 		JSONParser parser = new JSONParser();
 		try {
-            this.dataObject = parser.parse(new FileReader("../projectData.json"));	
+            this.dataObject = parser.parse(new FileReader("lib/projectData.json"));	
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
