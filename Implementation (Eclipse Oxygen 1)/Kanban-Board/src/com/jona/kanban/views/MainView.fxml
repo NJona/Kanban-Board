@@ -23,19 +23,5 @@ file name : Main.fxml
     <stylesheets>
         <URL value="@../styles/MainStylesheet.css"/>
     </stylesheets>
-
-	    <!--<Text text="Column1" 
-	        GridPane.columnIndex="0" GridPane.rowIndex="1"
-	        GridPane.columnSpan="1"/>
-	    <Text text="Column2" 
-	        GridPane.columnIndex="1" GridPane.rowIndex="1"
-	        GridPane.columnSpan="1"/>
-	    <Text text="Column3" 
-	        GridPane.columnIndex="2" GridPane.rowIndex="1"
-	        GridPane.columnSpan="1"/>
-		<HBox spacing="10" alignment="bottom_right" 
-		        GridPane.columnIndex="3" GridPane.rowIndex="0">
-		        <Button text="Add Column"     
-		        onAction="#handleAddColumnButtonPressed"/>
-		</HBox>-->    	        
+  	        
 </GridPane>

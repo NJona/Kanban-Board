@@ -34,78 +34,52 @@ public class MainController implements Initializable {
 	@FXML private Button[] columnEditNameButton;
 	@FXML private Button toggleLastColumnIsVisible;
 	
-	private boolean lastColumnIsVisible;
 	private int columnLength;
 	
 	private ColumnService columnService;
 	
 	public MainController() throws FileNotFoundException {
-		lastColumnIsVisible = false;
 		columnService = new ColumnService();
 		columnService.loadColumns();
 		columnLength = columnService.getColumnNamesLength();
-	}
-	
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	
+		
     	columnsGridpane = new GridPane[columnLength];
     	columns = new ColumnConstraints[columnLength];
     	columnNameTextLabel = new Text[columnLength];
     	columnNameTextField = new TextField[columnLength];
     	columnEditNameButton = new Button[columnLength];
+	}
+	
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
     	
-    	for(int columnIndex = 0; columnIndex<columnLength;columnIndex++) {    		
-    		columns[columnIndex] = new ColumnConstraints();
-    		columns[columnIndex].setPercentWidth((int)(100 / columnLength));
-    		columns[columnIndex].setHalignment(HPos.CENTER);
+    	for(int columnIndex = 0; columnIndex<columnLength;columnIndex++) {
+    		setColumnProperties(columnIndex);
     		
-    		boardGridpane.getColumnConstraints().add(columns[columnIndex]);
-    		
-    		columnsGridpane[columnIndex] = new GridPane();    		
-    		
-    		if(columnIndex%2==0) {
-    			columnsGridpane[columnIndex].setStyle("-fx-background-color: white;");
-    		}else {
-    			columnsGridpane[columnIndex].setStyle("-fx-background-color: grey;");
-    		}
-    		
-    		columnsGridpane[columnIndex].setVisible(columnService.getColumnIsActive(columnIndex));
-    		
-    		ColumnConstraints columnText = new ColumnConstraints();
-    		columnText.setPercentWidth(90);
-    		ColumnConstraints columnEditTextButton = new ColumnConstraints();
-    		columnEditTextButton.setPercentWidth(10);
-    		
-    		columnsGridpane[columnIndex].getColumnConstraints().addAll(columnText, columnEditTextButton);
-    		
-    		columnNameTextLabel[columnIndex] = new Text(columnService.getColumnName(columnIndex));
-    		columnNameTextField[columnIndex] = new TextField(columnService.getColumnName(columnIndex));
-    		columnNameTextField[columnIndex].setVisible(false);
-    		columnEditNameButton[columnIndex] = new Button("Edit");
-    		columnEditNameButton[columnIndex].setUserData(columnIndex);
-    		columnEditNameButton[columnIndex].setOnAction(new EventHandler<ActionEvent>() {
-        	    @Override public void handle(ActionEvent e) {
-        	        try {
-						handleEditColumnNameButtonPressed(e);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-        	    }
-        	});
-    		columnsGridpane[columnIndex].add(columnNameTextLabel[columnIndex], 0, 0);
-    		columnsGridpane[columnIndex].add(columnNameTextField[columnIndex], 0, 0);
-    		columnsGridpane[columnIndex].add(columnEditNameButton[columnIndex], 1, 0);
-    		
-    		((GridPane) boardGridpane).add(columnsGridpane[columnIndex], columnIndex, 1);
+    		addGridpaneToColumn(columnIndex);
     	}
     
-    	if(columnService.getColumnIsActive(columnLength-1)) {
-    		toggleLastColumnIsVisible = new Button("Delete Column");
+    	createButtonToggleLastColumn();
+    }  
+    
+    private void createButtonToggleLastColumn() {
+    	if(isLastColumnActive()) {
+    		createToggleLastColumnButton("Delete");
     	}else {
-    		toggleLastColumnIsVisible = new Button("Add Column");
+    		createToggleLastColumnButton("Add");
     	}
+    	createEventHandlerForButtonToggleLastColumnButton();
+    	((GridPane) boardGridpane).add(toggleLastColumnIsVisible, columnLength-1, 0);
+		
+	}
+    
+    
+
+	private void createToggleLastColumnButton(String deleteOrAdd) {
+		toggleLastColumnIsVisible = new Button(deleteOrAdd + " Column");
+	}
+
+	private void createEventHandlerForButtonToggleLastColumnButton() {
     	toggleLastColumnIsVisible.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
     	        try {
@@ -116,10 +90,106 @@ public class MainController implements Initializable {
 				}
     	    }
     	});
-    	((GridPane) boardGridpane).add(toggleLastColumnIsVisible, columnLength-1, 0);
-    }  
-    
-    @FXML protected void handleToggleLastColumnButtonPressed(ActionEvent event) throws IOException {
+	}
+
+	private boolean isLastColumnActive() {
+		return columnService.getColumnIsActive(columnLength-1);
+	}
+
+	private void addGridpaneToColumn(int columnIndex) {
+		columnsGridpane[columnIndex] = new GridPane();    		
+		
+		setBackgroundColorForColumn(columnIndex);
+		
+		setVisibilityOfColumn(columnIndex);
+		
+		setColumnElementsWidth(columnIndex);
+		
+		setColumnElements(columnIndex);
+		
+		((GridPane) boardGridpane).add(columnsGridpane[columnIndex], columnIndex, 1);
+		
+	}
+
+	private void setColumnElements(int columnIndex) {
+		addTextLabelColumnName(columnIndex);
+		addTextFieldColumnName(columnIndex);
+		addButtonChangeColumnName(columnIndex);
+	}
+
+	private void addButtonChangeColumnName(int columnIndex) {
+		columnEditNameButton[columnIndex] = new Button("Edit");
+		columnEditNameButton[columnIndex].setUserData(columnIndex);
+		createEventHandlerForButtonEditColumnName(columnIndex);
+		columnsGridpane[columnIndex].add(columnEditNameButton[columnIndex], 1, 0);
+	}
+
+	private void addTextFieldColumnName(int columnIndex) {
+		columnNameTextField[columnIndex] = new TextField(columnService.getColumnName(columnIndex));
+		columnNameTextField[columnIndex].setVisible(false);
+		columnsGridpane[columnIndex].add(columnNameTextField[columnIndex], 0, 0);
+	}
+
+	private void addTextLabelColumnName(int columnIndex) {
+		columnNameTextLabel[columnIndex] = new Text(columnService.getColumnName(columnIndex));
+		columnsGridpane[columnIndex].add(columnNameTextLabel[columnIndex], 0, 0);
+	}
+
+	private void createEventHandlerForButtonEditColumnName(int columnIndex) {
+		columnEditNameButton[columnIndex].setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {
+    	        try {
+					handleEditColumnNameButtonPressed(e);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    	    }
+    	});
+	}
+
+	private void setColumnElementsWidth(int columnIndex) {
+		ColumnConstraints columnName = new ColumnConstraints();
+		columnName.setPercentWidth(90);
+		ColumnConstraints columnEditNameButton = new ColumnConstraints();
+		columnEditNameButton.setPercentWidth(10);
+		columnsGridpane[columnIndex].getColumnConstraints().addAll(columnName, columnEditNameButton);
+	}
+
+	private void setVisibilityOfColumn(int columnIndex) {
+		columnsGridpane[columnIndex].setVisible(columnService.getColumnIsActive(columnIndex));
+	}
+
+	private void setBackgroundColorForColumn(int columnIndex) {
+		if(isColumnIndexEven(columnIndex)) {
+			setBackgroundColorForEvenColumn(columnIndex);	
+		}else {
+			setBackgroundColorForOddColumn(columnIndex);
+		}
+	}
+	
+	private boolean isColumnIndexEven(int columnIndex) {
+		return columnIndex%2==0;
+	}
+
+	private void setBackgroundColorForOddColumn(int columnIndex) {
+		columnsGridpane[columnIndex].setStyle("-fx-background-color: grey;");
+	}
+
+	private void setBackgroundColorForEvenColumn(int columnIndex) {
+		columnsGridpane[columnIndex].setStyle("-fx-background-color: white;");
+	}
+
+	private void setColumnProperties(int columnIndex) {
+		columns[columnIndex] = new ColumnConstraints();
+		columns[columnIndex].setPercentWidth((int)(100 / columnLength));
+		columns[columnIndex].setHalignment(HPos.CENTER);
+		
+		boardGridpane.getColumnConstraints().add(columns[columnIndex]);
+	}
+
+	//Todo: Refactor
+	@FXML protected void handleToggleLastColumnButtonPressed(ActionEvent event) throws IOException {
     	columnService.setColumnIsActive(columnLength-1, !columnService.getColumnIsActive(columnLength-1));
     	columnsGridpane[columnsGridpane.length-1].setVisible(columnService.getColumnIsActive(columnLength-1));
     	if(columnService.getColumnIsActive(columnLength-1)) {
@@ -127,8 +197,9 @@ public class MainController implements Initializable {
     	}else {
     		this.toggleLastColumnIsVisible.setText("Add Column");
     	}
-    	
     } 
+	
+	//Todo: Refactor
     @FXML protected void handleEditColumnNameButtonPressed(ActionEvent event) throws IOException { 
     	int columnIndex = (int) ((Button) event.getSource()).getUserData();
     	if(columnNameTextLabel[columnIndex].isVisible()) {        	

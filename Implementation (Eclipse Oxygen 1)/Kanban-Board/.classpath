@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.7.0_55/jre/lib/jfxrt.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/gson-2.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/JCDP-2.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/json2pojo.jar"/>
@@ -10,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/ormlite-jdbc-5.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/sqlite-jdbc-3.15.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jona/Documents/Projects/Kanban-Board/lib/unirest-java-1.4.9.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_131/jre/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
