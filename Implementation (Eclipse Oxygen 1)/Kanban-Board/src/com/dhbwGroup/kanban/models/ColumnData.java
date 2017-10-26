@@ -1,12 +1,12 @@
 
-package com.jona.kanban.models;
+package com.dhbwGroup.kanban.models;
 
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "column")
-public class Column {
+public class ColumnData {
 
     /**
      * This is compulsory for both the database and to access models
@@ -37,18 +37,18 @@ public class Column {
      * No args constructor for use in serialization
      * 
      */
-    public Column() {
+    public ColumnData() {
     }
 
     /**
      * 
      * @param name
      */
-    public Column(String name) {
+    public ColumnData(String name) {
         super();
         this.name = name;
     }
-    public Column(String name, boolean isActive) {
+    public ColumnData(String name, boolean isActive) {
         super();
         this.name = name;
         this.isActive = isActive;

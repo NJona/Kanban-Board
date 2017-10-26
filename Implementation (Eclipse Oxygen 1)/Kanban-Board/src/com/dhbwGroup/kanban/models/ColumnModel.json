@@ -1,0 +1,13 @@
+{
+    "table": "column",
+    "properties": {
+        "name": {
+            "type": "string",
+            "null": true,
+            "unique": true,
+            "default":"Column",
+            "title":"The Name of the Column"
+        }
+
+    }
+}

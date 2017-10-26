@@ -1,4 +1,4 @@
-package com.jona.kanban;
+package com.dhbwGroup.kanban;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/MainView.fxml"));
-        primaryStage.setTitle("Hello Main");
+        primaryStage.setTitle("Kanban-Board");
 
         primaryStage.setScene(new Scene(root));
         primaryStage.setMaximized(true);
