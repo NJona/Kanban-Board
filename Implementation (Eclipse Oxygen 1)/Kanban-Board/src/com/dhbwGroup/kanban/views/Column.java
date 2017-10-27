@@ -1,8 +1,6 @@
 package com.dhbwGroup.kanban.views;
 
 import com.dhbwGroup.kanban.models.ColumnData;
-
-import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
@@ -50,7 +48,6 @@ public class Column {
 	
 	private void initialize() {
 		setColumnConstraintsDefaults();
-		setVisibilityOfColumn();
 		setColumnGridPaneConstraints();
 		addToGridPane(columnGridPaneElementText.getColumnTextLabel(), 0, 0);
 		addToGridPane(columnGridPaneElementText.getColumnTextField(), 0, 0);
@@ -62,14 +59,9 @@ public class Column {
 		this.columnGridPane.getColumnConstraints().add(columnGridPaneElementText.getColumnConstraints());
 		this.columnGridPane.getColumnConstraints().add(columnGridPaneElementButton.getColumnConstraints());
 	}
-
-	private void setVisibilityOfColumn() {
-		columnGridPane.setVisible(columnData.getIsActive());
-	}
 	
 	public void setColumnConstraintsDefaults() {
 		columnConstraints.setPercentWidth((100 / numberOfColumns));
-		//columnConstraints.setHalignment(HPos.CENTER);
 	}
 	
 	private void addToGridPane(Text columnNameLabel, int columnIndex, int rowIndex) {

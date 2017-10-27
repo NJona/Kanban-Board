@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.TaskData;
 import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
+import com.dhbwGroup.kanban.views.Task;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,44 +35,118 @@ public class MainController implements Initializable {
 	@FXML private Button toggleLastColumnIsVisible;
 	
 	private KanbanService kanbanService;
-	List<ColumnData> columnsData;
+	private List<ColumnData> columnsData;
+	private List<TaskData> tasksData;
 	
 	private List<Column> columns = new ArrayList<Column>();
+	private List<Task> tasks = new ArrayList<Task>();
 	
 	public MainController() throws FileNotFoundException {
 		kanbanService = new KanbanService();
 		columnsData = kanbanService.loadColumnsFromDB();
-		int numberOfColumns = columnsData.size();
-		columnsData.forEach((activeColumn) -> {
-			columns.add(new Column(numberOfColumns, columnsData.indexOf(activeColumn), activeColumn));
-		});;
-		
-		
-		
-		
+		tasksData = kanbanService.loadTasksFromDB();
 	}
 	
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {    	
     	
-    	columns.forEach((activeColumn) -> {
-    		boardGridpane.getColumnConstraints().add(activeColumn.getColumnConstraints());
-    		boardGridpane.add(activeColumn.getColumnGridPane(), columns.indexOf(activeColumn), 1);
-    		activeColumn.getColumnGridPaneElementButton().getToggleChangeColumnName().setOnAction(new EventHandler<ActionEvent>() {
-        	    @Override public void handle(ActionEvent e) {
-        	    	handleEditNameEvent(activeColumn);
-        	    }
-    		});
-    	});
+    	boardGridpane.getStyleClass().add("boardGridpane");
+    	
+    	createColumns();
+    	
+    	createTasks();
 
+    	createButtonToggleLastColumn();
+    }
+    
+    public void moveTask(Task taskToMove, int newColumnIndex) {
+    	//TODO
+    	//update TaskData and save in DB
+    	/*
+    	if(taskToMove.getTaskData().getColumnIndex() != newColumnIndex) {
+        	taskToMove.getTaskData().setColumnIndex(newColumnIndex);
+        	
+        	boardGridpane.getChildren().remove(taskToMove.getTaskGridPane());
+        	boardGridpane.add(taskToMove.getTaskGridPane(), newColumnIndex, getRowIndex(taskToMove));   		
+    	}
+    	*/
+    }
+    
+    private int getRowIndex(Task activeTask) {
+		int numberOfTasksInColumn = columns.get(activeTask.getTaskData().getColumnIndex()).getColumnData().getNumberOfTasks();
+		int rowIndex = numberOfTasksInColumn + 2; // ColumnName and AddColumn Button
+		columns.get(activeTask.getTaskData().getColumnIndex()).getColumnData().setNumberOfTasks(numberOfTasksInColumn +1 );    	
+		return rowIndex;
+    }
+
+	private void createColumns() {
+    	createColumnViewForEeachColumnData();
+    	addEachColumnViewToBoardGridpane();
+    	createEventHandlerForEachEditColumnNameButton();
+	}
+	
+	private void createTasks() {
+    	createTaskViewForEeachTaskData();
+    	addEachTaskViewToBoardGridpane();
+	}
+
+	private void addEachTaskViewToBoardGridpane() {
+		if(!tasks.isEmpty()) {
+	    	tasks.forEach((activeTask) -> {
+	    		int rowIndex = getRowIndex(activeTask);
+	    		boardGridpane.add(activeTask.getTaskGridPane(), activeTask.getTaskData().getColumnIndex(), rowIndex);
+	    	});			
+		}
+	}
+
+	private void createTaskViewForEeachTaskData() {
+		if(!tasksData.isEmpty()) {
+			tasksData.forEach((activeTask) -> {
+				tasks.add(new Task(activeTask));
+			});;			
+		}
+	}
+
+	public void createButtonToggleLastColumn() {
 		if(columns.size() < 4) {
 			toggleLastColumnIsVisible = new Button("Add Column");
 		}else {
 			toggleLastColumnIsVisible = new Button("Delete Column");
 		}
     	createEventHandlerForButtonToggleLastColumnButton();
-    	((GridPane) boardGridpane).add(toggleLastColumnIsVisible, 0, 0);
-    }
+    	boardGridpane.add(toggleLastColumnIsVisible, 0, 0);
+	}
+
+	public void addEachColumnViewToBoardGridpane() {
+		if(!columns.isEmpty()) {
+	    	columns.forEach((activeColumn) -> {
+	    		boardGridpane.getColumnConstraints().add(activeColumn.getColumnConstraints());
+	    		boardGridpane.add(activeColumn.getColumnGridPane(), columns.indexOf(activeColumn), 1);
+	    	});			
+		}
+	}
+
+	public void createColumnViewForEeachColumnData() {
+		int numberOfColumns = columnsData.size();
+		if(!columnsData.isEmpty()) {
+			columnsData.forEach((activeColumn) -> {
+				activeColumn.setNumberOfTasks(0);
+				columns.add(new Column(numberOfColumns, getColumnsData().indexOf(activeColumn), activeColumn));
+			});;			
+		}
+	}
+	
+	public void createEventHandlerForEachEditColumnNameButton() {
+		if(!columns.isEmpty()) {
+	    	columns.forEach((activeColumn) -> {
+	    		activeColumn.getColumnGridPaneElementButton().getToggleChangeColumnName().setOnAction(new EventHandler<ActionEvent>() {
+	        	    @Override public void handle(ActionEvent e) {
+	        	    	handleEditNameEvent(activeColumn);
+	        	    }
+	    		});
+	    	});			
+		}
+	}
 	
 	private void handleEditNameEvent(Column activeColumn) {
         if(activeColumn.getColumnGridPaneElementText().getColumnTextLabel().isVisible()) {
@@ -85,7 +161,7 @@ public class MainController implements Initializable {
 			activeColumn.getColumnGridPaneElementText().getColumnTextField().setVisible(false);
 			activeColumn.getColumnData().setName(activeColumn.getColumnGridPaneElementText().getColumnTextField().getText());
 			activeColumn.getColumnGridPaneElementText().getColumnTextLabel().setText(activeColumn.getColumnGridPaneElementText().getColumnTextField().getText());
-			columnsData.set(activeColumn.getColumnIndex(), activeColumn.getColumnData());
+			getColumnsData().set(activeColumn.getColumnIndex(), activeColumn.getColumnData());
 			try {
 				updateDataBase();
 			} catch (IOException e1) {
@@ -97,8 +173,8 @@ public class MainController implements Initializable {
 
 	public void addColumn(String columnName){
 		ColumnData newColumnData = new ColumnData(columnName);
-		columnsData.add(newColumnData);
-		Column newColumn = new Column(columnsData.size(), columnsData.indexOf(newColumnData), newColumnData);
+		getColumnsData().add(newColumnData);
+		Column newColumn = new Column(getColumnsData().size(), getColumnsData().indexOf(newColumnData), newColumnData);
 		columns.add(newColumn);
 		newColumn.getColumnGridPaneElementButton().getToggleChangeColumnName().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
@@ -111,9 +187,9 @@ public class MainController implements Initializable {
 	}
 	
 	private void removeColumn() {
-		boardGridpane.getColumnConstraints().remove(columnsData.size()-1);
-		boardGridpane.getChildren().remove(columns.get(columnsData.size()-1).getColumnGridPane());
-		columnsData.remove(columnsData.size()-1);
+		boardGridpane.getColumnConstraints().remove(getColumnsData().size()-1);
+		boardGridpane.getChildren().remove(columns.get(getColumnsData().size()-1).getColumnGridPane());
+		getColumnsData().remove(getColumnsData().size()-1);
 		columns.remove(columns.size()-1);
 		updateColumnSize();
 	} 
@@ -151,5 +227,13 @@ public class MainController implements Initializable {
 	
 	private void updateDataBase() throws IOException {
 		kanbanService.saveColumnsToDB(columnsData);
+	}
+
+	public List<ColumnData> getColumnsData() {
+		return columnsData;
+	}
+
+	public void setColumnsData(List<ColumnData> columnsData) {
+		this.columnsData = columnsData;
 	}
 }

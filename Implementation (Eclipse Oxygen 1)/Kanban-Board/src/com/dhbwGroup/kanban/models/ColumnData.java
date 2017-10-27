@@ -30,9 +30,9 @@ public class ColumnData {
      * 
      * 
      */
-    @DatabaseField(columnName = "isActive", canBeNull = true, unique = true)
-    @SerializedName("isActive")
-    private boolean isActive = true;
+    @DatabaseField(columnName = "numberOfTasks", canBeNull = true, unique = true)
+    @SerializedName("numberOfTasks")
+    private int numberOfTasks = 0;
     /**
      * No args constructor for use in serialization
      * 
@@ -48,10 +48,10 @@ public class ColumnData {
         super();
         this.name = name;
     }
-    public ColumnData(String name, boolean isActive) {
+    public ColumnData(String name, int numberOfTasks) {
         super();
         this.name = name;
-        this.isActive = isActive;
+        this.numberOfTasks = numberOfTasks;
     }
 
     public int getId() {
@@ -92,8 +92,8 @@ public class ColumnData {
      * @return
      *     The name
      */
-    public boolean getIsActive() {
-        return isActive;
+    public int getNumberOfTasks() {
+        return numberOfTasks;
     }
 
     /**
@@ -104,8 +104,8 @@ public class ColumnData {
      * @param name
      *     The name
      */
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setNumberOfTasks(int numberOfTasks) {
+        this.numberOfTasks = numberOfTasks;
     }
 
 }

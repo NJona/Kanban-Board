@@ -6,7 +6,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "task")
-public class Task {
+public class TaskData {
 
     /**
      * This is compulsory for both the database and to access models
@@ -41,13 +41,23 @@ public class Task {
      */
     @DatabaseField(columnName = "priority", canBeNull = true, unique = false)
     @SerializedName("priority")
-    private int priority;
-
+    private String priority;
+    
     /**
+     * The ColumnIndex of the Task
+     * <p>
+     * 
+     * 
+     */
+    @DatabaseField(columnName = "columnIndex", canBeNull = false, unique = false)
+    @SerializedName("columnIndex")
+    private int columnIndex;
+
+	/**
      * No args constructor for use in serialization
      * 
      */
-    public Task() {
+    public TaskData() {
     }
 
     /**
@@ -56,7 +66,7 @@ public class Task {
      * @param title
      * @param priority
      */
-    public Task(String title, String description, int priority) {
+    public TaskData(String title, String description, String priority) {
         super();
         this.title = title;
         this.description = description;
@@ -126,7 +136,7 @@ public class Task {
      * @return
      *     The priority
      */
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
@@ -138,8 +148,16 @@ public class Task {
      * @param priority
      *     The priority
      */
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
+    
+    public int getColumnIndex() {
+		return columnIndex;
+	}
+
+	public void setColumnIndex(int columnIndex) {
+		this.columnIndex = columnIndex;
+	}
 
 }

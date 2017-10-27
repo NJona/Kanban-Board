@@ -19,6 +19,7 @@ public class ColumnGridPaneElementButton {
 		this.percentWidth = percentWidth;
 		
 		toggleChangeColumnName = new Button(buttonText);
+		toggleChangeColumnName.getStyleClass().add("columnEditNameButton");
 		columnConstraints = new ColumnConstraints();
 		
 		setColumnConstraintsDefaults(this.percentWidth);

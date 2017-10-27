@@ -19,8 +19,10 @@ public class ColumnGridPaneElementText {
 		
 		columnTextLabel = new Text(this.columnName);
 		columnTextLabel.setVisible(true);
+		columnTextLabel.getStyleClass().add("columnTextLabel");
 		columnTextField = new TextField(this.columnName);
 		columnTextField.setVisible(false);
+		columnTextLabel.getStyleClass().add("columnTextField");
 		columnConstraints = new ColumnConstraints();
 		
 		setColumnConstraintsDefaults(this.percentWidth);
