@@ -10,7 +10,6 @@ import com.dhbwGroup.kanban.views.Column;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.GridPane;
 
 public class ColumnController {
 
@@ -74,18 +73,19 @@ public class ColumnController {
     	    	handleEditNameEvent(newColumn);
     	    }
 		});
+		newColumn.getColumnGridPane().getStyleClass().add("lastColumn");
 		updateColumnSize();
 		updateDataBase();
 		return newColumn;
 	}
 	
-	public GridPane removeColumn() {
-		GridPane gridPaneToRemove = columns.get(getColumnsData().size()-1).getColumnGridPane();
-		columnsData.remove(getColumnsData().size()-1);
-		columns.remove(columns.size()-1);
-		updateColumnSize();
-		updateDataBase();
-		return gridPaneToRemove;
+	public Column removeColumn() {
+			Column columnToRemove = columns.get(getColumnsData().size()-1);
+			columnsData.remove(columnToRemove.getColumnIndex());
+			columns.remove(columnToRemove.getColumnIndex());
+			updateColumnSize();
+			updateDataBase();
+			return columnToRemove;		
 	}
 	
 	private void updateColumnSize() {

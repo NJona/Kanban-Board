@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.dhbwGroup.kanban.views.Column;
 import com.dhbwGroup.kanban.views.Task;
 
 import javafx.event.ActionEvent;
@@ -110,10 +111,14 @@ public class Controller implements Initializable {
 	@FXML protected void handleToggleLastColumnButtonPressed(ActionEvent event) throws IOException {
 		if(columnController.getColumns().size() < 4) {
 			toggleLastColumn.setText("Delete Column");
-			columnController.addColumn("new Column");
+			Column columnToAdd = columnController.addColumn("new Column");
+			boardGridpane.getColumnConstraints().add(columnToAdd.getColumnConstraints());
+			boardGridpane.add(columnToAdd.getColumnGridPane(), columnController.getColumns().indexOf(columnToAdd), 1);
 		}else {
 			toggleLastColumn.setText("Add Column");
-			columnController.removeColumn();
+			Column columnToRemove = columnController.removeColumn();
+			boardGridpane.getColumnConstraints().remove(columnToRemove.getColumnConstraints());
+			boardGridpane.getChildren().remove(columnToRemove.getColumnGridPane());
 		}
     }
 }
