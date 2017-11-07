@@ -1,6 +1,8 @@
 
 package com.dhbwGroup.kanban.models;
 
+import java.util.UUID;
+
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -13,9 +15,17 @@ public class TaskData {
      * 
      */
     @DatabaseField(generatedId = true, columnName = "id")
-    @SerializedName("id")
-    private int id;
-    /**
+    @SerializedName("uuid")
+    private UUID id;
+    public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	/**
      * The Title of the Task
      * <p>
      * 
@@ -31,54 +41,29 @@ public class TaskData {
      * 
      */
     @DatabaseField(columnName = "description", canBeNull = true, unique = false)
-    @SerializedName("description")
+    @SerializedName("content")
     private String description = "Description of the Task";
-    /**
-     * The Priority of the Task
-     * <p>
-     * 
-     * 
-     */
-    @DatabaseField(columnName = "priority", canBeNull = true, unique = false)
-    @SerializedName("priority")
-    private String priority;
     
-    /**
-     * The ColumnIndex of the Task
-     * <p>
-     * 
-     * 
-     */
-    @DatabaseField(columnName = "columnIndex", canBeNull = false, unique = false)
-    @SerializedName("columnIndex")
-    private int columnIndex;
+    @SerializedName("category")
+    private UUID categoryUUID;
+
+	public UUID getCategoryUUID() {
+		return categoryUUID;
+	}
+
+	public void setCategoryUUID(UUID categoryUUID) {
+		this.categoryUUID = categoryUUID;
+	}
 
 	/**
      * No args constructor for use in serialization
      * 
      */
     public TaskData() {
+    	this.id = UUID.randomUUID();
     }
 
-    /**
-     * 
-     * @param description
-     * @param title
-     * @param priority
-     */
-    public TaskData(String title, String description, String priority) {
-        super();
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-    }
 
     /**
      * The Title of the Task
@@ -127,37 +112,5 @@ public class TaskData {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    /**
-     * The Priority of the Task
-     * <p>
-     * 
-     * 
-     * @return
-     *     The priority
-     */
-    public String getPriority() {
-        return priority;
-    }
-
-    /**
-     * The Priority of the Task
-     * <p>
-     * 
-     * 
-     * @param priority
-     *     The priority
-     */
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-    
-    public int getColumnIndex() {
-		return columnIndex;
-	}
-
-	public void setColumnIndex(int columnIndex) {
-		this.columnIndex = columnIndex;
-	}
 
 }

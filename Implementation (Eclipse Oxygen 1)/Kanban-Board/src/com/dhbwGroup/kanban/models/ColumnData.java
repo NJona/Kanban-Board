@@ -1,6 +1,10 @@
 
 package com.dhbwGroup.kanban.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -13,35 +17,67 @@ public class ColumnData {
      * 
      */
     @DatabaseField(generatedId = true, columnName = "id")
-    @SerializedName("id")
-    private int id;
-    /**
+    @SerializedName("uuid")
+    private UUID id;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	/**
      * The Name of the Column
      * <p>
      * 
      * 
      */
     @DatabaseField(columnName = "name", canBeNull = true, unique = true)
-    @SerializedName("name")
+    @SerializedName("title")
     private String name = "Column";
     /**
-     * Number Of Tasks
+     * List Of TaskIDs
      * <p>
      * 
      * 
      */
     @DatabaseField(columnName = "numberOfTasks", canBeNull = true, unique = true)
-    @SerializedName("numberOfTasks")
-    private int numberOfTasks = 0;
-    /**
+    @SerializedName("items")
+    private List<UUID> taskUUIDs = new ArrayList<UUID>();
+    
+	public List<UUID> getTaskUUIDs() {
+		return taskUUIDs;
+	}
+
+	public void setTaskUUIDs(List<UUID> taskUUIDs) {
+		this.taskUUIDs = taskUUIDs;
+	}
+	/**
      * Number Of Tasks
      * <p>
      * 
      * 
      */
     @DatabaseField(columnName = "maxTasks", canBeNull = true, unique = true)
-    @SerializedName("maxTasks")
+    @SerializedName("capacity")
     private int maxTasks = 8;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getMaxTasks() {
+		return maxTasks;
+	}
+
+	public void setMaxTasks(int maxTasks) {
+		this.maxTasks = maxTasks;
+	}
 
 	/**
      * No args constructor for use in serialization
@@ -58,71 +94,11 @@ public class ColumnData {
         super();
         this.name = name;
     }
-    public ColumnData(String name, int numberOfTasks) {
+    public ColumnData(String name, int maxTasks) {
         super();
         this.name = name;
-        this.numberOfTasks = numberOfTasks;
+        this.maxTasks = maxTasks;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-    }
-
-    /**
-     * The Name of the Column
-     * <p>
-     * 
-     * 
-     * @return
-     *     The name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * The Name of the Column
-     * <p>
-     * 
-     * 
-     * @param name
-     *     The name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    /**
-     * The Name of the Column
-     * <p>
-     * 
-     * 
-     * @return
-     *     The name
-     */
-    public int getNumberOfTasks() {
-        return numberOfTasks;
-    }
-
-    /**
-     * The Name of the Column
-     * <p>
-     * 
-     * 
-     * @param name
-     *     The name
-     */
-    public void setNumberOfTasks(int numberOfTasks) {
-        this.numberOfTasks = numberOfTasks;
-    }
-    public int getMaxTasks() {
-		return maxTasks;
-	}
-
-	public void setMaxTasks(int maxTasks) {
-		this.maxTasks = maxTasks;
-	}
 
 }

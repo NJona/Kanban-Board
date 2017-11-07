@@ -5,14 +5,14 @@
 
 
 .MainClass {
+	
+}
 
-
-
-
+.scrollPane {
+	
 }
 
 .columnHBox{
-	-fx-background-color: gray;
 	-fx-vgap: 10px;
 	-fx-hgap: 10px;
 	-fx-padding: 10px;
@@ -21,11 +21,8 @@
 		
 }
 
-.column{
-	-fx-border-color: black;
-	-fx-vgap: 10px;
+.columnHeader{
 	-fx-padding: 20px;
-	-fx-hgap: 0px;
    	-fx-font-family: "Arial ";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
@@ -61,10 +58,10 @@
 
 .task{
 	-fx-border-color: black;
-	-fx-alignment: center;
 	-fx-border-radius: 10px;
 	-fx-border-width: 3px;
 	-fx-padding: 15px;
+	-fx-hgap: 10px;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 	-fx-background-color: linear-gradient(#BF8127, #C98E18);
 	-fx-background-radius: 11px;

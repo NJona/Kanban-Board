@@ -1,7 +1,5 @@
 package com.dhbwGroup.kanban.views;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 

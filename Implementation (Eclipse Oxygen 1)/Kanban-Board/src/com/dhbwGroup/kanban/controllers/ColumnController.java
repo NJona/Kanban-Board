@@ -1,37 +1,34 @@
 package com.dhbwGroup.kanban.controllers;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
 import com.dhbwGroup.kanban.models.ColumnData;
-import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
 import com.dhbwGroup.kanban.views.Task;
 
 public class ColumnController {
 
 	private List<ColumnData> columnsData;
-	private KanbanService kanbanService;
 	
 	private List<Column> columns = new ArrayList<Column>();
 	
 	private TaskController taskController;
 
 	public ColumnController() {
-		kanbanService = new KanbanService();
-		columnsData = kanbanService.loadColumnsFromDB();
-		createColumnViewForEeachColumnData();
 		taskController = new TaskController();
-		addEachTaskViewToBoardGridpane();
+	}
+	
+	public void createColumnViews(List<ColumnData> columnsData) {
+		this.columnsData = columnsData;
+		createColumnViewForEeachColumnData();
 	}
 
 	private void createColumnViewForEeachColumnData() {
 		if(!columnsData.isEmpty()) {
 			columnsData.forEach((activeColumnData) -> {
-				activeColumnData.setNumberOfTasks(0);
 				columns.add(new Column(activeColumnData));
 			});
 		}
@@ -46,64 +43,46 @@ public class ColumnController {
 	}
 	
 	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException, MinColumnsException{
-			if(columnToRemove.getColumnData().getNumberOfTasks() == 0 && columns.size() > 3)
+			if(columnToRemove.getColumnData().getTaskUUIDs().isEmpty() && columns.size() > 3)
 			{
 				columnsData.remove(columnToRemove.getColumnData());
 				columns.remove(columnToRemove);
 				return columnToRemove;				
-			}else if(columnToRemove.getColumnData().getNumberOfTasks() == 0){
+			}else if(columnToRemove.getColumnData().getTaskUUIDs().size() == 0){
 				throw new MinColumnsException();
 			}else {
 					throw new ColumnNotEmptyException();
 			}
 	}
-	
-//------------------Save Kanban-Board-----------------------------------------
-	
-	
-	public void updateDataBase() {
-		try {
-			kanbanService.saveColumnsToDB(columnsData);
-		} catch (IOException e) {
-			System.err.println("ColumnController.updateDataBase()");
-			System.err.println("Can't update Database");
-		}
-	}
-	
+
 	
 //--------------Add Tasks zu Gridpane---------------------
 	
 	
-	private void addEachTaskViewToBoardGridpane() {	//add to columnTaskGridpane
+	public void addEachTaskViewToBoardGridpane() {	//add to columnTaskGridpane
 		if(!taskController.getTasks().isEmpty()) {
-			taskController.getTasks().forEach((activeTask) -> {
-				Column columnToAdd = columns.get(activeTask.getTaskData().getColumnIndex());
-	    		int rowIndex = getRowIndex(columnToAdd);
-	    		columnToAdd.getColumnTaskGridPane().getColumnTaskGridPane().add(activeTask.getTaskGridPane(), 0, rowIndex);
-	    		setNewRowIndex(columnToAdd, rowIndex);
+			columns.forEach((activeColumn) -> {
+				activeColumn.getColumnData().getTaskUUIDs().forEach((taskUUIDToCompare) -> {
+					taskController.getTasks().forEach((activeTask) -> {
+						if(activeTask.getTaskData().getId().equals(taskUUIDToCompare)) {
+							//"Add " + taskUUIDToCompare + "to Column " + columns.indexOf(activeColumn)
+							activeColumn.getColumnTaskGridPane().getColumnTaskGridPane().add(activeTask.getTaskGridPane(), 0, activeColumn.getColumnData().getTaskUUIDs().indexOf(taskUUIDToCompare));
+						}
+					});
+				});
 	    	});			
 		}
 	}
-	
-    private void setNewRowIndex(Column columnToAdd, int rowIndex) {
-    	columnToAdd.getColumnData().setNumberOfTasks(rowIndex + 1);
-		
-	}
-
-	private int getRowIndex(Column columnToAdd) {
-		return columnToAdd.getColumnData().getNumberOfTasks();
-    }
     
 	
 	public boolean addTask() {
 		Column column = columns.get(0);
-		if(column.getColumnData().getNumberOfTasks() < columns.get(0).getColumnData().getMaxTasks()) {
-			Task taskToAdd = taskController.addTask(columns.indexOf(column));
-			int rowIndex = getRowIndex(columns.get(0));
-			column.getColumnTaskGridPane().getColumnTaskGridPane().add(taskToAdd.getTaskGridPane(), 0, rowIndex);
-			setNewRowIndex(column, rowIndex);
+		if(column.getColumnData().getTaskUUIDs().size() < columns.get(0).getColumnData().getMaxTasks()) {
+			Task taskToAdd = taskController.addTask();
+			column.getColumnData().getTaskUUIDs().add(taskToAdd.getTaskData().getId());
+			column.getColumnTaskGridPane().getColumnTaskGridPane().add(taskToAdd.getTaskGridPane(), 0, column.getColumnData().getTaskUUIDs().indexOf(taskToAdd.getTaskData().getId()));
 		}
-		return column.getColumnData().getNumberOfTasks() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
+		return column.getColumnData().getTaskUUIDs().size() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
 	}
 //-------------------------------------------------------------
 	

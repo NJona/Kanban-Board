@@ -1,5 +1,6 @@
 package com.dhbwGroup.kanban.views;
 
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
@@ -18,6 +19,9 @@ public class ColumnTaskGridPane {
 		columnTaskGridPane = new GridPane();
 		rowConstraints = new RowConstraints();
 		rowConstraints.setPercentHeight(90);
+		ColumnConstraints cc = new ColumnConstraints();
+		cc.setPercentWidth(100);
+		columnTaskGridPane.getColumnConstraints().add(cc);
 	}
 
 

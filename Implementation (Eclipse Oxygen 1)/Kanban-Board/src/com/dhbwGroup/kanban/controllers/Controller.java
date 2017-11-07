@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
+import com.dhbwGroup.kanban.models.Project;
+import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
 
 import javafx.event.ActionEvent;
@@ -47,7 +49,9 @@ public class Controller implements Initializable {
 	private ScrollPane scrollPane;
 	private HBox columnHBox;
 	
+	private Project project;
 	
+	private KanbanService kanbanService;
 
 	private ColumnController columnController;
 	
@@ -55,6 +59,7 @@ public class Controller implements Initializable {
 	
 	public Controller() throws FileNotFoundException {
 		columnController = new ColumnController();
+		kanbanService = new KanbanService();
 	}
 	
     @Override
@@ -62,11 +67,10 @@ public class Controller implements Initializable {
     	
     	initializeMenu();
         
-        fullBorderPane.setTop(menuBar);
-        
         scrollPane = new ScrollPane();
     	scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
     	scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+    	scrollPane.getStyleClass().add("scrollPane");
         
         fullBorderPane.setCenter(scrollPane);
     	
@@ -75,10 +79,8 @@ public class Controller implements Initializable {
         scrollPane.setContent(columnHBox);
         
         columnHBox.getStyleClass().add("columnHBox");
-    	
-    	addEachColumnViewToBoardGridpane();
-    	
-    	createEventHandlerForRemoveColumnButton();
+        
+        this.openFile();
     }
 
     
@@ -89,7 +91,12 @@ public class Controller implements Initializable {
 	private void initializeMenu() {
 		createMenuBar();
 		createMenus();
-		createMenuItems();       
+		createMenuItems();  
+		fullBorderPane.setTop(menuBar);
+	}
+	
+	private void createMenuBar() {
+		menuBar = new MenuBar();
 	}
 
 	private void createMenus() {
@@ -141,21 +148,23 @@ public class Controller implements Initializable {
         edit.getItems().addAll(addColumn, addTask);
 	}
 
-	private void createMenuBar() {
-		menuBar = new MenuBar();
-	}
-
 	private void createNewFile() {
-		// TODO Auto-generated method stub
+		columnController.createColumnViews(kanbanService.createNewBoard());
+    	addEachColumnViewToBoardGridpane();
+    	createEventHandlerForRemoveColumnButton();
 	}	
 	
 	private void openFile() {
-		// TODO Auto-generated method stub
+		project = kanbanService.loadProject();
+		columnController.createColumnViews(project.getColumnsData());
+		columnController.getTaskController().createTaskViews(project.getTasksData());
+		columnController.addEachTaskViewToBoardGridpane();
+    	addEachColumnViewToBoardGridpane();
+    	createEventHandlerForRemoveColumnButton();
 	}
 	
 	protected void saveFile() {
-		columnController.updateDataBase();
-		columnController.getTaskController().updateDataBase();
+		kanbanService.saveProject(project);
 	}
 	
 	protected void addColumn() throws IOException{

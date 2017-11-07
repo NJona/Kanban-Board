@@ -16,9 +16,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/MainView.fxml"));
         primaryStage.setTitle("Kanban-Board");
-
-        primaryStage.setScene(new Scene(root));
+        
         primaryStage.setMaximized(true);
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

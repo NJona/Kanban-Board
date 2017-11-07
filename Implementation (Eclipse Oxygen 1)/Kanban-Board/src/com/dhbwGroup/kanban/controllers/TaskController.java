@@ -1,23 +1,25 @@
 package com.dhbwGroup.kanban.controllers;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import com.dhbwGroup.kanban.models.TaskData;
-import com.dhbwGroup.kanban.services.KanbanService;
+
 import com.dhbwGroup.kanban.views.Task;
 
 public class TaskController{
 	
 	private List<TaskData> tasksData;
-	private KanbanService kanbanService;
 	
 	private List<Task> tasks = new ArrayList<Task>();
 
 	public TaskController() {
-		kanbanService = new KanbanService();
-		tasksData = kanbanService.loadTasksFromDB();
+
+	}
+	
+	public void createTaskViews(List<TaskData> tasksData) {
+		this.tasksData = tasksData;
 		createTaskViewForEeachTaskData();
 	}
 	
@@ -29,22 +31,12 @@ public class TaskController{
 		}
 	}
 	
-	public Task addTask(int columnIndex){	
+	public Task addTask(){	
 		TaskData taskData = new TaskData();
-		taskData.setColumnIndex(columnIndex);
 		Task taskToAdd = new Task(taskData);
 		tasks.add(taskToAdd);
 		tasksData.add(taskData);
 		return taskToAdd;
-	}
-	
-	public void updateDataBase() {
-		try {
-			kanbanService.saveTasksToDB(tasksData);
-		} catch (IOException e) {
-			System.err.println("ColumnController.updateDataBase()");
-			System.err.println("Can't update Database");
-		}
 	}
 
 	//Getter and Setter Methods

@@ -12,14 +12,12 @@ public class Task {
 	
 	private Text titleLabel;
 	private Text descriptionLabel;
-	private Text priorityLabel;
 	
 	public Task(TaskData taskData) {
 		this.taskData = taskData;
 		
 		titleLabel = new Text(this.taskData.getTitle());
 		descriptionLabel = new Text(this.taskData.getDescription());
-		priorityLabel = new Text(this.taskData.getPriority());
 		
 		taskGridPane = new GridPane();
 		
@@ -32,13 +30,11 @@ public class Task {
 		this.taskGridPane.getStyleClass().add("task");
 		this.titleLabel.getStyleClass().add("taskTitle");
 		this.descriptionLabel.getStyleClass().add("taskDescription");
-		this.priorityLabel.getStyleClass().add("taskPriority");
 	}
 
 	private void addNodesToGridPane() {
 		taskGridPane.add(titleLabel, 0, 0);
 		taskGridPane.add(descriptionLabel, 0, 1);
-		taskGridPane.add(priorityLabel, 0, 2);
 	}
 
 	public TaskData getTaskData() {
@@ -71,13 +67,5 @@ public class Task {
 
 	public void setDescriptionLabel(Text descriptionLabel) {
 		this.descriptionLabel = descriptionLabel;
-	}
-
-	public Text getPriorityLabel() {
-		return priorityLabel;
-	}
-
-	public void setPriorityLabel(Text priorityLabel) {
-		this.priorityLabel = priorityLabel;
 	}
 }
