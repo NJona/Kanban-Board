@@ -25,7 +25,7 @@ public class ColumnData {
     @SerializedName("name")
     private String name = "Column";
     /**
-     * Is Column Active
+     * Number Of Tasks
      * <p>
      * 
      * 
@@ -34,6 +34,16 @@ public class ColumnData {
     @SerializedName("numberOfTasks")
     private int numberOfTasks = 0;
     /**
+     * Number Of Tasks
+     * <p>
+     * 
+     * 
+     */
+    @DatabaseField(columnName = "maxTasks", canBeNull = true, unique = true)
+    @SerializedName("maxTasks")
+    private int maxTasks = 8;
+
+	/**
      * No args constructor for use in serialization
      * 
      */
@@ -107,5 +117,12 @@ public class ColumnData {
     public void setNumberOfTasks(int numberOfTasks) {
         this.numberOfTasks = numberOfTasks;
     }
+    public int getMaxTasks() {
+		return maxTasks;
+	}
+
+	public void setMaxTasks(int maxTasks) {
+		this.maxTasks = maxTasks;
+	}
 
 }

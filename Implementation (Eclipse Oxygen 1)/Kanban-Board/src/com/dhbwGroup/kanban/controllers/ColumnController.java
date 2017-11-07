@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.dhbwGroup.kanban.views.Task;
 
 public class ColumnController {
 
@@ -17,84 +16,49 @@ public class ColumnController {
 	private KanbanService kanbanService;
 	
 	private List<Column> columns = new ArrayList<Column>();
+	
+	private TaskController taskController;
 
 	public ColumnController() {
 		kanbanService = new KanbanService();
 		columnsData = kanbanService.loadColumnsFromDB();
 		createColumnViewForEeachColumnData();
+		taskController = new TaskController();
+		addEachTaskViewToBoardGridpane();
 	}
-	
+
 	private void createColumnViewForEeachColumnData() {
-		int numberOfColumns = columnsData.size();
 		if(!columnsData.isEmpty()) {
-			columnsData.forEach((activeColumn) -> {
-				activeColumn.setNumberOfTasks(0);
-				columns.add(new Column(numberOfColumns, getColumnsData().indexOf(activeColumn), activeColumn));
-			});;			
-		}
-		createEventHandlerForEachEditColumnNameButton();
-	}
-	
-	private void createEventHandlerForEachEditColumnNameButton() {
-		if(!columns.isEmpty()) {
-	    	columns.forEach((activeColumn) -> {
-	    		activeColumn.getColumnGridPaneElementButton().getToggleChangeColumnName().setOnAction(new EventHandler<ActionEvent>() {
-	        	    @Override public void handle(ActionEvent e) {
-	        	    	handleEditNameEvent(activeColumn);
-	        	    }
-	    		});
-	    	});			
+			columnsData.forEach((activeColumnData) -> {
+				activeColumnData.setNumberOfTasks(0);
+				columns.add(new Column(activeColumnData));
+			});
 		}
 	}
 	
-	private void handleEditNameEvent(Column activeColumn) {
-        if(activeColumn.getColumnGridPaneElementText().getColumnTextLabel().isVisible()) {
-			activeColumn.getColumnGridPaneElementButton().setButtonText("Save");
-			activeColumn.getColumnGridPaneElementText().getColumnTextLabel().setVisible(false);
-			activeColumn.getColumnGridPaneElementText().getColumnTextField().setVisible(true);
-		}else {
-			activeColumn.getColumnGridPaneElementButton().setButtonText("Edit");
-			activeColumn.getColumnGridPaneElementText().getColumnTextLabel().setVisible(true);
-			activeColumn.getColumnGridPaneElementText().getColumnTextField().setVisible(false);
-			activeColumn.getColumnData().setName(activeColumn.getColumnGridPaneElementText().getColumnTextField().getText());
-			activeColumn.getColumnGridPaneElementText().getColumnTextLabel().setText(activeColumn.getColumnGridPaneElementText().getColumnTextField().getText());
-			getColumnsData().set(activeColumn.getColumnIndex(), activeColumn.getColumnData());
-			updateDataBase();
-		}
+	public Column addColumn(String columnName){	
+		ColumnData newColumnData = new ColumnData();
+		Column columnToAdd = new Column(newColumnData);
+		columns.add(columns.size()-1, columnToAdd);
+		columnsData.add(columnsData.size()-1, newColumnData);
+		return columnToAdd;
 	}
 	
-	public Column addColumn(String columnName){
-		ColumnData newColumnData = new ColumnData(columnName);
-		getColumnsData().add(newColumnData);
-		Column newColumn = new Column(getColumnsData().size(), getColumnsData().indexOf(newColumnData), newColumnData);
-		columns.add(newColumn);
-		newColumn.getColumnGridPaneElementButton().getToggleChangeColumnName().setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {
-    	    	handleEditNameEvent(newColumn);
-    	    }
-		});
-		newColumn.getColumnGridPane().getStyleClass().add("lastColumn");
-		updateColumnSize();
-		updateDataBase();
-		return newColumn;
+	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException{
+			if(columnToRemove.getColumnData().getNumberOfTasks() == 0)
+			{
+				columnsData.remove(columnToRemove.getColumnData());
+				columns.remove(columnToRemove);
+				return columnToRemove;				
+			}else {
+					throw new ColumnNotEmptyException();
+			}
 	}
 	
-	public Column removeColumn() {
-			Column columnToRemove = columns.get(getColumnsData().size()-1);
-			columnsData.remove(columnToRemove.getColumnIndex());
-			columns.remove(columnToRemove.getColumnIndex());
-			updateColumnSize();
-			updateDataBase();
-			return columnToRemove;		
-	}
+//------------------Save Kanban-Board-----------------------------------------
 	
-	private void updateColumnSize() {
-		columns.forEach((activeColumn) -> {
-			activeColumn.setNumberOfColumns(columns.size());
-		});
-	}
 	
-	private void updateDataBase() {
+	public void updateDataBase() {
 		try {
 			kanbanService.saveColumnsToDB(columnsData);
 		} catch (IOException e) {
@@ -104,7 +68,51 @@ public class ColumnController {
 	}
 	
 	
+//--------------Add Tasks zu Gridpane---------------------
+	
+	
+	private void addEachTaskViewToBoardGridpane() {	//add to columnTaskGridpane
+		if(!taskController.getTasks().isEmpty()) {
+			taskController.getTasks().forEach((activeTask) -> {
+				Column columnToAdd = columns.get(activeTask.getTaskData().getColumnIndex());
+	    		int rowIndex = getRowIndex(columnToAdd);
+	    		columnToAdd.getColumnTaskGridPane().getColumnTaskGridPane().add(activeTask.getTaskGridPane(), 0, rowIndex);
+	    		setNewRowIndex(columnToAdd, rowIndex);
+	    	});			
+		}
+	}
+	
+    private void setNewRowIndex(Column columnToAdd, int rowIndex) {
+    	columnToAdd.getColumnData().setNumberOfTasks(rowIndex + 1);
+		
+	}
+
+	private int getRowIndex(Column columnToAdd) {
+		return columnToAdd.getColumnData().getNumberOfTasks();
+    }
+    
+	
+	public boolean addTask() {
+		Column column = columns.get(0);
+		if(column.getColumnData().getNumberOfTasks() < columns.get(0).getColumnData().getMaxTasks()) {
+			Task taskToAdd = taskController.addTask(columns.indexOf(column));
+			int rowIndex = getRowIndex(columns.get(0));
+			column.getColumnTaskGridPane().getColumnTaskGridPane().add(taskToAdd.getTaskGridPane(), 0, rowIndex);
+			setNewRowIndex(column, rowIndex);
+		}
+		return column.getColumnData().getNumberOfTasks() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
+	}
+//-------------------------------------------------------------
+	
 	//Getter and Setter Methods
+	
+	public TaskController getTaskController() {
+		return taskController;
+	}
+
+	public void setTaskController(TaskController taskController) {
+		this.taskController = taskController;
+	}
 	
 	public List<ColumnData> getColumnsData() {
 		return columnsData;

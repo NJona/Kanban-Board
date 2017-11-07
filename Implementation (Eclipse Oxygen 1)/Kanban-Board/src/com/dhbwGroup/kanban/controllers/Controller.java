@@ -8,15 +8,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.views.Column;
-import com.dhbwGroup.kanban.views.Task;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 
 /**
@@ -24,101 +29,181 @@ import javafx.scene.layout.GridPane;
  * File name: MainController.java
  */
 public class Controller implements Initializable {
-	@FXML private GridPane boardGridpane;
-	private Button toggleLastColumn;
+	@FXML private BorderPane fullBorderPane;
 	
-	private TaskController taskController;
+	private MenuBar menuBar;
+	
+	private Menu file;
+	private Menu edit;
+	
+	private MenuItem newFile;
+	private MenuItem openFile;
+	private MenuItem saveFile;
+	private MenuItem addColumn;
+	private MenuItem addTask;
+	
+	
+	private ScrollPane scrollPane;
+	private HBox columnHBox;
+	
+	
+
 	private ColumnController columnController;
 	
+	final static int MAXCOLUMNS = 10;
+	
 	public Controller() throws FileNotFoundException {
-		taskController = new TaskController();
 		columnController = new ColumnController();
 	}
 	
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    	
+    public void initialize(URL url, ResourceBundle rb) {   	
     	
-    	boardGridpane.getStyleClass().add("boardGridpane");
+    	initializeMenu();
+        
+        fullBorderPane.setTop(menuBar);
+        
+        scrollPane = new ScrollPane();
+    	scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+    	scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+        
+        fullBorderPane.setCenter(scrollPane);
     	
-    	addEachTaskViewToBoardGridpane();
+        columnHBox = new HBox();
+        
+        scrollPane.setContent(columnHBox);
+        
+        columnHBox.getStyleClass().add("columnHBox");
     	
     	addEachColumnViewToBoardGridpane();
-
-    	createButtonToggleLastColumn();
     	
-    	addButtonToggleLastColumnToGridpane();
+    	createEventHandlerForRemoveColumnButton();
     }
 
+    
+  //-----------------------------------------------------------------------------------	
+  //-------------------------------Menu Bar--------------------------------------------
+  //-----------------------------------------------------------------------------------
+    
+	private void initializeMenu() {
+		createMenuBar();
+		createMenus();
+		createMenuItems();       
+	}
+
+	private void createMenus() {
+        file = new Menu("File");
+        edit = new Menu("Edit");
+        
+        menuBar.getMenus().addAll(file, edit);
+	}
+
+	private void createMenuItems() {
+		//----------File Menu----------------
+        newFile = new MenuItem("New");
+        newFile.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+                   createNewFile();
+               }
+        });
+        openFile = new MenuItem("Open");
+        openFile.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+                   openFile();
+               }
+        });
+        saveFile = new MenuItem("Save");
+        saveFile.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+                   saveFile();
+               }
+        });
+        file.getItems().addAll(newFile, openFile, saveFile);
+        
+        //----------Edit Menu----------------
+        addColumn = new MenuItem("Add Column");
+        addColumn.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+            	try {
+					addColumn();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+               }
+        }); 
+        addTask = new MenuItem("Add Task");
+        addTask.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+					addTask();
+               }
+        }); 
+        edit.getItems().addAll(addColumn, addTask);
+	}
+
+	private void createMenuBar() {
+		menuBar = new MenuBar();
+	}
+
+	private void createNewFile() {
+		// TODO Auto-generated method stub
+	}	
+	
+	private void openFile() {
+		// TODO Auto-generated method stub
+	}
+	
+	protected void saveFile() {
+		columnController.updateDataBase();
+		columnController.getTaskController().updateDataBase();
+	}
+	
+	protected void addColumn() throws IOException{
+		if(columnController.getColumns().size() <= MAXCOLUMNS) {
+			Column columnToAdd = columnController.addColumn("new Column");
+			columnHBox.getChildren().add(columnController.getColumns().indexOf(columnToAdd), columnToAdd.getColumnGridPane());
+			columnToAdd.getColumnHeaderGridPane().getColumnGridPaneElementRemoveButton().getButton().setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {
+    	    	removeColumn(columnToAdd);
+    	    }
+		});
+			if(columnController.getColumns().size() == MAXCOLUMNS) {
+				addColumn.setDisable(true);
+			}
+		}
+    }
+	
+	protected void addTask(){
+		addTask.setDisable(columnController.addTask());
+    }
+	
+	private void removeColumn(Column columnToRemove){
+		try {
+			columnController.handleRemoveColumn(columnToRemove);
+			columnHBox.getChildren().remove(columnToRemove.getColumnGridPane());
+		} catch (ColumnNotEmptyException e) {
+			e.printStackTrace();
+		}		
+	}
+    
 //-----------------------------------------------------------------------------------	
 //-------------------------------Add Views to GridPane-------------------------------
 //-----------------------------------------------------------------------------------
-    
+
 	public void addEachColumnViewToBoardGridpane() {
 		if(!columnController.getColumns().isEmpty()) {
 			columnController.getColumns().forEach((activeColumn) -> {
-	    		boardGridpane.getColumnConstraints().add(activeColumn.getColumnConstraints());
-	    		boardGridpane.add(activeColumn.getColumnGridPane(), columnController.getColumns().indexOf(activeColumn), 1);
-	    	});			
-		}
-	}
-    
-	private void addEachTaskViewToBoardGridpane() {
-		if(!taskController.getTasks().isEmpty()) {
-			taskController.getTasks().forEach((activeTask) -> {
-	    		int rowIndex = getRowIndex(activeTask);
-	    		boardGridpane.add(activeTask.getTaskGridPane(), activeTask.getTaskData().getColumnIndex(), rowIndex);
-	    	});			
+				columnHBox.getChildren().add(activeColumn.getColumnGridPane());
+	    	});	
 		}
 	}
 	
-    private int getRowIndex(Task activeTask) {
-		int numberOfTasksInColumn = columnController.getColumns().get(activeTask.getTaskData().getColumnIndex()).getColumnData().getNumberOfTasks();
-		int rowIndex = numberOfTasksInColumn + 2; // ColumnName and AddColumn Button
-		columnController.getColumns().get(activeTask.getTaskData().getColumnIndex()).getColumnData().setNumberOfTasks(numberOfTasksInColumn +1 );    	
-		return rowIndex;
-    }
-	
-	public void addButtonToggleLastColumnToGridpane() {
-		boardGridpane.add(toggleLastColumn, 0, 0);
-	}
-	
-//-----------------------------------------------------------------------------------	
-//-------------------Methods Button Add / Remove Last Column-------------------------
-//-----------------------------------------------------------------------------------
-	
-	public void createButtonToggleLastColumn() {
-		if(columnController.getColumns().size() < 4) {
-			toggleLastColumn = new Button("Add Column");
-		}else {
-			toggleLastColumn = new Button("Delete Column");
-		}
-    	createEventHandlerForButtonToggleLastColumnButton();
-	}
-	
-	private void createEventHandlerForButtonToggleLastColumnButton() {
-    	toggleLastColumn.setOnAction(new EventHandler<ActionEvent>() {
+	private void createEventHandlerForRemoveColumnButton() {		
+		columnController.getColumns().forEach((activeColumn) -> {
+			activeColumn.getColumnHeaderGridPane().getColumnGridPaneElementRemoveButton().getButton().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
-    	        try {
-					handleToggleLastColumnButtonPressed(e);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+    	    	removeColumn(activeColumn);
     	    }
-    	});
+		});
+		});
 	}
-	
-	@FXML protected void handleToggleLastColumnButtonPressed(ActionEvent event) throws IOException {
-		if(columnController.getColumns().size() < 4) {
-			toggleLastColumn.setText("Delete Column");
-			Column columnToAdd = columnController.addColumn("new Column");
-			boardGridpane.getColumnConstraints().add(columnToAdd.getColumnConstraints());
-			boardGridpane.add(columnToAdd.getColumnGridPane(), columnController.getColumns().indexOf(columnToAdd), 1);
-		}else {
-			toggleLastColumn.setText("Add Column");
-			Column columnToRemove = columnController.removeColumn();
-			boardGridpane.getColumnConstraints().remove(columnToRemove.getColumnConstraints());
-			boardGridpane.getChildren().remove(columnToRemove.getColumnGridPane());
-		}
-    }
 }

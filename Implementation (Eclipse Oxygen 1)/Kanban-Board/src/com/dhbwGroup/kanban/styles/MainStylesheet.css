@@ -11,13 +11,13 @@
 
 }
 
-.boardGridpane{
+.columnHBox{
 	-fx-background-color: gray;
 	-fx-vgap: 10px;
 	-fx-hgap: 10px;
 	-fx-padding: 10px;
 	-fx-alignment: top-center;
-	
+	-fx-height: 100%;
 		
 }
 

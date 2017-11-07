@@ -8,7 +8,7 @@ public class ColumnGridPaneElementButton {
 
 	private ColumnConstraints columnConstraints;
 
-	private Button toggleChangeColumnName;
+	private Button button;
 
 	private String buttonText;
 
@@ -18,8 +18,8 @@ public class ColumnGridPaneElementButton {
 		this.buttonText = buttonText;
 		this.percentWidth = percentWidth;
 		
-		toggleChangeColumnName = new Button(buttonText);
-		toggleChangeColumnName.getStyleClass().add("columnEditNameButton");
+		button = new Button(buttonText);
+		button.getStyleClass().add("columnButton");
 		columnConstraints = new ColumnConstraints();
 		
 		setColumnConstraintsDefaults(this.percentWidth);
@@ -30,12 +30,12 @@ public class ColumnGridPaneElementButton {
 		columnConstraints.setHalignment(HPos.CENTER);
 	}
 	
-	public Button getToggleChangeColumnName() {
-		return toggleChangeColumnName;
+	public Button getButton() {
+		return button;
 	}
 
-	public void setToggleChangeColumnName(Button toggleChangeColumnName) {
-		this.toggleChangeColumnName = toggleChangeColumnName;
+	public void setButton(Button button) {
+		this.button = button;
 	}
 
 	public String getButtonText() {
@@ -44,7 +44,7 @@ public class ColumnGridPaneElementButton {
 
 	public void setButtonText(String buttonText) {
 		this.buttonText = buttonText;
-		this.toggleChangeColumnName.setText(this.buttonText);
+		this.button.setText(this.buttonText);
 	}
 	
 	public ColumnConstraints getColumnConstraints() {

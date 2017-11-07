@@ -1,5 +1,6 @@
 package com.dhbwGroup.kanban.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,24 @@ public class TaskController{
 			tasksData.forEach((activeTask) -> {
 				tasks.add(new Task(activeTask));
 			});;			
+		}
+	}
+	
+	public Task addTask(int columnIndex){	
+		TaskData taskData = new TaskData();
+		taskData.setColumnIndex(columnIndex);
+		Task taskToAdd = new Task(taskData);
+		tasks.add(taskToAdd);
+		tasksData.add(taskData);
+		return taskToAdd;
+	}
+	
+	public void updateDataBase() {
+		try {
+			kanbanService.saveTasksToDB(tasksData);
+		} catch (IOException e) {
+			System.err.println("ColumnController.updateDataBase()");
+			System.err.println("Can't update Database");
 		}
 	}
 

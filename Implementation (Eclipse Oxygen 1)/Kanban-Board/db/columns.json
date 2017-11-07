@@ -1,1 +1,1 @@
-[{"id":0,"name":"Todo","numberOfTasks":1},{"id":0,"name":"Doing","numberOfTasks":1},{"id":0,"name":"Done12","numberOfTasks":2}]
+[{"id":0,"name":"Todo","numberOfTasks":5,"maxTasks":8},{"id":0,"name":"Doing","numberOfTasks":0,"maxTasks":1},{"id":0,"name":"Coffee","numberOfTasks":0,"maxTasks":8},{"id":0,"name":"Done","numberOfTasks":0,"maxTasks":9999}]
