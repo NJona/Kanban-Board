@@ -89,11 +89,11 @@ public class KanbanService{
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				return null;
+				return new ArrayList<TaskData>();
 			}
 		}catch(FileNotFoundException e) {
             System.err.println("Cant't find File!");
-            return null;
+            return new ArrayList<TaskData>();
         }	
 	}
 	

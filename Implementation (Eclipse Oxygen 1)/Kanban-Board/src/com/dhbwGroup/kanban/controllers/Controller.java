@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
+import com.dhbwGroup.kanban.exceptions.MinColumnsException;
 import com.dhbwGroup.kanban.views.Column;
 
 import javafx.event.ActionEvent;
@@ -176,11 +177,14 @@ public class Controller implements Initializable {
 		addTask.setDisable(columnController.addTask());
     }
 	
-	private void removeColumn(Column columnToRemove){
+	private void removeColumn(Column columnToRemove) {
 		try {
 			columnController.handleRemoveColumn(columnToRemove);
 			columnHBox.getChildren().remove(columnToRemove.getColumnGridPane());
 		} catch (ColumnNotEmptyException e) {
+			e.printStackTrace();
+		} catch (MinColumnsException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}

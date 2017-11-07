@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
+import com.dhbwGroup.kanban.exceptions.MinColumnsException;
 import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
@@ -44,12 +45,14 @@ public class ColumnController {
 		return columnToAdd;
 	}
 	
-	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException{
-			if(columnToRemove.getColumnData().getNumberOfTasks() == 0)
+	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException, MinColumnsException{
+			if(columnToRemove.getColumnData().getNumberOfTasks() == 0 && columns.size() > 3)
 			{
 				columnsData.remove(columnToRemove.getColumnData());
 				columns.remove(columnToRemove);
 				return columnToRemove;				
+			}else if(columnToRemove.getColumnData().getNumberOfTasks() == 0){
+				throw new MinColumnsException();
 			}else {
 					throw new ColumnNotEmptyException();
 			}
