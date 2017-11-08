@@ -149,17 +149,23 @@ public class Controller implements Initializable {
 	}
 
 	private void createNewFile() {
-		columnController.createColumnViews(kanbanService.createNewBoard());
-    	addEachColumnViewToBoardGridpane();
-    	createEventHandlerForRemoveColumnButton();
+		columnHBox = new HBox();
+		scrollPane.setContent(columnHBox);
+		columnHBox.getStyleClass().add("columnHBox");
+		project = kanbanService.createNewBoard();
+		initializeColumnAndTasks();
 	}	
 	
 	private void openFile() {
 		project = kanbanService.loadProject();
+		initializeColumnAndTasks();
+	}
+	
+	private void initializeColumnAndTasks() {
 		columnController.createColumnViews(project.getColumnsData());
 		columnController.getTaskController().createTaskViews(project.getTasksData());
-		columnController.addEachTaskViewToBoardGridpane();
-    	addEachColumnViewToBoardGridpane();
+		columnController.addEachTaskViewToColumnView();
+    	addEachColumnViewToMainHBox();
     	createEventHandlerForRemoveColumnButton();
 	}
 	
@@ -202,7 +208,7 @@ public class Controller implements Initializable {
 //-------------------------------Add Views to GridPane-------------------------------
 //-----------------------------------------------------------------------------------
 
-	public void addEachColumnViewToBoardGridpane() {
+	public void addEachColumnViewToMainHBox() {
 		if(!columnController.getColumns().isEmpty()) {
 			columnController.getColumns().forEach((activeColumn) -> {
 				columnHBox.getChildren().add(activeColumn.getColumnGridPane());

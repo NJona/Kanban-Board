@@ -13,12 +13,13 @@ public class ColumnController {
 
 	private List<ColumnData> columnsData;
 	
-	private List<Column> columns = new ArrayList<Column>();
+	private List<Column> columns;
 	
 	private TaskController taskController;
 
 	public ColumnController() {
 		taskController = new TaskController();
+		columns = new ArrayList<Column>();
 	}
 	
 	public void createColumnViews(List<ColumnData> columnsData) {
@@ -27,6 +28,7 @@ public class ColumnController {
 	}
 
 	private void createColumnViewForEeachColumnData() {
+		columns = new ArrayList<Column>();
 		if(!columnsData.isEmpty()) {
 			columnsData.forEach((activeColumnData) -> {
 				columns.add(new Column(activeColumnData));
@@ -59,7 +61,7 @@ public class ColumnController {
 //--------------Add Tasks zu Gridpane---------------------
 	
 	
-	public void addEachTaskViewToBoardGridpane() {	//add to columnTaskGridpane
+	public void addEachTaskViewToColumnView() {	//add to columnTaskGridpane
 		if(!taskController.getTasks().isEmpty()) {
 			columns.forEach((activeColumn) -> {
 				activeColumn.getColumnData().getTaskUUIDs().forEach((taskUUIDToCompare) -> {

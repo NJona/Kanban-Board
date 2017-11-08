@@ -28,8 +28,8 @@ public class KanbanService{
 		standardColumns.add(new ColumnData("Done", 10000));
 	}
 	
-	public List<ColumnData> createNewBoard(){
-		return standardColumns;
+	public Project createNewBoard(){
+		return new Project(standardColumns);
 	}
 	
 	public Project loadProject() {

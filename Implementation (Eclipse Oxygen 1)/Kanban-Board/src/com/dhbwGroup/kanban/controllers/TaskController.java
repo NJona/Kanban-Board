@@ -12,10 +12,10 @@ public class TaskController{
 	
 	private List<TaskData> tasksData;
 	
-	private List<Task> tasks = new ArrayList<Task>();
+	private List<Task> tasks;
 
 	public TaskController() {
-
+		tasks = new ArrayList<Task>();
 	}
 	
 	public void createTaskViews(List<TaskData> tasksData) {
@@ -24,6 +24,7 @@ public class TaskController{
 	}
 	
 	private void createTaskViewForEeachTaskData() {
+		tasks = new ArrayList<Task>();
 		if(!tasksData.isEmpty()) {
 			tasksData.forEach((activeTask) -> {
 				tasks.add(new Task(activeTask));

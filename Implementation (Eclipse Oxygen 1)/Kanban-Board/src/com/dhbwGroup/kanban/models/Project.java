@@ -6,7 +6,9 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class Project {
+	
 	public Project(List<ColumnData> columnsData) {
+		this.source = 5;
 		this.columnsData = columnsData;
 		this.tasksData = new ArrayList<TaskData>();
 		this.categoriesData = new ArrayList<CategoryData>();
@@ -14,12 +16,20 @@ public class Project {
 	
 	@SerializedName("source")
     private int source;
+	
 	@SerializedName("items")
     private List<TaskData> tasksData;
+	
 	@SerializedName("columns")
     private List<ColumnData> columnsData;
+	
 	@SerializedName("categories")
     private List<CategoryData> categoriesData;
+	
+	//---------------------------------------------------------------------------
+	//--------------------Getter and Setter--------------------------------------
+	//---------------------------------------------------------------------------
+	
 	public int getSource() {
 		return source;
 	}

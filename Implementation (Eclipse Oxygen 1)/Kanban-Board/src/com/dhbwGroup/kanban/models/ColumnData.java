@@ -6,20 +6,41 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "column")
 public class ColumnData {
 
-    /**
-     * This is compulsory for both the database and to access models
-     * 
-     */
-    @DatabaseField(generatedId = true, columnName = "id")
+    public ColumnData() {
+    	this.id = UUID.randomUUID();
+    }
+
+    public ColumnData(String name) {
+        this();
+        this.name = name;
+    }
+    
+    public ColumnData(String name, int maxTasks) {
+        this(name);
+        this.maxTasks = maxTasks;
+    }
+
     @SerializedName("uuid")
     private UUID id;
 
+    @SerializedName("title")
+    private String name = "Column";
+
+    @SerializedName("items")
+    private List<UUID> taskUUIDs = new ArrayList<UUID>();
+
+    @SerializedName("capacity")
+    private int maxTasks = 8;
+    
+  //---------------------------------------------------------------------------
+  //--------------------Getter and Setter--------------------------------------
+  //---------------------------------------------------------------------------
+    
 	public UUID getId() {
 		return id;
 	}
@@ -27,41 +48,6 @@ public class ColumnData {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	/**
-     * The Name of the Column
-     * <p>
-     * 
-     * 
-     */
-    @DatabaseField(columnName = "name", canBeNull = true, unique = true)
-    @SerializedName("title")
-    private String name = "Column";
-    /**
-     * List Of TaskIDs
-     * <p>
-     * 
-     * 
-     */
-    @DatabaseField(columnName = "numberOfTasks", canBeNull = true, unique = true)
-    @SerializedName("items")
-    private List<UUID> taskUUIDs = new ArrayList<UUID>();
-    
-	public List<UUID> getTaskUUIDs() {
-		return taskUUIDs;
-	}
-
-	public void setTaskUUIDs(List<UUID> taskUUIDs) {
-		this.taskUUIDs = taskUUIDs;
-	}
-	/**
-     * Number Of Tasks
-     * <p>
-     * 
-     * 
-     */
-    @DatabaseField(columnName = "maxTasks", canBeNull = true, unique = true)
-    @SerializedName("capacity")
-    private int maxTasks = 8;
 
 	public String getName() {
 		return name;
@@ -69,6 +55,14 @@ public class ColumnData {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<UUID> getTaskUUIDs() {
+		return taskUUIDs;
+	}
+
+	public void setTaskUUIDs(List<UUID> taskUUIDs) {
+		this.taskUUIDs = taskUUIDs;
 	}
 
 	public int getMaxTasks() {
@@ -78,27 +72,4 @@ public class ColumnData {
 	public void setMaxTasks(int maxTasks) {
 		this.maxTasks = maxTasks;
 	}
-
-	/**
-     * No args constructor for use in serialization
-     * 
-     */
-    public ColumnData() {
-    }
-
-    /**
-     * 
-     * @param name
-     */
-    public ColumnData(String name) {
-        super();
-        this.name = name;
-    }
-    public ColumnData(String name, int maxTasks) {
-        super();
-        this.name = name;
-        this.maxTasks = maxTasks;
-    }
-
-
 }
