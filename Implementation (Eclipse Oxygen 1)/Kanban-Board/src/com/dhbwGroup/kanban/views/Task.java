@@ -28,6 +28,7 @@ public class Task {
 
 	private void addStyleClasses() {
 		this.taskGridPane.getStyleClass().add("task");
+		this.taskGridPane.setStyle("-fx-background-color: #" + this.taskData.getColor());
 		this.titleLabel.getStyleClass().add("taskTitle");
 		this.descriptionLabel.getStyleClass().add("taskDescription");
 	}

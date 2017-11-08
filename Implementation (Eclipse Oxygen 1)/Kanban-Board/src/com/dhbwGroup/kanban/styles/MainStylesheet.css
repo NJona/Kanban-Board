@@ -63,7 +63,6 @@
 	-fx-padding: 15px;
 	-fx-hgap: 10px;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-	-fx-background-color: linear-gradient(#BF8127, #C98E18);
 	-fx-background-radius: 11px;
     -fx-font-family: "Arial Narrow";
 }

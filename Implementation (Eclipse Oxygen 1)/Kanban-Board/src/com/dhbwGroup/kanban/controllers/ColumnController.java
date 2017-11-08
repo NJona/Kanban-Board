@@ -57,8 +57,9 @@ public class ColumnController {
 			}
 	}
 
-	
+//--------------------------------------------------------
 //--------------Add Tasks zu Gridpane---------------------
+//--------------------------------------------------------
 	
 	
 	public void addEachTaskViewToColumnView() {	//add to columnTaskGridpane
@@ -86,6 +87,13 @@ public class ColumnController {
 		}
 		return column.getColumnData().getTaskUUIDs().size() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
 	}
+	
+	//--------------------------------------------------------
+	//--------------Implement Drag and Drop-------------------
+	//--------------------------------------------------------
+	
+
+	
 //-------------------------------------------------------------
 	
 	//Getter and Setter Methods
