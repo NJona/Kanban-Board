@@ -31,7 +31,7 @@ public class ColumnHeaderGridPane {
 		this.columnHeaderGridPane.add(columnGridPaneElementText.getColumnTextField(), 0, 0);
 		this.columnHeaderGridPane.add(columnGridPaneElementEditButton.getButton(), 1, 0);
 		this.columnHeaderGridPane.add(columnGridPaneElementRemoveButton.getButton(), 2, 0);
-		this.columnHeaderGridPane.getStyleClass().add("columnHeader");
+		this.columnHeaderGridPane.getStyleClass().add("columnHeaderGridPane");
 	}
 	
 	public String handleEditNameEvent() {

@@ -32,7 +32,7 @@ public class Column {
 		initializeColumnTasksGridPane();
 		initializeColumnConstraints();
 		setRowConstraints();
-		this.columnGridPane.getStyleClass().add("column");
+		this.columnGridPane.getStyleClass().add("columnGridPane");
 	}
 
 	private void setRowConstraints() {

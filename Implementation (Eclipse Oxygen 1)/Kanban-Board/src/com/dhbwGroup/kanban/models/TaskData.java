@@ -27,12 +27,15 @@ public class TaskData {
     
     @SerializedName("color")
     private String color;
+    
+    @SerializedName("timestamp")
+    private long timestamp;
 
 //---------------------------------------------------------------------------
 //--------------------Getter and Setter--------------------------------------
 //---------------------------------------------------------------------------
-    
-    public String getTitle() {
+
+	public String getTitle() {
         return title;
     }
 
@@ -70,6 +73,14 @@ public class TaskData {
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+	
+    public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }

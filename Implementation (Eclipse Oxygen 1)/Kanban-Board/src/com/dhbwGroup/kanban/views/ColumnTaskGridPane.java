@@ -17,6 +17,7 @@ public class ColumnTaskGridPane {
 	
 	private void initialize() {
 		columnTaskGridPane = new GridPane();
+		columnTaskGridPane.getStyleClass().add("columnTaskGridPane");
 		rowConstraints = new RowConstraints();
 		rowConstraints.setPercentHeight(90);
 		ColumnConstraints cc = new ColumnConstraints();

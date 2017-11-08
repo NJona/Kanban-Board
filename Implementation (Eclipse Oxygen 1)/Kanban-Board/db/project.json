@@ -6,7 +6,8 @@
             "title": "Some title",
             "content": "Some desc",
             "category": "db9318c0-c3c4-11e7-abc4-cec278b6b50a",
-            "color": "C98E18FF"
+            "color": "C98E18FF",
+            "timestamp": "1510135376109"
         }
     ],
     "columns": [
