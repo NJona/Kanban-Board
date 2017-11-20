@@ -60,13 +60,13 @@ public class Controller implements Initializable {
 	
     @Override
     public void initialize(URL url, ResourceBundle rb) {   	
-    	
+        this.openFile();
+    }
+    
+    private void initializeBoard() {
     	initializeMenu();
         
-        scrollPane = new ScrollPane();
-    	scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-    	scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
-    	scrollPane.getStyleClass().add("scrollPane");
+    	initializeScrollPane();
         
         fullBorderPane.setCenter(scrollPane);
     	
@@ -74,9 +74,14 @@ public class Controller implements Initializable {
         
         scrollPane.setContent(columnHBox);
         
-        columnHBox.getStyleClass().add("columnHBox");
-        
-        this.openFile();
+        columnHBox.getStyleClass().add("columnHBox");    	
+    }
+    
+    private void initializeScrollPane() {
+        scrollPane = new ScrollPane();
+    	scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+    	scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+    	scrollPane.getStyleClass().add("scrollPane");    	
     }
 
     
@@ -153,6 +158,9 @@ public class Controller implements Initializable {
 	}	
 	
 	private void openFile() {
+		columnController = new ColumnController();
+		kanbanService = new KanbanService();
+		initializeBoard();
 		project = kanbanService.loadProject();
 		initializeColumnAndTasks();
 	}

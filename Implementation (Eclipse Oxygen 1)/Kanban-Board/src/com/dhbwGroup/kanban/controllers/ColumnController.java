@@ -37,7 +37,7 @@ public class ColumnController {
 	}
 	
 	public Column addColumn(String columnName){	
-		ColumnData newColumnData = new ColumnData();
+		ColumnData newColumnData = new ColumnData(columnName);
 		Column columnToAdd = new Column(newColumnData);
 		columns.add(columns.size()-1, columnToAdd);
 		columnsData.add(columnsData.size()-1, newColumnData);

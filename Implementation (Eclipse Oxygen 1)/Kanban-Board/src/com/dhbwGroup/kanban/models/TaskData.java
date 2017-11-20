@@ -11,6 +11,7 @@ public class TaskData {
 	
 	public TaskData() {
     	this.id = UUID.randomUUID();
+    	this.timestamp = System.currentTimeMillis();
     }
 
     @SerializedName("uuid")
@@ -26,7 +27,7 @@ public class TaskData {
     private UUID categoryUUID;
     
     @SerializedName("color")
-    private String color;
+    private String color = "C98E18FF";
     
     @SerializedName("timestamp")
     private long timestamp;
