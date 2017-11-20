@@ -1,1 +1,46 @@
-{"source":1,"items":[{"uuid":"b3f61092-c3c4-11e7-abc4-cec278b6b50a","title":"Some title","content":"Some desc121212","category":"db9318c0-c3c4-11e7-abc4-cec278b6b50a","color":"C98E18FF","timestamp":1510135376109}],"columns":[{"uuid":"db932310-c3c4-11e7-abc4-cec278b6b50a","title":"Ready23","items":["b3f61092-c3c4-11e7-abc4-cec278b6b50a"],"capacity":8},{"uuid":"60b06cd2-ae5a-4599-aa69-32c508ab4432","title":"Doing","items":[],"capacity":1},{"uuid":"461fb862-1694-4f06-a086-fecbee38b9a9","title":"Done","items":[],"capacity":10000}],"categories":[{"uuid":"db9318c0-c3c4-11e7-abc4-cec278b6b50a","title":"Allday Task","color":"00FF00FF"},{"uuid":"bd0de130-56b4-4c68-bea0-0a2bca1fecc9","title":"TestCategory"}]}
+{
+    "source": 1,
+    "items": [
+        {
+            "uuid": "b3f61092-c3c4-11e7-abc4-cec278b6b50a",
+            "title": "Some title",
+            "content": "Some desc121212",
+            "category": "db9318c0-c3c4-11e7-abc4-cec278b6b50a",
+            "color": "C98E18FF",
+            "timestamp": 1510135376109
+        }
+    ],
+    "columns": [
+        {
+            "uuid": "db932310-c3c4-11e7-abc4-cec278b6b50a",
+            "title": "Ready23",
+            "items": [
+                "b3f61092-c3c4-11e7-abc4-cec278b6b50a"
+            ],
+            "capacity": 8
+        },
+        {
+            "uuid": "60b06cd2-ae5a-4599-aa69-32c508ab4432",
+            "title": "Doing",
+            "items": [],
+            "capacity": 1
+        },
+        {
+            "uuid": "461fb862-1694-4f06-a086-fecbee38b9a9",
+            "title": "Done",
+            "items": [],
+            "capacity": 10000
+        }
+    ],
+    "categories": [
+        {
+            "uuid": "db9318c0-c3c4-11e7-abc4-cec278b6b50a",
+            "title": "Allday Task",
+            "color": "00FF00FF"
+        },
+        {
+            "uuid": "bd0de130-56b4-4c68-bea0-0a2bca1fecc9",
+            "title": "TestCategory"
+        }
+    ]
+}

@@ -17,8 +17,8 @@ public class ColumnController {
 	
 	private TaskController taskController;
 
-	public ColumnController() {
-		taskController = new TaskController();
+	public ColumnController(CategoryController categoryController) {
+		taskController = new TaskController(categoryController);
 		columns = new ArrayList<Column>();
 	}
 	

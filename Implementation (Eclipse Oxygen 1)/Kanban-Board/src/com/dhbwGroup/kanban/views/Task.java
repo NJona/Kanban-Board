@@ -1,5 +1,6 @@
 package com.dhbwGroup.kanban.views;
 
+import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.TaskData;
 
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 
 public class Task {
 	private TaskData taskData;
+	private CategoryData categoryData;
 	
 	private GridPane taskGridPane;
 	
@@ -25,10 +27,19 @@ public class Task {
 	private TextArea descriptionTextArea;
 	
 	private Text categoryLabel;
-	
+
 	public Task(TaskData taskData) {
 		this.taskData = taskData;
-		
+		initialize();
+	}
+
+	public Task(TaskData taskData, CategoryData categoryData) {
+		this.taskData = taskData;
+		this.categoryData = categoryData;
+		initialize();
+	}
+
+	private void initialize() {
 		titleLabel = new Text(this.taskData.getTitle());
 		titleTextField = new TextField(this.taskData.getTitle());
 		titleTextField.setVisible(false);
@@ -45,7 +56,12 @@ public class Task {
 		descriptionTextArea.setVisible(false);
 		//descriptionLabel.setVisible(false);
 		
-		categoryLabel = new Text();
+		if(categoryData == null) {
+			categoryLabel = new Text();
+		}else {
+			categoryLabel = new Text(categoryData.getTitle());
+		}
+		
 		
 		descriptionLabel.setWrapText(true);
 		descriptionTextArea.setWrapText(true);
@@ -56,7 +72,6 @@ public class Task {
 		
 		addNodesToGridPane();
 		addStyleClasses();
-		
 	}
 
 	private void addStyleClasses() {
@@ -152,5 +167,37 @@ public class Task {
 
 	public void setDescriptionLabel(Label descriptionLabel) {
 		this.descriptionLabel = descriptionLabel;
+	}
+	
+	public TextField getTitleTextField() {
+		return titleTextField;
+	}
+
+	public void setTitleTextField(TextField titleTextField) {
+		this.titleTextField = titleTextField;
+	}
+
+	public Button getEditSaveButton() {
+		return editSaveButton;
+	}
+
+	public void setEditSaveButton(Button editSaveButton) {
+		this.editSaveButton = editSaveButton;
+	}
+
+	public TextArea getDescriptionTextArea() {
+		return descriptionTextArea;
+	}
+
+	public void setDescriptionTextArea(TextArea descriptionTextArea) {
+		this.descriptionTextArea = descriptionTextArea;
+	}
+
+	public Text getCategoryLabel() {
+		return categoryLabel;
+	}
+
+	public void setCategoryLabel(Text categoryLabel) {
+		this.categoryLabel = categoryLabel;
 	}
 }

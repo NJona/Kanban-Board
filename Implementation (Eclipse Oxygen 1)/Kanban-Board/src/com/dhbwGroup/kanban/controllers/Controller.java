@@ -58,8 +58,8 @@ public class Controller implements Initializable {
 	final static int MAXCOLUMNS = 10;
 	
 	public Controller() throws FileNotFoundException {
-		columnController = new ColumnController();
 		categoryController = new CategoryController();
+		columnController = new ColumnController(categoryController);
 		kanbanService = new KanbanService();
 	}
 	
@@ -169,7 +169,6 @@ public class Controller implements Initializable {
 	}	
 	
 	private void openFile() {
-		columnController = new ColumnController();
 		initializeBoard();
 		project = kanbanService.loadProject();
 		initializeColumnAndTasks();
