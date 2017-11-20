@@ -10,6 +10,16 @@ public class CategoryData {
 		this.id = UUID.randomUUID();
 	}
 	
+	public CategoryData(String title) {
+		this();
+		this.title = title;
+	}
+	
+	public CategoryData(String title, String color) {
+		this(title);
+		this.color = color;
+	}
+	
     @SerializedName("uuid")
     private UUID id;
     

@@ -51,13 +51,17 @@ public class Column {
 	}
 
 	public void initializeColumnConstraints() {
-		this.columnGridPane.setMinWidth(400);
+		this.columnGridPane.setMinWidth(450);
 		this.columnGridPane.setPrefWidth(450);
-		this.columnGridPane.setMaxWidth(500);
+		this.columnGridPane.setMaxWidth(450);
 	}
 
 	
-// Getter and Setter
+	  //---------------------------------------------------------------------------
+	  //--------------------Getter and Setter--------------------------------------
+	  //---------------------------------------------------------------------------
+	
+	
 	public ColumnHeaderGridPane getColumnHeaderGridPane() {
 		return columnHeaderGridPane;
 	}

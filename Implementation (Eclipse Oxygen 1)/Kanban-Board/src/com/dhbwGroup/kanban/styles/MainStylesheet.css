@@ -80,15 +80,22 @@
 
 }
 
-.taskTitle{
-
+.taskTitleLabel{
 	-fx-font-size: 30px;
 }
 
-.taskDescription{
+.taskTitleTextField{
+	-fx-font-size: 30px;
+}
+
+.taskDescriptionLabel{
+	-fx-font-size: 20px;
+}
+
+.taskDescriptionTextArea{
 -fx-font-size: 20px;
 }
 
-.taskPriority{
--fx-font-size: 20px;
+.taskEditSaveButton{
+
 }

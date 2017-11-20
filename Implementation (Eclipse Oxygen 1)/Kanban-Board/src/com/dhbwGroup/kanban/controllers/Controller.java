@@ -6,6 +6,7 @@ package com.dhbwGroup.kanban.controllers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
@@ -23,6 +24,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -40,6 +42,7 @@ public class Controller implements Initializable {
 	private MenuItem saveFile;
 	private MenuItem addColumn;
 	private MenuItem addTask;
+	private MenuItem addCategory;
 	
 	
 	private ScrollPane scrollPane;
@@ -50,11 +53,13 @@ public class Controller implements Initializable {
 	private KanbanService kanbanService;
 
 	private ColumnController columnController;
+	private CategoryController categoryController;
 	
 	final static int MAXCOLUMNS = 10;
 	
 	public Controller() throws FileNotFoundException {
 		columnController = new ColumnController();
+		categoryController = new CategoryController();
 		kanbanService = new KanbanService();
 	}
 	
@@ -145,8 +150,14 @@ public class Controller implements Initializable {
                public void handle(ActionEvent t) {
 					addTask();
                }
-        }); 
-        edit.getItems().addAll(addColumn, addTask);
+        });
+        addCategory = new MenuItem("Add Category");
+        addCategory.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+					addCategory();
+               }
+        });
+        edit.getItems().addAll(addColumn, addTask, addCategory);
 	}
 
 	private void createNewFile() {
@@ -159,13 +170,13 @@ public class Controller implements Initializable {
 	
 	private void openFile() {
 		columnController = new ColumnController();
-		kanbanService = new KanbanService();
 		initializeBoard();
 		project = kanbanService.loadProject();
 		initializeColumnAndTasks();
 	}
 	
 	private void initializeColumnAndTasks() {
+		categoryController.initializeData(project.getCategoriesData());
 		columnController.createColumnViews(project.getColumnsData());
 		columnController.getTaskController().createTaskViews(project.getTasksData());
 		columnController.addEachTaskViewToColumnView();
@@ -195,6 +206,15 @@ public class Controller implements Initializable {
 	protected void addTask(){
 		addTask.setDisable(columnController.addTask());
     }
+	
+	private void addCategory() {
+		TextInputDialog dialog = new TextInputDialog("Category Title");
+		dialog.setTitle("Add Category!");
+		dialog.setContentText("Please enter a category:");
+
+		Optional<String> result = dialog.showAndWait();
+		result.ifPresent((title) -> categoryController.addCategoryData(title));
+	}
     
 //-----------------------------------------------------------------------------------	
 //-------------------------------Add Views to GridPane-------------------------------
