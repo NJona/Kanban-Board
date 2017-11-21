@@ -2,6 +2,7 @@ package com.dhbwGroup.kanban.controllers;
 
 import java.util.List;
 
+import com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException;
 import com.dhbwGroup.kanban.models.CategoryData;
 
 public class CategoryController {
@@ -16,13 +17,22 @@ public class CategoryController {
 		this.categoriesData = categoryData;
 	}
 	
-	public CategoryData addCategoryData(String title, String color) {
+	public CategoryData addCategoryData(String title, String color) throws CategoryNameAlreadyTakenException{
+		checkIfTitleAlreadyTaken(title);
 		CategoryData newCategoryData = new CategoryData(title, color);
 		categoriesData.add(newCategoryData);
 		return newCategoryData;
 	}
 	
-	public CategoryData addCategoryData(String title) {
+	private void checkIfTitleAlreadyTaken(String newCategoryTitle) throws CategoryNameAlreadyTakenException {
+		boolean isTitleAlreadyTaken = categoriesData.stream().anyMatch(activeCategory -> activeCategory.getTitle().equals(newCategoryTitle));
+		if(isTitleAlreadyTaken) {
+			throw new CategoryNameAlreadyTakenException();
+		}
+	}
+	
+	public CategoryData addCategoryData(String title) throws CategoryNameAlreadyTakenException {
+		checkIfTitleAlreadyTaken(title);
 		CategoryData newCategoryData = new CategoryData(title);
 		categoriesData.add(newCategoryData);
 		return newCategoryData;

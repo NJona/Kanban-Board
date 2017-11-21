@@ -4,7 +4,6 @@ package com.dhbwGroup.kanban.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.models.TaskData;
 
 import com.dhbwGroup.kanban.views.Task;
@@ -34,11 +33,11 @@ public class TaskController{
 				if(activeTask.getCategoryUUID() != null) {
 					categoryController.getCategoryData().forEach((activeCategory) -> {
 						if(activeTask.getCategoryUUID().equals(activeCategory.getId())) {
-							tasks.add(new Task(activeTask, activeCategory));
+							tasks.add(new Task(activeTask, activeCategory, categoryController.getCategoryData()));
 						}
 					});					
 				}else {
-					tasks.add(new Task(activeTask));	
+					tasks.add(new Task(activeTask, categoryController.getCategoryData()));	
 				}
 			});;			
 		}
@@ -46,7 +45,7 @@ public class TaskController{
 	
 	public Task addTask(){	
 		TaskData taskData = new TaskData();
-		Task taskToAdd = new Task(taskData);
+		Task taskToAdd = new Task(taskData, categoryController.getCategoryData());
 		tasks.add(taskToAdd);
 		tasksData.add(taskData);
 		return taskToAdd;

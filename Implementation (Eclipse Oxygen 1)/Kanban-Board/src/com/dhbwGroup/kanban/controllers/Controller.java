@@ -9,8 +9,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException;
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
+import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.Project;
 import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
@@ -212,7 +214,16 @@ public class Controller implements Initializable {
 		dialog.setContentText("Please enter a category:");
 
 		Optional<String> result = dialog.showAndWait();
-		result.ifPresent((title) -> categoryController.addCategoryData(title));
+		result.ifPresent((title) -> {
+			try {
+				CategoryData newCategoryData = categoryController.addCategoryData(title);
+				columnController.getTaskController().getTasks().forEach((activeTask) -> {
+					activeTask.addNewCategoryToDropDown(newCategoryData);
+				});
+			} catch (CategoryNameAlreadyTakenException e) {
+				
+			}
+		});
 	}
     
 //-----------------------------------------------------------------------------------	

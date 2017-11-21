@@ -1,20 +1,25 @@
 package com.dhbwGroup.kanban.views;
 
+import java.util.List;
+
 import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.TaskData;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 
 public class Task {
 	private TaskData taskData;
 	private CategoryData categoryData;
+	private List<CategoryData> categoriesData;
 	
 	private GridPane taskGridPane;
 	
@@ -27,15 +32,18 @@ public class Task {
 	private TextArea descriptionTextArea;
 	
 	private Text categoryLabel;
+	private ComboBox<CategoryData> categoryDropDown;
 
-	public Task(TaskData taskData) {
+	public Task(TaskData taskData, List<CategoryData> categoriesData) {
 		this.taskData = taskData;
+		this.categoriesData = categoriesData;
 		initialize();
 	}
 
-	public Task(TaskData taskData, CategoryData categoryData) {
+	public Task(TaskData taskData, CategoryData categoryData, List<CategoryData> categoriesData) {
 		this.taskData = taskData;
 		this.categoryData = categoryData;
+		this.categoriesData = categoriesData;
 		initialize();
 	}
 
@@ -56,10 +64,30 @@ public class Task {
 		descriptionTextArea.setVisible(false);
 		//descriptionLabel.setVisible(false);
 		
+		categoryDropDown = new ComboBox<CategoryData>();
+		categoriesData.forEach((activeCategory) -> {
+			categoryDropDown.getItems().add(activeCategory);
+		});
+		categoryDropDown.setVisible(false);
+		categoryDropDown.setConverter(new StringConverter<CategoryData>() {
+
+			@Override
+			public CategoryData fromString(String string) {
+				return categoryDropDown.getItems().stream().filter(categoryData -> 
+						categoryData.getTitle().equals(string)).findFirst().orElse(null);
+			}
+
+			@Override
+			public String toString(CategoryData categoryData) {
+				return categoryData.getTitle();
+			}
+			
+		});
 		if(categoryData == null) {
 			categoryLabel = new Text();
 		}else {
 			categoryLabel = new Text(categoryData.getTitle());
+			categoryDropDown.setValue(categoryData);
 		}
 		
 		
@@ -87,6 +115,7 @@ public class Task {
 		this.descriptionTextArea.getStyleClass().add("taskDescriptionTextArea");
 		
 		this.categoryLabel.getStyleClass().add("taskCategoryLabel");
+		this.categoryDropDown.getStyleClass().add("taskCategoryDropDown");
 	}
 
 	private void addNodesToGridPane() {
@@ -99,6 +128,7 @@ public class Task {
 		taskGridPane.add(descriptionTextArea, 0, 1, GridPane.REMAINING, 1);
 		
 		taskGridPane.add(categoryLabel, 0, 2, GridPane.REMAINING, 1);
+		taskGridPane.add(categoryDropDown, 0, 2, GridPane.REMAINING, 1);
 	}
 	
 	private void handleEditSaveButtonEvent() {
@@ -112,15 +142,21 @@ public class Task {
 			toggleAllVisibilitys();
 		}		
 	}
+	
+	public void addNewCategoryToDropDown(CategoryData newCategoryData) {
+		this.categoryDropDown.getItems().add(newCategoryData);
+	}
 
 	private void updateTaskData() {
 		this.taskData.setTitle(titleLabel.getText());
 		this.taskData.setDescription(descriptionLabel.getText());
+		this.taskData.setCategoryUUID(this.categoryDropDown.getValue().getId());
 	}
 
 	private void updateLabels() {
 		titleLabel.setText(titleTextField.getText());
 		descriptionLabel.setText(descriptionTextArea.getText());
+		categoryLabel.setText(categoryDropDown.getValue().getTitle());
 	}
 
 	private void toggleAllVisibilitys() {
@@ -131,6 +167,7 @@ public class Task {
 		descriptionTextArea.setVisible(!descriptionTextArea.isVisible());
 		
 		categoryLabel.setVisible(!categoryLabel.isVisible());
+		categoryDropDown.setVisible(!categoryDropDown.isVisible());
 	}
 	
 //---------------------------------------------------------------------------
@@ -199,5 +236,13 @@ public class Task {
 
 	public void setCategoryLabel(Text categoryLabel) {
 		this.categoryLabel = categoryLabel;
+	}
+
+	public ComboBox<CategoryData> getCategoryDropDown() {
+		return categoryDropDown;
+	}
+
+	public void setCategoryDropDown(ComboBox<CategoryData> categoryDropDown) {
+		this.categoryDropDown = categoryDropDown;
 	}
 }
