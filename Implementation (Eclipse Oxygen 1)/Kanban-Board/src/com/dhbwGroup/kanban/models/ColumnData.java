@@ -37,6 +37,9 @@ public class ColumnData {
     @SerializedName("capacity")
     private int maxTasks = 8;
     
+    @SerializedName("type")
+    private String type = "optional";
+    
   //---------------------------------------------------------------------------
   //--------------------Getter and Setter--------------------------------------
   //---------------------------------------------------------------------------
