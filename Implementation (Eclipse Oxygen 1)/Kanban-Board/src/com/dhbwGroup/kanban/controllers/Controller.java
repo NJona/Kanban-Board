@@ -71,10 +71,11 @@ public class Controller implements Initializable {
     }
     
     private void initializeBoard() {
+    	fullBorderPane.getStyleClass().add("fullBorderPane");
     	initializeMenu();
         
     	initializeScrollPane();
-        
+    	
         fullBorderPane.setCenter(scrollPane);
     	
         columnHBox = new HBox();
