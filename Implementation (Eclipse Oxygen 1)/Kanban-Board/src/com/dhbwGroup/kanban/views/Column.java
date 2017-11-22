@@ -13,7 +13,7 @@ public class Column {
 	
 	private ColumnHeaderGridPane columnHeaderGridPane;
 
-	private ColumnTaskGridPane columnTaskGridPane;
+	private ColumnTaskVBox columnTaskGridPane;
 	
 	public Column(ColumnData columnData) {
 		this.columnData = columnData;
@@ -37,7 +37,6 @@ public class Column {
 
 	private void setRowConstraints() {
 		columnGridPane.getRowConstraints().add(columnHeaderGridPane.getRowConstraints());
-		columnGridPane.getRowConstraints().add(columnTaskGridPane.getRowConstraints());
 	}
 
 	private void initializeColumnHeaderGridPane() {
@@ -46,8 +45,8 @@ public class Column {
 	}
 	
 	private void initializeColumnTasksGridPane() {
-		columnTaskGridPane = new ColumnTaskGridPane();
-		columnGridPane.add(columnTaskGridPane.getColumnTaskGridPane(), 0, 1);
+		columnTaskGridPane = new ColumnTaskVBox();
+		columnGridPane.add(columnTaskGridPane.getColumnTaskVBox(), 0, 1);
 	}
 
 	public void initializeColumnConstraints() {
@@ -70,11 +69,11 @@ public class Column {
 		this.columnHeaderGridPane = columnHeaderGridPane;
 	}
 
-	public ColumnTaskGridPane getColumnTaskGridPane() {
+	public ColumnTaskVBox getColumnTaskGridPane() {
 		return columnTaskGridPane;
 	}
 
-	public void setColumnTaskGridPane(ColumnTaskGridPane columnTaskGridPane) {
+	public void setColumnTaskGridPane(ColumnTaskVBox columnTaskGridPane) {
 		this.columnTaskGridPane = columnTaskGridPane;
 	}
 	

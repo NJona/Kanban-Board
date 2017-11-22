@@ -69,7 +69,7 @@ public class ColumnController {
 					taskController.getTasks().forEach((activeTask) -> {
 						if(activeTask.getTaskData().getId().equals(taskUUIDToCompare)) {
 							//"Add " + taskUUIDToCompare + "to Column " + columns.indexOf(activeColumn)
-							activeColumn.getColumnTaskGridPane().getColumnTaskGridPane().add(activeTask.getTaskGridPane(), 0, activeColumn.getColumnData().getTaskUUIDs().indexOf(taskUUIDToCompare));
+							activeColumn.getColumnTaskGridPane().getColumnTaskVBox().getChildren().add(activeTask.getTaskGridPane());
 						}
 					});
 				});
@@ -83,7 +83,7 @@ public class ColumnController {
 		if(column.getColumnData().getTaskUUIDs().size() < columns.get(0).getColumnData().getMaxTasks()) {
 			Task taskToAdd = taskController.addTask();
 			column.getColumnData().getTaskUUIDs().add(taskToAdd.getTaskData().getId());
-			column.getColumnTaskGridPane().getColumnTaskGridPane().add(taskToAdd.getTaskGridPane(), 0, column.getColumnData().getTaskUUIDs().indexOf(taskToAdd.getTaskData().getId()));
+			column.getColumnTaskGridPane().getColumnTaskVBox().getChildren().add(taskToAdd.getTaskGridPane());
 		}
 		return column.getColumnData().getTaskUUIDs().size() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
 	}

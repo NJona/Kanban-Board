@@ -26,7 +26,7 @@ public class ColumnHeaderGridPane {
 	private void initialize() {
 		setColumnGridPaneConstraints();
 		rowConstraints = new RowConstraints();
-		rowConstraints.setPercentHeight(10);
+		rowConstraints.setPrefHeight(90);
 		this.columnHeaderGridPane.add(columnGridPaneElementText.getColumnTextLabel(), 0, 0);
 		this.columnHeaderGridPane.add(columnGridPaneElementText.getColumnTextField(), 0, 0);
 		this.columnHeaderGridPane.add(columnGridPaneElementEditButton.getButton(), 1, 0);
