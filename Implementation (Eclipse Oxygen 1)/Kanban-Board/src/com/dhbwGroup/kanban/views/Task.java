@@ -62,7 +62,6 @@ public class Task {
 		descriptionLabel = new Label(this.taskData.getDescription());
 		descriptionTextArea = new TextArea(this.taskData.getDescription());
 		descriptionTextArea.setVisible(false);
-		//descriptionLabel.setVisible(false);
 		
 		categoryDropDown = new ComboBox<CategoryData>();
 		categoriesData.forEach((activeCategory) -> {
@@ -103,7 +102,7 @@ public class Task {
 	}
 
 	private void addStyleClasses() {
-		this.taskGridPane.getStyleClass().add("task");
+		this.taskGridPane.getStyleClass().add("taskGridPane");
 		this.taskGridPane.setStyle("-fx-background-color: #" + this.taskData.getColor());
 		
 		this.titleLabel.getStyleClass().add("taskTitleLabel");
@@ -150,13 +149,15 @@ public class Task {
 	private void updateTaskData() {
 		this.taskData.setTitle(titleLabel.getText());
 		this.taskData.setDescription(descriptionLabel.getText());
-		this.taskData.setCategoryUUID(this.categoryDropDown.getValue().getId());
+		if(categoryDropDown.getValue() != null)
+			this.taskData.setCategoryUUID(this.categoryDropDown.getValue().getId());
 	}
 
 	private void updateLabels() {
 		titleLabel.setText(titleTextField.getText());
 		descriptionLabel.setText(descriptionTextArea.getText());
-		categoryLabel.setText(categoryDropDown.getValue().getTitle());
+		if(categoryDropDown.getValue() != null)
+			categoryLabel.setText(categoryDropDown.getValue().getTitle());
 	}
 
 	private void toggleAllVisibilitys() {

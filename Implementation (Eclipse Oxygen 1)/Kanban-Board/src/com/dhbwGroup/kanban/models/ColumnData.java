@@ -43,7 +43,7 @@ public class ColumnData {
   //---------------------------------------------------------------------------
   //--------------------Getter and Setter--------------------------------------
   //---------------------------------------------------------------------------
-    
+
 	public UUID getId() {
 		return id;
 	}
@@ -74,5 +74,13 @@ public class ColumnData {
 
 	public void setMaxTasks(int maxTasks) {
 		this.maxTasks = maxTasks;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

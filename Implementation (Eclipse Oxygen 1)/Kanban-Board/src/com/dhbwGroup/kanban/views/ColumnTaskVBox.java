@@ -13,7 +13,7 @@ public class ColumnTaskVBox {
 	
 	private void initialize() {
 		columnTaskVBox = new VBox();
-		columnTaskVBox.getStyleClass().add("columnTaskGridPane");
+		columnTaskVBox.getStyleClass().add("columnTaskVBox");
 	}
 
 

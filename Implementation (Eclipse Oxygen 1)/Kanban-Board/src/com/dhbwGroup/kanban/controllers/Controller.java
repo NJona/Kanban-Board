@@ -82,7 +82,7 @@ public class Controller implements Initializable {
         
         scrollPane.setContent(columnHBox);
         
-        columnHBox.getStyleClass().add("columnHBox");    	
+        columnHBox.getStyleClass().add("columnsHBox");    	
     }
     
     private void initializeScrollPane() {
@@ -194,7 +194,7 @@ public class Controller implements Initializable {
 		if(columnController.getColumns().size() <= MAXCOLUMNS) {
 			Column columnToAdd = columnController.addColumn("new Column");
 			columnHBox.getChildren().add(columnController.getColumns().indexOf(columnToAdd), columnToAdd.getColumnGridPane());
-			columnToAdd.getColumnHeaderGridPane().getColumnGridPaneElementRemoveButton().getButton().setOnAction(new EventHandler<ActionEvent>() {
+			columnToAdd.getColumnHeaderGridPane().getRemoveButton().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
     	    	removeColumn(columnToAdd);
     	    }
@@ -212,6 +212,7 @@ public class Controller implements Initializable {
 	private void addCategory() {
 		TextInputDialog dialog = new TextInputDialog("Category Title");
 		dialog.setTitle("Add Category!");
+		dialog.setHeaderText(null);
 		dialog.setContentText("Please enter a category:");
 
 		Optional<String> result = dialog.showAndWait();
@@ -241,7 +242,7 @@ public class Controller implements Initializable {
 	
 	private void createEventHandlerForRemoveColumnButton() {		
 		columnController.getColumns().forEach((activeColumn) -> {
-			activeColumn.getColumnHeaderGridPane().getColumnGridPaneElementRemoveButton().getButton().setOnAction(new EventHandler<ActionEvent>() {
+			activeColumn.getColumnHeaderGridPane().getRemoveButton().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
     	    	removeColumn(activeColumn);
     	    }

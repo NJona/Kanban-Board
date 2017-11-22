@@ -2,14 +2,12 @@ package com.dhbwGroup.kanban.views;
 
 import com.dhbwGroup.kanban.models.ColumnData;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class Column {
 	private ColumnData columnData;
 	
-	private GridPane columnGridPane;
+	private VBox columnVBox;
 	
 	private ColumnHeaderGridPane columnHeaderGridPane;
 
@@ -17,42 +15,27 @@ public class Column {
 	
 	public Column(ColumnData columnData) {
 		this.columnData = columnData;
-		
 		initialize();
 	}
 	
 	public void initialize() {
-		columnGridPane = new GridPane();
-		initializeColumnHeaderGridPane();
-		columnHeaderGridPane.getColumnGridPaneElementEditButton().getButton().setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {
-    	    	columnData.setName(columnHeaderGridPane.handleEditNameEvent());
-    	    }
-		});
-		initializeColumnTasksGridPane();
-		initializeColumnConstraints();
-		setRowConstraints();
-		this.columnGridPane.getStyleClass().add("columnGridPane");
-	}
-
-	private void setRowConstraints() {
-		columnGridPane.getRowConstraints().add(columnHeaderGridPane.getRowConstraints());
-	}
-
-	private void initializeColumnHeaderGridPane() {
-		columnHeaderGridPane = new ColumnHeaderGridPane(columnData.getName());
-		columnGridPane.add(columnHeaderGridPane.getColumnHeaderGridPane(), 0, 0);
-	}
-	
-	private void initializeColumnTasksGridPane() {
+		columnVBox = new VBox();
+		
+		columnHeaderGridPane = new ColumnHeaderGridPane(columnData);
+		
 		columnTaskGridPane = new ColumnTaskVBox();
-		columnGridPane.add(columnTaskGridPane.getColumnTaskVBox(), 0, 1);
+		
+		addNodesToGridPane();
+		addStyleClasses();
 	}
 
-	public void initializeColumnConstraints() {
-		this.columnGridPane.setMinWidth(450);
-		this.columnGridPane.setPrefWidth(450);
-		this.columnGridPane.setMaxWidth(450);
+	private void addStyleClasses() {
+		this.columnVBox.getStyleClass().add("columnVBox");
+	}
+
+	private void addNodesToGridPane() {
+		this.columnVBox.getChildren().add(columnHeaderGridPane.getColumnHeaderGridPane());
+		this.columnVBox.getChildren().add(columnTaskGridPane.getColumnTaskVBox());
 	}
 
 	
@@ -85,12 +68,12 @@ public class Column {
 		this.columnData = columnData;
 	}
 
-	public GridPane getColumnGridPane() {
-		return columnGridPane;
+	public VBox getColumnGridPane() {
+		return columnVBox;
 	}
 
-	public void setColumnGridPane(GridPane columnGridPane) {
-		this.columnGridPane = columnGridPane;
+	public void setColumnGridPane(VBox columnVBox) {
+		this.columnVBox = columnVBox;
 	}
 	
 }

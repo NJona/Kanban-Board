@@ -16,7 +16,80 @@
 	
 }
 
-.columnHBox{
+.columnsHBox{
+
+}
+
+.columnVBox{
+
+}
+
+.columnHeaderGridPane{
+
+}
+
+.columnHeaderTitleLabel{
+	
+}
+
+.columnHeaderTitleTextField{
+	
+}
+
+.columnHeaderEditSaveButton{
+	
+}
+
+.columnHeaderRemoveButton{
+	
+}
+
+.columnHeaderChangeCapacityButton{
+	
+}
+
+.columnTaskVBox{
+	
+}
+
+.taskGridPane{
+	/* Task Color defined in Code */
+}
+
+.taskTitleLabel{
+	
+}
+
+.taskTitleTextField{
+	
+}
+
+.taskEditSaveButton{
+	
+}
+
+.taskDescriptionLabel{
+	
+}
+
+.taskDescriptionTextArea{
+	
+}
+
+.taskCategoryLabel{
+	
+}
+
+.taskCategoryDropDown{
+	
+}
+
+/**
+********************************
+* OLD Stylesheet
+********************************
+
+.columnsHBox{
 	-fx-vgap: 10px;
 	-fx-hgap: 10px;
 	-fx-padding: 10px;
@@ -24,12 +97,12 @@
 	-fx-height: 100%;
 }
 
-.columnGridPane{
-
+.columnVBox{
+	-fx-padding: 10px;
 }
 
 .columnHeaderGridPane{
-	-fx-padding: 20px;
+	-fx-alignment: top-center;
    	-fx-font-family: "Arial ";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
@@ -38,12 +111,7 @@
     -fx-text-fill: white;
 }
 
-.columnTextLabel{
-
-}
-
 .columnTextField{
-
 	-fx-alignment: center;
 	-fx-font-size: 30px;
 }
@@ -63,7 +131,7 @@
     
 }
 
-.columnTaskGridPane{
+.columnTaskVBox{
 	-fx-vgap: 10px;
 	-fx-hgap: 10px;
 	-fx-padding: 10px;
@@ -103,3 +171,4 @@
 .taskEditSaveButton{
 
 }
+*/
