@@ -8,6 +8,13 @@ import com.dhbwGroup.kanban.models.TaskData;
 
 import com.dhbwGroup.kanban.views.Task;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+
 public class TaskController{
 	
 	private List<TaskData> tasksData;
@@ -15,6 +22,8 @@ public class TaskController{
 	private List<Task> tasks;
 	
 	private CategoryController categoryController;
+	
+	public final static DataFormat taskDataFormat = new DataFormat("com.dhbwGroup.kanban.models.TaskData");
 
 	public TaskController(CategoryController categoryController) {
 		this.categoryController = categoryController;
@@ -24,6 +33,7 @@ public class TaskController{
 	public void createTaskViews(List<TaskData> tasksData) {
 		this.tasksData = tasksData;
 		createTaskViewForEeachTaskData();
+		createDragAndDropHandlerForTasks();
 	}
 	
 	private void createTaskViewForEeachTaskData() {
@@ -44,14 +54,68 @@ public class TaskController{
 	}
 	
 	public Task addTask(){	
-		TaskData taskData = new TaskData();
-		Task taskToAdd = new Task(taskData, categoryController.getCategoryData());
+		return addTask(new TaskData());
+
+	}
+	
+	public Task addTask(TaskData taskData) {
+		Task taskToAdd;
+		if(taskData.getCategoryUUID() != null) {
+			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData());
+		}else {
+			taskToAdd = new Task(taskData, categoryController.getCategoryData());
+		}
+		taskToAdd.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+		        Dragboard db = taskToAdd.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
+		        
+		        //put UUID as Content
+		        ClipboardContent content = new ClipboardContent();
+		        content.put(taskDataFormat, taskToAdd.getTaskData());
+		        db.setContent(content);
+		        
+		        mouseEvent.consume();
+			}
+			
+		});
 		tasks.add(taskToAdd);
 		tasksData.add(taskData);
-		return taskToAdd;
+		return taskToAdd;		
 	}
 
-	//Getter and Setter Methods
+	
+//---------------------------------------------------------------------------
+//--------------------Drag and Drop Handler----------------------------------
+//---------------------------------------------------------------------------
+	
+	private void createDragAndDropHandlerForTasks() {
+		tasks.forEach((activeTask) -> {
+			activeTask.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent mouseEvent) {
+			        Dragboard db = activeTask.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
+			        
+			        //put UUID as Content
+			        ClipboardContent content = new ClipboardContent();
+			        content.put(taskDataFormat, activeTask.getTaskData());
+			        db.setContent(content);
+			        
+			        mouseEvent.consume();
+				}
+				
+			});
+		});	
+	}
+	
+
+	
+	
+//---------------------------------------------------------------------------
+//--------------------Getter and Setter--------------------------------------
+//---------------------------------------------------------------------------
 	
 	public List<TaskData> getTasksData() {
 		return tasksData;
@@ -67,5 +131,13 @@ public class TaskController{
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public CategoryController getCategoryController() {
+		return categoryController;
+	}
+
+	public void setCategoryController(CategoryController categoryController) {
+		this.categoryController = categoryController;
 	}
 }

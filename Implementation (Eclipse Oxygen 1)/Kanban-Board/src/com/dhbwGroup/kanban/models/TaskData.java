@@ -1,14 +1,20 @@
 
 package com.dhbwGroup.kanban.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "task")
-public class TaskData {
+public class TaskData implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public TaskData() {
     	this.id = UUID.randomUUID();
     	this.timestamp = System.currentTimeMillis();

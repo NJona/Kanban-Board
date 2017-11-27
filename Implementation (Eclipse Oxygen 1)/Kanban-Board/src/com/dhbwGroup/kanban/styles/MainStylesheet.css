@@ -49,7 +49,7 @@
 }
 
 .columnTaskVBox{
-	
+	-fx-background-color: red;
 }
 
 .taskGridPane{

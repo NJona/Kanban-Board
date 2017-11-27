@@ -1,6 +1,7 @@
 package com.dhbwGroup.kanban.views;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.TaskData;
@@ -16,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
-public class Task {
+public class Task{
 	private TaskData taskData;
 	private CategoryData categoryData;
 	private List<CategoryData> categoriesData;
@@ -43,6 +44,16 @@ public class Task {
 	public Task(TaskData taskData, CategoryData categoryData, List<CategoryData> categoriesData) {
 		this.taskData = taskData;
 		this.categoryData = categoryData;
+		this.categoriesData = categoriesData;
+		initialize();
+	}
+	
+	public Task(TaskData taskData, UUID categoryDataUUID, List<CategoryData> categoriesData) {
+		this.taskData = taskData;
+		categoriesData.forEach(categoryData -> {
+			if(categoryData.getId().equals(categoryDataUUID))
+				this.categoryData = categoryData;
+		});
 		this.categoriesData = categoriesData;
 		initialize();
 	}

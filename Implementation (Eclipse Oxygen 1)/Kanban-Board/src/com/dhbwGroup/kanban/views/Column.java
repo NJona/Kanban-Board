@@ -11,7 +11,7 @@ public class Column {
 	
 	private ColumnHeaderGridPane columnHeaderGridPane;
 
-	private ColumnTaskVBox columnTaskGridPane;
+	private ColumnTaskVBox columnTaskVBox;
 	
 	public Column(ColumnData columnData) {
 		this.columnData = columnData;
@@ -23,7 +23,8 @@ public class Column {
 		
 		columnHeaderGridPane = new ColumnHeaderGridPane(columnData);
 		
-		columnTaskGridPane = new ColumnTaskVBox();
+		columnTaskVBox = new ColumnTaskVBox();
+		columnTaskVBox.getColumnTaskVBox().setId(columnData.getId().toString());
 		
 		addNodesToGridPane();
 		addStyleClasses();
@@ -35,7 +36,7 @@ public class Column {
 
 	private void addNodesToGridPane() {
 		this.columnVBox.getChildren().add(columnHeaderGridPane.getColumnHeaderGridPane());
-		this.columnVBox.getChildren().add(columnTaskGridPane.getColumnTaskVBox());
+		this.columnVBox.getChildren().add(columnTaskVBox.getColumnTaskVBox());
 	}
 
 	
@@ -52,12 +53,12 @@ public class Column {
 		this.columnHeaderGridPane = columnHeaderGridPane;
 	}
 
-	public ColumnTaskVBox getColumnTaskGridPane() {
-		return columnTaskGridPane;
+	public ColumnTaskVBox getColumnTaskVBox() {
+		return columnTaskVBox;
 	}
 
-	public void setColumnTaskGridPane(ColumnTaskVBox columnTaskGridPane) {
-		this.columnTaskGridPane = columnTaskGridPane;
+	public void setColumnTaskVBox(ColumnTaskVBox columnTaskVBox) {
+		this.columnTaskVBox = columnTaskVBox;
 	}
 	
 	public ColumnData getColumnData() {
