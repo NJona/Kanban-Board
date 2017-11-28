@@ -8,12 +8,14 @@ import com.dhbwGroup.kanban.models.TaskData;
 
 import com.dhbwGroup.kanban.views.Task;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.VBox;
 
 public class TaskController{
 	
@@ -23,7 +25,7 @@ public class TaskController{
 	
 	private CategoryController categoryController;
 	
-	public final static DataFormat taskDataFormat = new DataFormat("com.dhbwGroup.kanban.models.TaskData");
+	public final static DataFormat TASK_DATA_FORMAT = new DataFormat("com.dhbwGroup.kanban.models.TaskData");
 
 	public TaskController(CategoryController categoryController) {
 		this.categoryController = categoryController;
@@ -32,56 +34,32 @@ public class TaskController{
 	
 	public void createTaskViews(List<TaskData> tasksData) {
 		this.tasksData = tasksData;
-		createTaskViewForEeachTaskData();
-		createDragAndDropHandlerForTasks();
-	}
-	
-	private void createTaskViewForEeachTaskData() {
 		tasks = new ArrayList<Task>();
 		if(!tasksData.isEmpty()) {
-			tasksData.forEach((activeTask) -> {
-				if(activeTask.getCategoryUUID() != null) {
-					categoryController.getCategoryData().forEach((activeCategory) -> {
-						if(activeTask.getCategoryUUID().equals(activeCategory.getId())) {
-							tasks.add(new Task(activeTask, activeCategory, categoryController.getCategoryData()));
-						}
-					});					
-				}else {
-					tasks.add(new Task(activeTask, categoryController.getCategoryData()));	
-				}
-			});;			
+			tasksData.forEach((activeTaskData) -> {
+				createNewTaskView(activeTaskData);
+			});			
 		}
 	}
 	
-	public Task addTask(){	
-		return addTask(new TaskData());
+	public Task createNewTaskDataAndTaskView(){	
+		TaskData newTaskData = new TaskData();
+		tasksData.add(newTaskData);
+		return createNewTaskView(newTaskData);
 
 	}
 	
-	public Task addTask(TaskData taskData) {
+	public Task createNewTaskView(TaskData taskData) {
 		Task taskToAdd;
 		if(taskData.getCategoryUUID() != null) {
 			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData());
 		}else {
 			taskToAdd = new Task(taskData, categoryController.getCategoryData());
 		}
-		taskToAdd.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent mouseEvent) {
-		        Dragboard db = taskToAdd.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
-		        
-		        //put UUID as Content
-		        ClipboardContent content = new ClipboardContent();
-		        content.put(taskDataFormat, taskToAdd.getTaskData());
-		        db.setContent(content);
-		        
-		        mouseEvent.consume();
-			}
-			
-		});
+		createDragAndDropHandlerForTask(taskToAdd);
+		createArchiveHandlerForTask(taskToAdd);
+		createDeleteHandlerForTask(taskToAdd);
 		tasks.add(taskToAdd);
-		tasksData.add(taskData);
 		return taskToAdd;		
 	}
 
@@ -90,27 +68,52 @@ public class TaskController{
 //--------------------Drag and Drop Handler----------------------------------
 //---------------------------------------------------------------------------
 	
-	private void createDragAndDropHandlerForTasks() {
-		tasks.forEach((activeTask) -> {
-			activeTask.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
+	private void createDeleteHandlerForTask(Task taskToAdd) {
+		taskToAdd.getDeleteButton().setOnAction(new EventHandler<ActionEvent>() {
 
-				@Override
-				public void handle(MouseEvent mouseEvent) {
-			        Dragboard db = activeTask.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
-			        
-			        //put UUID as Content
-			        ClipboardContent content = new ClipboardContent();
-			        content.put(taskDataFormat, activeTask.getTaskData());
-			        db.setContent(content);
-			        
-			        mouseEvent.consume();
+			@Override
+			public void handle(ActionEvent event) {
+				tasksData.remove(taskToAdd.getTaskData());
+				if(taskToAdd.getColumnData() != null) {
+					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
+					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
 				}
-				
-			});
+			}
+			
+		});
+		
+	}
+
+	private void createArchiveHandlerForTask(Task taskToAdd) {
+		taskToAdd.getArchiveButton().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				if(taskToAdd.getColumnData() != null) {
+					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
+					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
+				}
+			}
+			
 		});	
 	}
-	
 
+	private void createDragAndDropHandlerForTask(Task task) {
+		task.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+		        Dragboard db = task.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
+		        
+		        ClipboardContent content = new ClipboardContent();
+		        content.put(TASK_DATA_FORMAT, task.getTaskData());
+		        db.setContent(content);
+		        
+		        mouseEvent.consume();
+			}
+			
+		});
+	}
 	
 	
 //---------------------------------------------------------------------------

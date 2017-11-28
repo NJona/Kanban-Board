@@ -12,8 +12,12 @@
 	
 }
 
-.scrollPane {
+.borderPaneCenter{
 	
+}
+
+.scrollPane {
+	-fx-background: #ffffff;
 }
 
 .columnsHBox{
@@ -21,11 +25,11 @@
 }
 
 .columnVBox{
-
+	
 }
 
 .columnHeaderGridPane{
-
+    
 }
 
 .columnHeaderTitleLabel{
@@ -49,7 +53,7 @@
 }
 
 .columnTaskVBox{
-	-fx-background-color: red;
+	
 }
 
 .taskGridPane{
@@ -68,11 +72,23 @@
 	
 }
 
+.taskDeleteButton{
+	
+}
+
+.taskArchiveButton{
+	
+}
+
 .taskDescriptionLabel{
 	
 }
 
 .taskDescriptionTextArea{
+	
+}
+
+.taskColorPicker{
 	
 }
 

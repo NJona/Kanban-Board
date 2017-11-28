@@ -1,7 +1,9 @@
 package com.dhbwGroup.kanban.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException;
@@ -24,7 +26,7 @@ public class ColumnController {
 	
 	private TaskController taskController;
 	
-	private ColumnData taskUUIDToRemove;
+	public static final int MIN_COLUMNS = 3;
 
 	public ColumnController(CategoryController categoryController) {
 		taskController = new TaskController(categoryController);
@@ -34,28 +36,39 @@ public class ColumnController {
 	public void createColumnViews(List<ColumnData> columnsData) {
 		this.columnsData = columnsData;
 		createColumnViewForEeachColumnData();
-		createDragAndDropHandler();
 	}
 
 	private void createColumnViewForEeachColumnData() {
 		columns = new ArrayList<Column>();
 		if(!columnsData.isEmpty()) {
 			columnsData.forEach((activeColumnData) -> {
-				columns.add(new Column(activeColumnData));
+				createNewColumnView(activeColumnData);
 			});
 		}
 	}
 	
-	public Column addColumn(String columnName){	
+	public Column createNewColumnDataAndColumnView(String columnName){	
 		ColumnData newColumnData = new ColumnData(columnName);
-		Column columnToAdd = new Column(newColumnData);
-		columns.add(columns.size()-1, columnToAdd);
 		columnsData.add(columnsData.size()-1, newColumnData);
+		return createNewColumnViewNextToLastColumn(newColumnData);
+	}
+	
+	public Column createNewColumnViewNextToLastColumn(ColumnData columnData) {
+		Column columnToAdd = new Column(columnData);
+		columns.add(columns.size()-1, columnToAdd);
+		createDragAndDropHandlerForColumnTaskVBox(columnToAdd);
+		return columnToAdd;
+	}
+
+	public Column createNewColumnView(ColumnData columnData) {
+		Column columnToAdd = new Column(columnData);
+		columns.add(columnToAdd);
+		createDragAndDropHandlerForColumnTaskVBox(columnToAdd);
 		return columnToAdd;
 	}
 	
 	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException, MinColumnsException{
-			if(columnToRemove.getColumnData().getTaskUUIDs().isEmpty() && columns.size() > 3)
+			if(columnToRemove.getColumnData().getTaskUUIDs().isEmpty() && columns.size() > MIN_COLUMNS)
 			{
 				columnsData.remove(columnToRemove.getColumnData());
 				columns.remove(columnToRemove);
@@ -68,7 +81,7 @@ public class ColumnController {
 	}
 
 //--------------------------------------------------------
-//--------------Add Tasks zu Gridpane---------------------
+//--------------Add Tasks to Gridpane---------------------
 //--------------------------------------------------------
 	
 	
@@ -78,7 +91,7 @@ public class ColumnController {
 				activeColumn.getColumnData().getTaskUUIDs().forEach((taskUUIDToCompare) -> {
 					taskController.getTasks().forEach((activeTask) -> {
 						if(activeTask.getTaskData().getId().equals(taskUUIDToCompare)) {
-							//"Add " + taskUUIDToCompare + "to Column " + columns.indexOf(activeColumn)
+							activeTask.setColumnData(activeColumn.getColumnData());
 							activeColumn.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(activeTask.getTaskGridPane());
 						}
 					});
@@ -91,7 +104,8 @@ public class ColumnController {
 	public boolean addTask() {
 		Column column = columns.get(0);
 		if(column.getColumnData().getTaskUUIDs().size() < columns.get(0).getColumnData().getMaxTasks()) {
-			Task taskToAdd = taskController.addTask();
+			Task taskToAdd = taskController.createNewTaskDataAndTaskView();
+			taskToAdd.setColumnData(column.getColumnData());
 			column.getColumnData().getTaskUUIDs().add(taskToAdd.getTaskData().getId());
 			column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskToAdd.getTaskGridPane());
 		}
@@ -102,81 +116,86 @@ public class ColumnController {
 //--------------------Drag and Drop Handler----------------------------------
 //---------------------------------------------------------------------------
 	
+	private void createDragAndDropHandlerForColumnTaskVBox(Column column) {
+		column.getColumnTaskVBox().getColumnTaskVBox().setOnDragDropped(new EventHandler<DragEvent>() {
 
-	private void createDragAndDropHandler() {
-		this.columns.forEach((activeColumn) -> {
-			activeColumn.getColumnTaskVBox().getColumnTaskVBox().setOnDragDropped(new EventHandler<DragEvent>() {
-			    public void handle(DragEvent event) {
-			        /* data dropped */
-			        /* if there is a string data on dragboard, read it and use it */
-			        Dragboard db = event.getDragboard();
-			        boolean success = false;
-			        if (db.hasContent(TaskController.taskDataFormat)) {
-			        	if(activeColumn.getColumnData().getMaxTasks() > activeColumn.getColumnTaskVBox().getColumnTaskVBox().getChildren().size()) {
-				        	System.out.println("DragBoard has Content");
-				        	TaskData taskDataToMove = (TaskData) db.getContent(TaskController.taskDataFormat);
-				        	columnsData.forEach(activeColumnData -> {
-				        		System.out.println("ColumnUUID:" + activeColumnData.getId());
-				        		if(!activeColumnData.getTaskUUIDs().isEmpty()) {
-					        		activeColumnData.getTaskUUIDs().forEach((activeTaskUUID) -> {
-					        			System.out.println("TaskUUID:" + activeTaskUUID);
-					        			if(activeTaskUUID.equals(taskDataToMove.getId())) {
-					        				System.out.println("activeTaskUUID equals taskDataToMove");
-					        				taskUUIDToRemove = activeColumnData;
-					        			}
-					        			System.out.println("removed UUID");
-					        		});
-					        		System.out.println("All Task UUIDs from column compared");
-				        		}else {
-				        			System.out.println("TaskUUIDs are empty");
-				        		}
-				        		System.out.println("TaskUUIDs from column compared");
-				        	});
-				        	if(columnsData.indexOf(taskUUIDToRemove) == columnsData.size()-1) {
-				        		try {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard dragBoard = event.getDragboard();
+				boolean success = false;
+				if(dragBoard.hasContent(TaskController.TASK_DATA_FORMAT)) {
+					if(hasColumnSpaceForAnotherTask(column)) {
+						TaskData taskDataToMove = (TaskData) dragBoard.getContent(TaskController.TASK_DATA_FORMAT);
+						ColumnData oldColumn = getOldColumnFromTask(taskDataToMove);
+						if(oldColumn != null) {
+							if(isNotLastColumn(oldColumn)) {
+								column.getColumnData().getTaskUUIDs().add(taskDataToMove.getId());
+								oldColumn.getTaskUUIDs().remove(taskDataToMove.getId());
+								Task taskView = getTaskViewFromTaskData(taskDataToMove);
+								if(taskView != null) {
+									taskView.setColumnData(column.getColumnData());
+									column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskView.getTaskGridPane());
+								}
+								success = true;
+							}else {
+								success = false;
+								try {
 									throw new TaskNotReusableException();
 								} catch (TaskNotReusableException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-				        	}else {
-					        	taskUUIDToRemove.getTaskUUIDs().remove(taskDataToMove.getId());
-					        	
-					        	System.out.println("Task UUID removed from old column");
-					        	activeColumn.getColumnData().getTaskUUIDs().add(taskDataToMove.getId());
-					        	System.out.println(taskController.getTasks().size());
-					        	taskController.getTasks().forEach(activeTask -> {
-					        		System.out.println(activeTask.getTaskData().getId());
-					        		if(activeTask.getTaskData().getId().equals(taskDataToMove.getId())) {
-					        			System.out.println("Task with correct TaskId found:" + activeTask.getTaskData().getId());
-					        			activeColumn.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(activeTask.getTaskGridPane());
-					        		}else {
-					        			System.out.println(activeTask.getTaskData().getId());
-					        			System.out.println(taskDataToMove.getId());
-					        		}
-					        	});
-					        	
-					            success = true;				        		
-				        	}
-			        	}else {
-			        		success = false;
-			        		try {
-								throw new MaxTasksAlreadyReachedException();
-							} catch (MaxTasksAlreadyReachedException e) {
-								
 							}
-			        	}
-
-			        }
-			        /* let the source know whether the string was successfully 
-			         * transferred and used */
-			        event.setDropCompleted(success);
-			        
-			        event.consume();
-			     }
-			});
+						}
+					}else {
+						success = false;
+						try {
+							throw new MaxTasksAlreadyReachedException();
+						} catch (MaxTasksAlreadyReachedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				
+		        event.setDropCompleted(success);
+		        
+		        event.consume();
+			}	
 		});
-	}	
+	}
+	
+	private boolean hasColumnSpaceForAnotherTask(Column column) {
+		return column.getColumnData().getMaxTasks() > column.getColumnTaskVBox().getColumnTaskVBox().getChildren().size();
+	}
+	
+	private boolean isNotLastColumn(ColumnData oldColumn) {
+		return columnsData.indexOf(oldColumn) != columnsData.size()-1;
+	}
+	
+	private ColumnData getOldColumnFromTask(TaskData taskDataToMove) {
+		Iterator<ColumnData> columnDataIterator = columnsData.iterator();
+		while(columnDataIterator.hasNext()) {
+			ColumnData activeColumnData = columnDataIterator.next();
+			if(!activeColumnData.getTaskUUIDs().isEmpty()) {
+				Iterator<UUID> columnTasksUUIDIterator = activeColumnData.getTaskUUIDs().iterator();
+				while(columnTasksUUIDIterator.hasNext()) {
+					UUID taskUUID = columnTasksUUIDIterator.next();
+					if(taskUUID.equals(taskDataToMove.getId()))
+						return activeColumnData;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private Task getTaskViewFromTaskData(TaskData taskDataToMove) {
+		Iterator<Task> taskIterator = taskController.getTasks().iterator();
+		while(taskIterator.hasNext()) {
+			Task activeTask = taskIterator.next();
+			if(activeTask.getTaskData().getId().equals(taskDataToMove.getId()))
+				return activeTask;
+		}
+		return null;
+	}
 	
 //---------------------------------------------------------------------------
 //--------------------Getter and Setter--------------------------------------

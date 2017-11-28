@@ -5,8 +5,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.filechooser.FileSystemView;
 
 import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.models.Project;
@@ -17,7 +20,8 @@ public class KanbanService{
 
 	private List<ColumnData> standardColumns = new ArrayList<ColumnData>();
 	
-	private String projectPath = "db/project.json";
+	public static final Path SHARED_DEFAULT_DIRECTORY = FileSystemView.getFileSystemView().getDefaultDirectory().toPath();
+	public static final Path SHARED_DEFAULT_FILE = SHARED_DEFAULT_DIRECTORY.resolve("kanban_shared.json");
 	
 	Gson gson;
 	
@@ -34,7 +38,7 @@ public class KanbanService{
 	
 	public Project loadProject() {
 		try {
-			JsonReader reader = new JsonReader(new FileReader(projectPath));	
+			JsonReader reader = new JsonReader(new FileReader(SHARED_DEFAULT_FILE.toString()));	
 			try {
 			return gson.fromJson(reader, Project.class);
 			}catch(NullPointerException e) {
@@ -52,7 +56,8 @@ public class KanbanService{
 	}
 	
 	public void saveProject(Project project) {
-		try (Writer writer = new FileWriter(projectPath)){
+		project.setSource(5);
+		try (Writer writer = new FileWriter(SHARED_DEFAULT_FILE.toString())){
 			gson.toJson(project, writer);
 		} catch (IOException e) {			
 			e.printStackTrace();

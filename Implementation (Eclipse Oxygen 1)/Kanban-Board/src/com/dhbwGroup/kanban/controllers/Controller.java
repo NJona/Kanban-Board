@@ -77,11 +77,13 @@ public class Controller implements Initializable {
     	initializeScrollPane();
     	
         fullBorderPane.setCenter(scrollPane);
+        fullBorderPane.getCenter().getStyleClass().add("borderPaneCenter");
     	
         columnHBox = new HBox();
         
         scrollPane.setContent(columnHBox);
         
+        columnHBox.setFillHeight(true);
         columnHBox.getStyleClass().add("columnsHBox");    	
     }
     
@@ -192,7 +194,7 @@ public class Controller implements Initializable {
 	
 	protected void addColumn() throws IOException{
 		if(columnController.getColumns().size() <= MAXCOLUMNS) {
-			Column columnToAdd = columnController.addColumn("new Column");
+			Column columnToAdd = columnController.createNewColumnDataAndColumnView("new Column");
 			columnHBox.getChildren().add(columnController.getColumns().indexOf(columnToAdd), columnToAdd.getColumnGridPane());
 			columnToAdd.getColumnHeaderGridPane().getRemoveButton().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {

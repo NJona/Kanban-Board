@@ -4,22 +4,26 @@ import java.util.List;
 import java.util.UUID;
 
 import com.dhbwGroup.kanban.models.CategoryData;
+import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.models.TaskData;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 public class Task{
 	private TaskData taskData;
 	private CategoryData categoryData;
+	private ColumnData columnData;
 	private List<CategoryData> categoriesData;
 	
 	private GridPane taskGridPane;
@@ -28,9 +32,13 @@ public class Task{
 	private TextField titleTextField;
 	
 	private Button editSaveButton;
+	private Button deleteButton;
+	private Button archiveButton;
 	
 	private Label descriptionLabel;
 	private TextArea descriptionTextArea;
+	
+	private ColorPicker colorPicker;
 	
 	private Text categoryLabel;
 	private ComboBox<CategoryData> categoryDropDown;
@@ -70,9 +78,24 @@ public class Task{
     	    }
 		});
 		
+		deleteButton = new Button("Delete");
+		deleteButton.setVisible(false);
+		archiveButton = new Button("Archive");
+		archiveButton.setVisible(false);
+		
 		descriptionLabel = new Label(this.taskData.getDescription());
 		descriptionTextArea = new TextArea(this.taskData.getDescription());
 		descriptionTextArea.setVisible(false);
+		
+		colorPicker = new ColorPicker();
+		colorPicker.setValue(Color.web(this.taskData.getColor()));
+		colorPicker.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				taskGridPane.setStyle("-fx-background-color: #" + getRGBCode(colorPicker.getValue()));
+			}
+        });
+		colorPicker.setVisible(false);
 		
 		categoryDropDown = new ComboBox<CategoryData>();
 		categoriesData.forEach((activeCategory) -> {
@@ -120,9 +143,13 @@ public class Task{
 		this.titleTextField.getStyleClass().add("taskTitleTextField");
 		
 		this.editSaveButton.getStyleClass().add("taskEditSaveButton");
+		this.deleteButton.getStyleClass().add("taskDeleteButton");
+		this.archiveButton.getStyleClass().add("taskArchiveButton");
 		
 		this.descriptionLabel.getStyleClass().add("taskDescriptionLabel");
 		this.descriptionTextArea.getStyleClass().add("taskDescriptionTextArea");
+		
+		this.colorPicker.getStyleClass().add("taskColorPicker");
 		
 		this.categoryLabel.getStyleClass().add("taskCategoryLabel");
 		this.categoryDropDown.getStyleClass().add("taskCategoryDropDown");
@@ -132,13 +159,17 @@ public class Task{
 		taskGridPane.add(titleLabel, 0, 0);
 		taskGridPane.add(titleTextField, 0, 0);
 		
-		taskGridPane.add(editSaveButton, 1, 0);
+		taskGridPane.add(editSaveButton, 3, 0);
+		taskGridPane.add(archiveButton, 2, 0);
+		taskGridPane.add(deleteButton, 1, 0);
 		
 		taskGridPane.add(descriptionLabel, 0, 1, GridPane.REMAINING, 1);
 		taskGridPane.add(descriptionTextArea, 0, 1, GridPane.REMAINING, 1);
 		
+		taskGridPane.add(colorPicker, 0, 2);
+		
 		taskGridPane.add(categoryLabel, 0, 2, GridPane.REMAINING, 1);
-		taskGridPane.add(categoryDropDown, 0, 2, GridPane.REMAINING, 1);
+		taskGridPane.add(categoryDropDown, 0, 3, GridPane.REMAINING, 1);
 	}
 	
 	private void handleEditSaveButtonEvent() {
@@ -160,6 +191,7 @@ public class Task{
 	private void updateTaskData() {
 		this.taskData.setTitle(titleLabel.getText());
 		this.taskData.setDescription(descriptionLabel.getText());
+		this.taskData.setColor(getRGBCode(colorPicker.getValue()));
 		if(categoryDropDown.getValue() != null)
 			this.taskData.setCategoryUUID(this.categoryDropDown.getValue().getId());
 	}
@@ -175,11 +207,23 @@ public class Task{
 		titleLabel.setVisible(!titleLabel.isVisible());
 		titleTextField.setVisible(!titleTextField.isVisible());
 		
+		deleteButton.setVisible(!deleteButton.isVisible());
+		archiveButton.setVisible(!archiveButton.isVisible());
+		
 		descriptionLabel.setVisible(!descriptionLabel.isVisible());
 		descriptionTextArea.setVisible(!descriptionTextArea.isVisible());
 		
+		colorPicker.setVisible(!colorPicker.isVisible());
+		
 		categoryLabel.setVisible(!categoryLabel.isVisible());
 		categoryDropDown.setVisible(!categoryDropDown.isVisible());
+	}
+	
+	private String getRGBCode(Color color) {
+		return String.format( "%02X%02X%02X",
+	            (int)( color.getRed() * 255 ),
+	            (int)( color.getGreen() * 255 ),
+	            (int)( color.getBlue() * 255 ) );
 	}
 	
 //---------------------------------------------------------------------------
@@ -256,5 +300,53 @@ public class Task{
 
 	public void setCategoryDropDown(ComboBox<CategoryData> categoryDropDown) {
 		this.categoryDropDown = categoryDropDown;
+	}
+
+	public CategoryData getCategoryData() {
+		return categoryData;
+	}
+
+	public void setCategoryData(CategoryData categoryData) {
+		this.categoryData = categoryData;
+	}
+
+	public List<CategoryData> getCategoriesData() {
+		return categoriesData;
+	}
+
+	public void setCategoriesData(List<CategoryData> categoriesData) {
+		this.categoriesData = categoriesData;
+	}
+
+	public Button getDeleteButton() {
+		return deleteButton;
+	}
+
+	public void setDeleteButton(Button deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+	public Button getArchiveButton() {
+		return archiveButton;
+	}
+
+	public void setArchiveButton(Button archiveButton) {
+		this.archiveButton = archiveButton;
+	}
+
+	public ColorPicker getColorPicker() {
+		return colorPicker;
+	}
+
+	public void setColorPicker(ColorPicker colorPicker) {
+		this.colorPicker = colorPicker;
+	}
+
+	public ColumnData getColumnData() {
+		return columnData;
+	}
+
+	public void setColumnData(ColumnData columnData) {
+		this.columnData = columnData;
 	}
 }
