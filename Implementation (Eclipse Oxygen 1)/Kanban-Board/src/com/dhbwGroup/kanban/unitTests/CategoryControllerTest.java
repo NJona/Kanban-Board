@@ -18,6 +18,8 @@ class CategoryControllerTest {
 	 * 	
 	 *  1. initialize Data
 	 *  2. Add Data 
+	 *  
+	 *  Bei den Exceptions muss der GUI Teil auskommentiert werden
 	 * 
 	 */
 	@Test

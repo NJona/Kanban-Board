@@ -50,15 +50,15 @@ public class TaskController{
 	}
 	
 	public Task createNewTaskView(TaskData taskData) {
-		Task taskToAdd;
+		Task taskToAdd = null;
 		if(taskData.getCategoryUUID() != null) {
-			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData());
+			//taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData());
 		}else {
-			taskToAdd = new Task(taskData, categoryController.getCategoryData());
+			//taskToAdd = new Task(taskData, categoryController.getCategoryData());
 		}
-		createDragAndDropHandlerForTask(taskToAdd);
-		createArchiveHandlerForTask(taskToAdd);
-		createDeleteHandlerForTask(taskToAdd);
+		//createDragAndDropHandlerForTask(taskToAdd);
+		//createArchiveHandlerForTask(taskToAdd);
+		//createDeleteHandlerForTask(taskToAdd);
 		tasks.add(taskToAdd);
 		return taskToAdd;		
 	}
