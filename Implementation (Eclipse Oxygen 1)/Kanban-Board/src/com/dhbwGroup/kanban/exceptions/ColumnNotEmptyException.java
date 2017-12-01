@@ -13,10 +13,10 @@ public class ColumnNotEmptyException extends Exception {
 	
 	public ColumnNotEmptyException() {
 		System.err.println("Column Not Emtpy! Please move all Tasks first!");
-		Alert alert = new Alert(AlertType.WARNING);
+		/*Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Column not empty!");
 		alert.setContentText("Column not empty! Please move all Tasks first!");
 
-		alert.showAndWait();
+		alert.showAndWait();*/
 	}
 }
