@@ -12,10 +12,11 @@ public class CategoryNameAlreadyTakenException extends Exception {
 	
 	public CategoryNameAlreadyTakenException() {
 		System.err.println("Category Name already taken! Please choose another one!");
-		Alert alert = new Alert(AlertType.WARNING);
+		/*Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Category Name already taken!");
 		alert.setContentText("Category Name already taken! Please choose another one!");
 
 		alert.showAndWait();
+		*/
 	}
 }
