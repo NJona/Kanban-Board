@@ -2,6 +2,8 @@
 package com.dhbwGroup.kanban.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
@@ -15,9 +17,11 @@ public class TaskData implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TaskData() {
+	public TaskData(String columnName) {
     	this.id = UUID.randomUUID();
     	this.timestamp = System.currentTimeMillis();
+    	this.changeLog = new ArrayList<TaskChangeLog>();
+    	this.changeLog.add(new TaskChangeLog(columnName));
     }
 
     @SerializedName("uuid")
@@ -37,6 +41,9 @@ public class TaskData implements Serializable{
     
     @SerializedName("timestamp")
     private long timestamp;
+    
+    @SerializedName("changeLog")
+    private List<TaskChangeLog> changeLog;
 
 //---------------------------------------------------------------------------
 //--------------------Getter and Setter--------------------------------------
@@ -88,6 +95,14 @@ public class TaskData implements Serializable{
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public List<TaskChangeLog> getChangeLog() {
+		return changeLog;
+	}
+
+	public void setChangeLog(List<TaskChangeLog> changeLog) {
+		this.changeLog = changeLog;
 	}
 
 }

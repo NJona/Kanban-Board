@@ -1,21 +1,30 @@
 package com.dhbwGroup.kanban.views;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import com.dhbwGroup.kanban.controllers.Controller;
+import com.dhbwGroup.kanban.exceptions.TooManyCharsException;
 import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.TaskChangeLog;
 import com.dhbwGroup.kanban.models.TaskData;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
@@ -42,6 +51,8 @@ public class Task{
 	
 	private Text categoryLabel;
 	private ComboBox<CategoryData> categoryDropDown;
+	
+	private Button showHistoryButton;
 
 	public Task(TaskData taskData, List<CategoryData> categoriesData) {
 		this.taskData = taskData;
@@ -74,7 +85,12 @@ public class Task{
 		editSaveButton = new Button("Edit");
 		editSaveButton.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
-    	    	handleEditSaveButtonEvent();
+    	    	try {
+					handleEditSaveButtonEvent();
+				} catch (TooManyCharsException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
     	    }
 		});
 		
@@ -123,6 +139,15 @@ public class Task{
 			categoryDropDown.setValue(categoryData);
 		}
 		
+		showHistoryButton = new Button("Show History");
+		showHistoryButton.setVisible(false);
+		showHistoryButton.setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {
+					showHistory();
+    	    }
+		});
+		
+		
 		
 		descriptionLabel.setWrapText(true);
 		descriptionTextArea.setWrapText(true);
@@ -153,6 +178,8 @@ public class Task{
 		
 		this.categoryLabel.getStyleClass().add("taskCategoryLabel");
 		this.categoryDropDown.getStyleClass().add("taskCategoryDropDown");
+		
+		this.showHistoryButton.getStyleClass().add("taskShowHistoryButton");
 	}
 
 	private void addNodesToGridPane() {
@@ -170,13 +197,17 @@ public class Task{
 		
 		taskGridPane.add(categoryLabel, 0, 2, GridPane.REMAINING, 1);
 		taskGridPane.add(categoryDropDown, 0, 3, GridPane.REMAINING, 1);
+		
+		taskGridPane.add(showHistoryButton, 3, 3);
 	}
 	
-	private void handleEditSaveButtonEvent() {
+	private void handleEditSaveButtonEvent() throws TooManyCharsException {
         if(this.editSaveButton.getText().equals("Edit")) {
         	this.editSaveButton.setText("Save");
         	toggleAllVisibilitys();
 		}else {
+			if(titleTextField.getText().length() > Controller.MAX_ALLOWED_CHARS)
+				throw new TooManyCharsException();			
 			this.editSaveButton.setText("Edit");
 			updateLabels();
 			updateTaskData();
@@ -217,6 +248,8 @@ public class Task{
 		
 		categoryLabel.setVisible(!categoryLabel.isVisible());
 		categoryDropDown.setVisible(!categoryDropDown.isVisible());
+		
+		showHistoryButton.setVisible(!showHistoryButton.isVisible());
 	}
 	
 	private String getRGBCode(Color color) {
@@ -224,6 +257,27 @@ public class Task{
 	            (int)( color.getRed() * 255 ),
 	            (int)( color.getGreen() * 255 ),
 	            (int)( color.getBlue() * 255 ) );
+	}
+	
+	private void showHistory() {
+		if(taskData.getChangeLog() != null && !taskData.getChangeLog().isEmpty()) {
+			String message = "History: \n- Task added in ";
+			Iterator<TaskChangeLog> changeLogIterator = taskData.getChangeLog().iterator();
+			while(changeLogIterator.hasNext()) {
+				TaskChangeLog activeChangeLog = changeLogIterator.next();
+				String changeLogDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(activeChangeLog.getTimestamp()));
+				message += activeChangeLog.getColumnName() + " at " + changeLogDate + " \n";
+				if(changeLogIterator.hasNext())
+					message += "- Task moved from " + activeChangeLog.getColumnName() + " to ";
+			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(taskData.getTitle() + " History");
+			alert.setContentText(message);
+			alert.setResizable(true);
+			alert.getDialogPane().setMinWidth(500);
+
+			alert.showAndWait();	
+		}
 	}
 	
 //---------------------------------------------------------------------------

@@ -14,7 +14,6 @@
 	
 }
 .borderPaneCenter{
-	-fx-background-color: black;
 	
 }
 
@@ -23,8 +22,7 @@
 }
 
 .columnsHBox{
-
--fx-background-color: gray;
+	
 }
 
 .columnVBox{
@@ -32,7 +30,7 @@
 }
 
 .columnHeaderGridPane{
-    
+    -fx-background-color: gray;
 }
 
 .columnHeaderTitleLabel{

@@ -6,13 +6,16 @@ package com.dhbwGroup.kanban.controllers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException;
 import com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
+import com.dhbwGroup.kanban.exceptions.TooManyTasksInActiveDoingColumn;
 import com.dhbwGroup.kanban.models.CategoryData;
+import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.models.Project;
 import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
@@ -21,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -45,6 +49,7 @@ public class Controller implements Initializable {
 	private MenuItem addColumn;
 	private MenuItem addTask;
 	private MenuItem addCategory;
+	private MenuItem changeDoingColumn;
 	
 	
 	private ScrollPane scrollPane;
@@ -57,7 +62,10 @@ public class Controller implements Initializable {
 	private ColumnController columnController;
 	private CategoryController categoryController;
 	
-	final static int MAXCOLUMNS = 10;
+	public final static int MAXCOLUMNS = 10;
+	public final static int MAX_DEFAULT_TASKS = 8;
+	public final static int MAX_ALLOWED_CHARS = 15;
+	public final static int MIN_COLUMNS = 3;
 	
 	public Controller() throws FileNotFoundException {
 		categoryController = new CategoryController();
@@ -89,8 +97,8 @@ public class Controller implements Initializable {
     
     private void initializeScrollPane() {
         scrollPane = new ScrollPane();
-    	scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
-    	scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+    	scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+    	scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
     	scrollPane.getStyleClass().add("scrollPane");    	
     }
 
@@ -162,7 +170,18 @@ public class Controller implements Initializable {
 					addCategory();
                }
         });
-        edit.getItems().addAll(addColumn, addTask, addCategory);
+        changeDoingColumn = new MenuItem("Change Doing Column");
+        changeDoingColumn.setOnAction(new EventHandler<ActionEvent>() {
+               public void handle(ActionEvent t) {
+					try {
+						changeDoingColumn();
+					} catch (TooManyTasksInActiveDoingColumn e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+               }
+        });
+        edit.getItems().addAll(addColumn, addTask, addCategory, changeDoingColumn);
 	}
 
 	private void createNewFile() {
@@ -228,6 +247,46 @@ public class Controller implements Initializable {
 				
 			}
 		});
+	}
+	
+	private void changeDoingColumn() throws TooManyTasksInActiveDoingColumn {
+		Column activeDoingColumn = getActiveDoingColumn();
+		if(activeDoingColumn == null) {
+			try {
+				activeDoingColumn = columnController.getColumns().get(1);
+			} catch (NullPointerException e) {
+				if(columnController.getColumnsData().isEmpty()) {
+					e.printStackTrace();
+				}
+					return;
+			}			
+		}
+		
+		if(activeDoingColumn.getColumnTaskVBox().getColumnTaskVBox().getChildren().size() > MAX_DEFAULT_TASKS)
+			throw new TooManyTasksInActiveDoingColumn();
+		
+		ChoiceDialog<ColumnData> dialog = new ChoiceDialog<>(activeDoingColumn.getColumnData(), columnController.getColumnsData().subList(1, columnController.getColumnsData().size()-1));
+		dialog.setTitle("Change Doing Column!");
+		dialog.setHeaderText(null);
+		dialog.setContentText("Please choose a Column:");
+
+		Optional<ColumnData> result = dialog.showAndWait();
+		if(result.isPresent()) {
+			activeDoingColumn.getColumnData().setType("optional");
+			activeDoingColumn.getColumnData().setMaxTasks(MAX_DEFAULT_TASKS);
+			result.get().setType("doing");
+		}
+	}
+	
+	private Column getActiveDoingColumn() {
+		Iterator<Column> columnIterator = columnController.getColumns().iterator();
+		while(columnIterator.hasNext()) {
+			Column activeColumn = columnIterator.next();
+			if(activeColumn.getColumnData().getType().equals("doing")) {
+				return activeColumn;
+			}
+		}
+		return null;
 	}
     
 //-----------------------------------------------------------------------------------	

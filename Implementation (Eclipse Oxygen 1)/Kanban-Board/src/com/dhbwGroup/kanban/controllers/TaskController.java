@@ -42,8 +42,8 @@ public class TaskController{
 		}
 	}
 	
-	public Task createNewTaskDataAndTaskView(){	
-		TaskData newTaskData = new TaskData();
+	public Task createNewTaskDataAndTaskView(String columnName){	
+		TaskData newTaskData = new TaskData(columnName);
 		tasksData.add(newTaskData);
 		return createNewTaskView(newTaskData);
 

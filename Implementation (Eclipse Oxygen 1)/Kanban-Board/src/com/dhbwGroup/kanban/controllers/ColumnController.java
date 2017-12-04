@@ -10,6 +10,7 @@ import com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
 import com.dhbwGroup.kanban.exceptions.TaskNotReusableException;
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.TaskChangeLog;
 import com.dhbwGroup.kanban.models.TaskData;
 import com.dhbwGroup.kanban.views.Column;
 import com.dhbwGroup.kanban.views.Task;
@@ -25,8 +26,6 @@ public class ColumnController {
 	private List<Column> columns;
 	
 	private TaskController taskController;
-	
-	public static final int MIN_COLUMNS = 3;
 
 	public ColumnController(CategoryController categoryController) {
 		taskController = new TaskController(categoryController);
@@ -68,7 +67,7 @@ public class ColumnController {
 	}
 	
 	public Column handleRemoveColumn(Column columnToRemove) throws ColumnNotEmptyException, MinColumnsException{
-			if(columnToRemove.getColumnData().getTaskUUIDs().isEmpty() && columns.size() > MIN_COLUMNS)
+			if(columnToRemove.getColumnData().getTaskUUIDs().isEmpty() && columns.size() > Controller.MIN_COLUMNS)
 			{
 				columnsData.remove(columnToRemove.getColumnData());
 				columns.remove(columnToRemove);
@@ -104,7 +103,7 @@ public class ColumnController {
 	public boolean addTask() {
 		Column column = columns.get(0);
 		if(column.getColumnData().getTaskUUIDs().size() < columns.get(0).getColumnData().getMaxTasks()) {
-			Task taskToAdd = taskController.createNewTaskDataAndTaskView();
+			Task taskToAdd = taskController.createNewTaskDataAndTaskView(column.getColumnData().getName());
 			taskToAdd.setColumnData(column.getColumnData());
 			column.getColumnData().getTaskUUIDs().add(taskToAdd.getTaskData().getId());
 			column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskToAdd.getTaskGridPane());
@@ -134,6 +133,7 @@ public class ColumnController {
 								Task taskView = getTaskViewFromTaskData(taskDataToMove);
 								if(taskView != null) {
 									taskView.setColumnData(column.getColumnData());
+									taskView.getTaskData().getChangeLog().add(new TaskChangeLog(column.getColumnData().getName()));
 									column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskView.getTaskGridPane());
 								}
 								success = true;

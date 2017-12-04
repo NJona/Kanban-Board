@@ -2,6 +2,8 @@ package com.dhbwGroup.kanban.views;
 
 import java.util.Optional;
 
+import com.dhbwGroup.kanban.controllers.Controller;
+import com.dhbwGroup.kanban.exceptions.TooManyCharsException;
 import com.dhbwGroup.kanban.models.ColumnData;
 
 import javafx.event.ActionEvent;
@@ -46,7 +48,12 @@ public class ColumnHeaderGridPane {
 		this.editSaveButton = new Button("Edit");
 		this.editSaveButton.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
-    	    	handleEditSaveButtonEvent();
+    	    	try {
+					handleEditSaveButtonEvent();
+				} catch (TooManyCharsException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
     	    }
 		});
 		
@@ -95,11 +102,13 @@ public class ColumnHeaderGridPane {
 //--------------------Handle Edit Column Name--------------------------------
 //---------------------------------------------------------------------------
 	
-	private void handleEditSaveButtonEvent() {
+	private void handleEditSaveButtonEvent() throws TooManyCharsException {
         if(this.editSaveButton.getText().equals("Edit")) {
         	this.editSaveButton.setText("Save");
         	toggleAllVisibilitys();
 		}else {
+			if(titleTextField.getText().length() > Controller.MAX_ALLOWED_CHARS)
+				throw new TooManyCharsException();
 			this.editSaveButton.setText("Edit");
 			updateLabels();
 			updateTaskData();

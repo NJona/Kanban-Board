@@ -60,7 +60,6 @@ public class ColumnTaskVBox {
 		});
 		
 		columnTaskVBox.setMinHeight(900);
-		columnTaskVBox.setPrefHeight(900);
 		columnTaskVBox.setMinWidth(450);
 		columnTaskVBox.setPrefWidth(450);
 		columnTaskVBox.setMaxWidth(450);
