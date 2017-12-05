@@ -26,15 +26,19 @@
 }
 
 .columnVBox{
-	
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-padding: 10px;
 }
 
 .columnHeaderGridPane{
     -fx-background-color: gray;
+	
 }
 
 .columnHeaderTitleLabel{
--fx-font-size: 20px;	
+	-fx-font-size: 20px;	
+
 
 }
 
@@ -69,13 +73,21 @@
 
 .columnHeaderRemoveButton:hover {
    
-  -fx-background-color: linear-gradient(#FF0F0A, #A5240B);  
+	-fx-background-color: linear-gradient(#FF0F0A, #A5240B);  
 }
 
 
 .columnHeaderChangeCapacityButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
 
-	
+.columnHeaderChangeCapacityButton:hover {
+	-fx-background-color: linear-gradient(#2DFE2F, #027201);
 }
 
 .columnTaskVBox{
@@ -86,7 +98,6 @@
 	-fx-alignment: top-center;
 	-fx-height: 100%;
 	-fx-spacing: 10px;
-	
 }
 
 .taskGridPane{
@@ -99,25 +110,18 @@
 	-fx-background-radius: 11px;
     -fx-font-family: "Arial Narrow";
 	-fx-spacing: 10px;
-	
 	-fx-alignment: top-center;
 	-fx-height: 100%;
-	
-	
-	
-	
 }
 
 .taskTitleLabel{
 	-fx-alignment: center;
 	-fx-font-size: 30px;
-	
 }
 
 .taskTitleTextField{
    -fx-border-color: black;
-    -fx-font-family: "Arial Narrow";
-	
+   -fx-font-family: "Arial Narrow";
 }
 
 .taskEditSaveButton{
@@ -127,7 +131,6 @@
     -fx-background-color: linear-gradient(#23BF2E, #000000);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
     -fx-border-color: black;
-	
 }
 .taskEditSaveButton:hover{
 	-fx-background-color: linear-gradient(#2DFE2F, #027201);
@@ -164,7 +167,6 @@
 }
 
 .taskDescriptionTextArea{
-	
 	-fx-border-color: black;
 }
 
@@ -173,13 +175,12 @@
 }
 
 .taskCategoryLabel{
--fx-border-color: black;
+	-fx-border-color: black;
 }
 
 .taskCategoryDropDown{
--fx-border-color: black;
+	-fx-border-color: black; 
 }
-
 /**
 ********************************
 * OLD Stylesheet
