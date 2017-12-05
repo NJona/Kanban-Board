@@ -23,7 +23,11 @@ import com.dhbwGroup.kanban.views.Column;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -33,6 +37,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 
 public class Controller implements Initializable {
@@ -46,10 +51,12 @@ public class Controller implements Initializable {
 	private MenuItem newFile;
 	private MenuItem openFile;
 	private MenuItem saveFile;
+	
 	private MenuItem addColumn;
 	private MenuItem addTask;
 	private MenuItem addCategory;
 	private MenuItem changeDoingColumn;
+	private MenuItem showHistory;
 	
 	
 	private ScrollPane scrollPane;
@@ -68,14 +75,17 @@ public class Controller implements Initializable {
 	public final static int MIN_COLUMNS = 3;
 	
 	public Controller() throws FileNotFoundException {
-		categoryController = new CategoryController();
-		columnController = new ColumnController(categoryController);
 		kanbanService = new KanbanService();
+		project = kanbanService.loadProject();
+		System.out.println(project);
+		categoryController = new CategoryController(kanbanService, project);
+		columnController = new ColumnController(categoryController, kanbanService, project);
 	}
 	
     @Override
     public void initialize(URL url, ResourceBundle rb) {   	
-        this.openFile();
+		initializeBoard();
+		initializeColumnAndTasks();
     }
     
     private void initializeBoard() {
@@ -181,7 +191,13 @@ public class Controller implements Initializable {
 					}
                }
         });
-        edit.getItems().addAll(addColumn, addTask, addCategory, changeDoingColumn);
+        showHistory = new MenuItem("Show old Tasks");
+        showHistory.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent t) {
+						showHistory();
+            }
+     });
+        edit.getItems().addAll(addColumn, addTask, addCategory, changeDoingColumn, showHistory);
 	}
 
 	private void createNewFile() {
@@ -275,6 +291,7 @@ public class Controller implements Initializable {
 			activeDoingColumn.getColumnData().setType("optional");
 			activeDoingColumn.getColumnData().setMaxTasks(MAX_DEFAULT_TASKS);
 			result.get().setType("doing");
+			kanbanService.saveProject(project);
 		}
 	}
 	
@@ -287,6 +304,20 @@ public class Controller implements Initializable {
 			}
 		}
 		return null;
+	}
+	
+	private void showHistory() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../views/HistoryView.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("History");
+            stage.setScene(new Scene(root, 450, 800));
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }		
 	}
     
 //-----------------------------------------------------------------------------------	

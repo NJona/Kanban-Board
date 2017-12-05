@@ -4,13 +4,20 @@ import java.util.List;
 
 import com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException;
 import com.dhbwGroup.kanban.models.CategoryData;
+import com.dhbwGroup.kanban.models.Project;
+import com.dhbwGroup.kanban.services.KanbanService;
 
 public class CategoryController {
 
 	private List<CategoryData> categoriesData;
+	
+	private KanbanService kanbanService;
+	
+	private Project project;
 
-	public CategoryController() {
-		
+	public CategoryController(KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 	}
 	
 	public void initializeData(List<CategoryData> categoryData) {
@@ -21,6 +28,7 @@ public class CategoryController {
 		checkIfTitleAlreadyTaken(title);
 		CategoryData newCategoryData = new CategoryData(title, color);
 		categoriesData.add(newCategoryData);
+		kanbanService.saveProject(project);
 		return newCategoryData;
 	}
 	
@@ -35,6 +43,7 @@ public class CategoryController {
 		checkIfTitleAlreadyTaken(title);
 		CategoryData newCategoryData = new CategoryData(title);
 		categoriesData.add(newCategoryData);
+		kanbanService.saveProject(project);
 		return newCategoryData;
 	}
 	

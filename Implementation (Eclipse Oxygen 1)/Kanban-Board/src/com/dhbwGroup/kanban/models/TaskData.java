@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "task")
 public class TaskData implements Serializable{
 	
 	/**

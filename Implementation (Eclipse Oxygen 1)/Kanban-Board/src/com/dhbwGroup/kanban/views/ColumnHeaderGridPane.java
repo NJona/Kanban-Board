@@ -5,6 +5,8 @@ import java.util.Optional;
 import com.dhbwGroup.kanban.controllers.Controller;
 import com.dhbwGroup.kanban.exceptions.TooManyCharsException;
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.Project;
+import com.dhbwGroup.kanban.services.KanbanService;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,8 +32,14 @@ public class ColumnHeaderGridPane {
 	private Button changeCapacityButton;
 
 	private RowConstraints rowConstraints;
+	
+	private KanbanService kanbanService;
+	
+	private Project project;
 
-	public ColumnHeaderGridPane(ColumnData columnData) {
+	public ColumnHeaderGridPane(ColumnData columnData, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 		this.columnData = columnData;
 		initialize();
 	}
@@ -118,6 +126,7 @@ public class ColumnHeaderGridPane {
 	
 	private void updateTaskData() {
 		this.columnData.setName(titleLabel.getText());
+		kanbanService.saveProject(project);
 	}
 
 	private void updateLabels() {
@@ -148,6 +157,7 @@ public class ColumnHeaderGridPane {
 		result.ifPresent((title) -> {
 			try {
 				this.columnData.setMaxTasks(Integer.parseInt(title));
+				kanbanService.saveProject(project);
 			}catch(NumberFormatException e) {
 				System.err.println("Not a numeric number!");
 				Alert alert = new Alert(AlertType.WARNING);

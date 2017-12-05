@@ -1,6 +1,8 @@
 package com.dhbwGroup.kanban.views;
 
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.Project;
+import com.dhbwGroup.kanban.services.KanbanService;
 
 import javafx.scene.layout.VBox;
 
@@ -13,7 +15,13 @@ public class Column {
 
 	private ColumnTaskVBox columnTaskVBox;
 	
-	public Column(ColumnData columnData) {
+	private KanbanService kanbanService;
+	
+	private Project project;
+	
+	public Column(ColumnData columnData, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 		this.columnData = columnData;
 		initialize();
 	}
@@ -21,7 +29,7 @@ public class Column {
 	public void initialize() {
 		columnVBox = new VBox();
 		
-		columnHeaderGridPane = new ColumnHeaderGridPane(columnData);
+		columnHeaderGridPane = new ColumnHeaderGridPane(columnData, kanbanService, project);
 		
 		columnTaskVBox = new ColumnTaskVBox();
 		columnTaskVBox.getColumnTaskVBox().setId(columnData.getId().toString());

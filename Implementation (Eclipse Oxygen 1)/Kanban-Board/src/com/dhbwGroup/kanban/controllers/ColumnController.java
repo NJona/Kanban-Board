@@ -10,8 +10,10 @@ import com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException;
 import com.dhbwGroup.kanban.exceptions.MinColumnsException;
 import com.dhbwGroup.kanban.exceptions.TaskNotReusableException;
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.Project;
 import com.dhbwGroup.kanban.models.TaskChangeLog;
 import com.dhbwGroup.kanban.models.TaskData;
+import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Column;
 import com.dhbwGroup.kanban.views.Task;
 
@@ -26,9 +28,16 @@ public class ColumnController {
 	private List<Column> columns;
 	
 	private TaskController taskController;
+	
+	private KanbanService kanbanService;
+	
+	private Project project;
 
-	public ColumnController(CategoryController categoryController) {
-		taskController = new TaskController(categoryController);
+	public ColumnController(CategoryController categoryController, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
+		System.out.println(project);
+		taskController = new TaskController(categoryController, kanbanService, project);
 		columns = new ArrayList<Column>();
 	}
 	
@@ -49,18 +58,19 @@ public class ColumnController {
 	public Column createNewColumnDataAndColumnView(String columnName){	
 		ColumnData newColumnData = new ColumnData(columnName);
 		columnsData.add(columnsData.size()-1, newColumnData);
+		kanbanService.saveProject(project);
 		return createNewColumnViewNextToLastColumn(newColumnData);
 	}
 	
 	public Column createNewColumnViewNextToLastColumn(ColumnData columnData) {
-		Column columnToAdd = new Column(columnData);
+		Column columnToAdd = new Column(columnData, kanbanService, project);
 		columns.add(columns.size()-1, columnToAdd);
 		createDragAndDropHandlerForColumnTaskVBox(columnToAdd);
 		return columnToAdd;
 	}
 
 	public Column createNewColumnView(ColumnData columnData) {
-		Column columnToAdd = new Column(columnData);
+		Column columnToAdd = new Column(columnData, kanbanService, project);
 		columns.add(columnToAdd);
 		createDragAndDropHandlerForColumnTaskVBox(columnToAdd);
 		return columnToAdd;
@@ -71,6 +81,7 @@ public class ColumnController {
 			{
 				columnsData.remove(columnToRemove.getColumnData());
 				columns.remove(columnToRemove);
+				kanbanService.saveProject(project);
 				return columnToRemove;				
 			}else if(columnToRemove.getColumnData().getTaskUUIDs().size() == 0){
 				throw new MinColumnsException();
@@ -107,6 +118,7 @@ public class ColumnController {
 			taskToAdd.setColumnData(column.getColumnData());
 			column.getColumnData().getTaskUUIDs().add(taskToAdd.getTaskData().getId());
 			column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskToAdd.getTaskGridPane());
+			kanbanService.saveProject(project);
 		}
 		return column.getColumnData().getTaskUUIDs().size() >= columns.get(0).getColumnData().getMaxTasks(); //reached max Tasks?
 	}
@@ -137,6 +149,7 @@ public class ColumnController {
 									column.getColumnTaskVBox().getColumnTaskVBox().getChildren().add(taskView.getTaskGridPane());
 								}
 								success = true;
+								kanbanService.saveProject(project);
 							}else {
 								success = false;
 								try {

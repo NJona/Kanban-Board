@@ -14,7 +14,11 @@ import javax.swing.filechooser.FileSystemView;
 import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.models.Project;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class KanbanService{
 
@@ -40,9 +44,18 @@ public class KanbanService{
 		try {
 			JsonReader reader = new JsonReader(new FileReader(SHARED_DEFAULT_FILE.toString()));	
 			try {
-			return gson.fromJson(reader, Project.class);
-			}catch(NullPointerException e) {
+				Project project = gson.fromJson(reader, Project.class);
+				if(project == null)
+					throw new NullPointerException();
+				return project;
+			}catch(NullPointerException | JsonSyntaxException e) {
 				try {
+					System.err.println("Document is not valid! Please repair File, or save new one!");
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Document is not valid!");
+					alert.setContentText("Document is not valid! Please repair File, or save new one!");
+
+					alert.showAndWait();					
 					reader.close();
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -56,6 +69,7 @@ public class KanbanService{
 	}
 	
 	public void saveProject(Project project) {
+		System.out.println(project);
 		project.setSource(5);
 		try (Writer writer = new FileWriter(SHARED_DEFAULT_FILE.toString())){
 			gson.toJson(project, writer);

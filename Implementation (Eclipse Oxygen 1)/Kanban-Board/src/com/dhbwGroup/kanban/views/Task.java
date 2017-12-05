@@ -10,8 +10,10 @@ import com.dhbwGroup.kanban.controllers.Controller;
 import com.dhbwGroup.kanban.exceptions.TooManyCharsException;
 import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.ColumnData;
+import com.dhbwGroup.kanban.models.Project;
 import com.dhbwGroup.kanban.models.TaskChangeLog;
 import com.dhbwGroup.kanban.models.TaskData;
+import com.dhbwGroup.kanban.services.KanbanService;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,7 +26,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
@@ -53,21 +54,31 @@ public class Task{
 	private ComboBox<CategoryData> categoryDropDown;
 	
 	private Button showHistoryButton;
+	
+	private KanbanService kanbanService;
+	
+	private Project project;
 
-	public Task(TaskData taskData, List<CategoryData> categoriesData) {
+	public Task(TaskData taskData, List<CategoryData> categoriesData, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 		this.taskData = taskData;
 		this.categoriesData = categoriesData;
 		initialize();
 	}
 
-	public Task(TaskData taskData, CategoryData categoryData, List<CategoryData> categoriesData) {
+	public Task(TaskData taskData, CategoryData categoryData, List<CategoryData> categoriesData, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 		this.taskData = taskData;
 		this.categoryData = categoryData;
 		this.categoriesData = categoriesData;
 		initialize();
 	}
 	
-	public Task(TaskData taskData, UUID categoryDataUUID, List<CategoryData> categoriesData) {
+	public Task(TaskData taskData, UUID categoryDataUUID, List<CategoryData> categoriesData, KanbanService kanbanService, Project project) {
+		this.kanbanService = kanbanService;
+		this.project = project;
 		this.taskData = taskData;
 		categoriesData.forEach(categoryData -> {
 			if(categoryData.getId().equals(categoryDataUUID))
@@ -225,6 +236,7 @@ public class Task{
 		this.taskData.setColor(getRGBCode(colorPicker.getValue()));
 		if(categoryDropDown.getValue() != null)
 			this.taskData.setCategoryUUID(this.categoryDropDown.getValue().getId());
+		kanbanService.saveProject(project);
 	}
 
 	private void updateLabels() {
@@ -402,5 +414,13 @@ public class Task{
 
 	public void setColumnData(ColumnData columnData) {
 		this.columnData = columnData;
+	}
+
+	public Button getShowHistoryButton() {
+		return showHistoryButton;
+	}
+
+	public void setShowHistoryButton(Button showHistoryButton) {
+		this.showHistoryButton = showHistoryButton;
 	}
 }

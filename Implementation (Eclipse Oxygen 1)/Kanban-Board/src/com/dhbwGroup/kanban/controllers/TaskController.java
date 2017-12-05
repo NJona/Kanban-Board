@@ -4,8 +4,9 @@ package com.dhbwGroup.kanban.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dhbwGroup.kanban.models.Project;
 import com.dhbwGroup.kanban.models.TaskData;
-
+import com.dhbwGroup.kanban.services.KanbanService;
 import com.dhbwGroup.kanban.views.Task;
 
 import javafx.event.ActionEvent;
@@ -25,10 +26,16 @@ public class TaskController{
 	
 	private CategoryController categoryController;
 	
+	private KanbanService kanbanService;
+	
+	private Project project;
+	
 	public final static DataFormat TASK_DATA_FORMAT = new DataFormat("com.dhbwGroup.kanban.models.TaskData");
 
-	public TaskController(CategoryController categoryController) {
+	public TaskController(CategoryController categoryController, KanbanService kanbanService, Project project) {
 		this.categoryController = categoryController;
+		this.kanbanService = kanbanService;
+		this.project = project;
 		tasks = new ArrayList<Task>();
 	}
 	
@@ -45,6 +52,8 @@ public class TaskController{
 	public Task createNewTaskDataAndTaskView(String columnName){	
 		TaskData newTaskData = new TaskData(columnName);
 		tasksData.add(newTaskData);
+		System.out.println("Add Task" + project);
+		kanbanService.saveProject(project);
 		return createNewTaskView(newTaskData);
 
 	}
@@ -52,9 +61,9 @@ public class TaskController{
 	public Task createNewTaskView(TaskData taskData) {
 		Task taskToAdd;
 		if(taskData.getCategoryUUID() != null) {
-			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData());
+			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData(), kanbanService, project);
 		}else {
-			taskToAdd = new Task(taskData, categoryController.getCategoryData());
+			taskToAdd = new Task(taskData, categoryController.getCategoryData(), kanbanService, project);
 		}
 		createDragAndDropHandlerForTask(taskToAdd);
 		createArchiveHandlerForTask(taskToAdd);
@@ -74,8 +83,11 @@ public class TaskController{
 			@Override
 			public void handle(ActionEvent event) {
 				tasksData.remove(taskToAdd.getTaskData());
+				kanbanService.saveProject(project);
 				if(taskToAdd.getColumnData() != null) {
 					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
+					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
+				}else {
 					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
 				}
 			}
@@ -91,6 +103,7 @@ public class TaskController{
 			public void handle(ActionEvent event) {
 				if(taskToAdd.getColumnData() != null) {
 					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
+					kanbanService.saveProject(project);
 					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
 				}
 			}
