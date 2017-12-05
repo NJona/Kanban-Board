@@ -284,6 +284,7 @@ public class Task{
 			}
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle(taskData.getTitle() + " History");
+			alert.setHeaderText(null);
 			alert.setContentText(message);
 			alert.setResizable(true);
 			alert.getDialogPane().setMinWidth(500);
