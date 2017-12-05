@@ -22,6 +22,11 @@ public class ColumnData {
         this(name);
         this.maxTasks = maxTasks;
     }
+    
+    public ColumnData(String name, int maxTasks, String type) {
+        this(name, maxTasks);
+        this.type = type;
+    }
 
     @SerializedName("uuid")
     private UUID id;

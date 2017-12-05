@@ -45,7 +45,6 @@ public class HistoryController implements Initializable {
 			Task activeTask = taskIterator.previous();
 			activeTask.getEditSaveButton().setVisible(false);
 			activeTask.getShowHistoryButton().setVisible(true);
-			activeTask.getDeleteButton().setVisible(true);
     		historyVBox.getChildren().add(activeTask.getTaskGridPane());
 		}
     }

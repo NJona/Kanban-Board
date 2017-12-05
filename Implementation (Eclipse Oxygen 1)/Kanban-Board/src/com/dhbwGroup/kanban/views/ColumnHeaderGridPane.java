@@ -156,8 +156,16 @@ public class ColumnHeaderGridPane {
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent((title) -> {
 			try {
-				this.columnData.setMaxTasks(Integer.parseInt(title));
-				kanbanService.saveProject(project);
+				if(Integer.parseInt(title) > 100) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Number too high!");
+					alert.setContentText("Number too high! Maximum 100 Tasks allowed!");
+
+					alert.showAndWait();					
+				}else {
+					this.columnData.setMaxTasks(Integer.parseInt(title));
+					kanbanService.saveProject(project);
+				}
 			}catch(NumberFormatException e) {
 				System.err.println("Not a numeric number!");
 				Alert alert = new Alert(AlertType.WARNING);

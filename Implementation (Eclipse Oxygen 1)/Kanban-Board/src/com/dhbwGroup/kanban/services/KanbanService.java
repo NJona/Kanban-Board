@@ -31,9 +31,9 @@ public class KanbanService{
 	
 	public KanbanService() {
 		gson = new Gson();
-		standardColumns.add(new ColumnData("Todo", 8));
-		standardColumns.add(new ColumnData("Doing", 1));
-		standardColumns.add(new ColumnData("Done", 10000));
+		standardColumns.add(new ColumnData("Todo", 8, "ready"));
+		standardColumns.add(new ColumnData("Doing", 1, "doing"));
+		standardColumns.add(new ColumnData("Done", 100, "done"));
 	}
 	
 	public Project createNewBoard(){
@@ -69,7 +69,6 @@ public class KanbanService{
 	}
 	
 	public void saveProject(Project project) {
-		System.out.println(project);
 		project.setSource(5);
 		try (Writer writer = new FileWriter(SHARED_DEFAULT_FILE.toString())){
 			gson.toJson(project, writer);

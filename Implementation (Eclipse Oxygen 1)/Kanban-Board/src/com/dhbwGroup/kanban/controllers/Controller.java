@@ -29,9 +29,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextInputDialog;
@@ -43,20 +40,13 @@ import javafx.stage.Stage;
 public class Controller implements Initializable {
 	@FXML private BorderPane fullBorderPane;
 	
-	private MenuBar menuBar;
+	private HBox menuHBox;
 	
-	private Menu file;
-	private Menu edit;
-	
-	private MenuItem newFile;
-	private MenuItem openFile;
-	private MenuItem saveFile;
-	
-	private MenuItem addColumn;
-	private MenuItem addTask;
-	private MenuItem addCategory;
-	private MenuItem changeDoingColumn;
-	private MenuItem showHistory;
+	private Button addColumnButton;
+	private Button addTaskButton;
+	private Button addCategoryButton;
+	private Button changeDoingColumnButton;
+	private Button showHistoryButton;
 	
 	
 	private ScrollPane scrollPane;
@@ -73,11 +63,11 @@ public class Controller implements Initializable {
 	public final static int MAX_DEFAULT_TASKS = 8;
 	public final static int MAX_ALLOWED_CHARS = 15;
 	public final static int MIN_COLUMNS = 3;
+	public static final int MAX_TASKS_IN_HISTORY = 3;
 	
 	public Controller() throws FileNotFoundException {
 		kanbanService = new KanbanService();
 		project = kanbanService.loadProject();
-		System.out.println(project);
 		categoryController = new CategoryController(kanbanService, project);
 		columnController = new ColumnController(categoryController, kanbanService, project);
 	}
@@ -118,48 +108,18 @@ public class Controller implements Initializable {
   //-----------------------------------------------------------------------------------
     
 	private void initializeMenu() {
-		createMenuBar();
-		createMenus();
-		createMenuItems();  
-		fullBorderPane.setTop(menuBar);
+		createMenuHBox();
+		createMenuButtons();  
+		fullBorderPane.setTop(menuHBox);
 	}
 	
-	private void createMenuBar() {
-		menuBar = new MenuBar();
+	private void createMenuHBox() {
+		menuHBox = new HBox();
 	}
 
-	private void createMenus() {
-        file = new Menu("File");
-        edit = new Menu("Edit");
-        
-        menuBar.getMenus().addAll(file, edit);
-	}
-
-	private void createMenuItems() {
-		//----------File Menu----------------
-        newFile = new MenuItem("New");
-        newFile.setOnAction(new EventHandler<ActionEvent>() {
-               public void handle(ActionEvent t) {
-                   createNewFile();
-               }
-        });
-        openFile = new MenuItem("Open");
-        openFile.setOnAction(new EventHandler<ActionEvent>() {
-               public void handle(ActionEvent t) {
-                   openFile();
-               }
-        });
-        saveFile = new MenuItem("Save");
-        saveFile.setOnAction(new EventHandler<ActionEvent>() {
-               public void handle(ActionEvent t) {
-                   saveFile();
-               }
-        });
-        file.getItems().addAll(newFile, openFile, saveFile);
-        
-        //----------Edit Menu----------------
-        addColumn = new MenuItem("Add Column");
-        addColumn.setOnAction(new EventHandler<ActionEvent>() {
+	private void createMenuButtons() {
+        addColumnButton = new Button("Add Column");
+        addColumnButton.setOnAction(new EventHandler<ActionEvent>() {
                public void handle(ActionEvent t) {
             	try {
 					addColumn();
@@ -168,20 +128,20 @@ public class Controller implements Initializable {
 				}
                }
         }); 
-        addTask = new MenuItem("Add Task");
-        addTask.setOnAction(new EventHandler<ActionEvent>() {
+        addTaskButton = new Button("Add Task");
+        addTaskButton.setOnAction(new EventHandler<ActionEvent>() {
                public void handle(ActionEvent t) {
 					addTask();
                }
         });
-        addCategory = new MenuItem("Add Category");
-        addCategory.setOnAction(new EventHandler<ActionEvent>() {
+        addCategoryButton = new Button("Add Category");
+        addCategoryButton.setOnAction(new EventHandler<ActionEvent>() {
                public void handle(ActionEvent t) {
 					addCategory();
                }
         });
-        changeDoingColumn = new MenuItem("Change Doing Column");
-        changeDoingColumn.setOnAction(new EventHandler<ActionEvent>() {
+        changeDoingColumnButton = new Button("Change Doing Column");
+        changeDoingColumnButton.setOnAction(new EventHandler<ActionEvent>() {
                public void handle(ActionEvent t) {
 					try {
 						changeDoingColumn();
@@ -191,27 +151,13 @@ public class Controller implements Initializable {
 					}
                }
         });
-        showHistory = new MenuItem("Show old Tasks");
-        showHistory.setOnAction(new EventHandler<ActionEvent>() {
+        showHistoryButton = new Button("Show old Tasks");
+        showHistoryButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent t) {
 						showHistory();
             }
      });
-        edit.getItems().addAll(addColumn, addTask, addCategory, changeDoingColumn, showHistory);
-	}
-
-	private void createNewFile() {
-		columnHBox = new HBox();
-		scrollPane.setContent(columnHBox);
-		columnHBox.getStyleClass().add("columnHBox");
-		project = kanbanService.createNewBoard();
-		initializeColumnAndTasks();
-	}	
-	
-	private void openFile() {
-		initializeBoard();
-		project = kanbanService.loadProject();
-		initializeColumnAndTasks();
+        menuHBox.getChildren().addAll(addColumnButton, addTaskButton, addCategoryButton, changeDoingColumnButton, showHistoryButton);
 	}
 	
 	private void initializeColumnAndTasks() {
@@ -222,11 +168,7 @@ public class Controller implements Initializable {
     	addEachColumnViewToMainHBox();
     	createEventHandlerForRemoveColumnButton();
 	}
-	
-	protected void saveFile() {
-		kanbanService.saveProject(project);
-	}
-	
+
 	protected void addColumn() throws IOException{
 		if(columnController.getColumns().size() <= MAXCOLUMNS) {
 			Column columnToAdd = columnController.createNewColumnDataAndColumnView("new Column");
@@ -237,13 +179,13 @@ public class Controller implements Initializable {
     	    }
 		});
 			if(columnController.getColumns().size() == MAXCOLUMNS) {
-				addColumn.setDisable(true);
+				addColumnButton.setDisable(true);
 			}
 		}
     }
 	
 	protected void addTask(){
-		addTask.setDisable(columnController.addTask());
+		addTaskButton.setDisable(columnController.addTask());
     }
 	
 	private void addCategory() {

@@ -36,7 +36,6 @@ public class ColumnController {
 	public ColumnController(CategoryController categoryController, KanbanService kanbanService, Project project) {
 		this.kanbanService = kanbanService;
 		this.project = project;
-		System.out.println(project);
 		taskController = new TaskController(categoryController, kanbanService, project);
 		columns = new ArrayList<Column>();
 	}

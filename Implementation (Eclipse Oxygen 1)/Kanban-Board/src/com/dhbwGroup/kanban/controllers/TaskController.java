@@ -51,8 +51,12 @@ public class TaskController{
 	
 	public Task createNewTaskDataAndTaskView(String columnName){	
 		TaskData newTaskData = new TaskData(columnName);
-		tasksData.add(newTaskData);
-		System.out.println("Add Task" + project);
+		if(tasksData.size() < Controller.MAX_TASKS_IN_HISTORY) {
+			tasksData.add(newTaskData);
+		}else{
+			tasksData.remove(0);
+			tasksData.add(newTaskData);
+		}
 		kanbanService.saveProject(project);
 		return createNewTaskView(newTaskData);
 
