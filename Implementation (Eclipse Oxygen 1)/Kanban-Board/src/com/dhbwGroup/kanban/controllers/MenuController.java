@@ -153,7 +153,7 @@ public class MenuController extends Controller{
 	private void showHistory() {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("../views/HistoryView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/HistoryView.fxml"));
             Stage stage = new Stage();
             stage.setTitle("History");
             stage.setScene(new Scene(root, 450, 800));

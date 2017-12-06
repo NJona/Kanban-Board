@@ -1,0 +1,371 @@
+/**
+ * genarated by APX file generation template
+ * File name: MainStylesheet.css
+ */
+
+
+.MainClass {
+	
+}
+
+.fullBorderPane{
+	-fx-font-family: "Arial Narrow";
+	
+	
+}
+.borderPaneCenter{
+	
+}
+
+.scrollPane {
+	-fx-background: #ffffff;
+}
+
+.projectHBox{
+	
+}
+
+.menuHBox{
+	
+}
+
+.menuAddColumnButton{
+	
+}
+
+.menuAddTaskButton{
+	
+}
+
+.menuAddCategoryButton{
+	
+}
+
+.menuChangeDoingColumnButton{
+	
+}
+
+.menuShowHistoryButton{
+	
+}
+
+.menuShowStatisticsButton{
+	
+}
+
+.columnVBox{
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-padding: 10px;
+}
+
+.columnHeaderGridPane{
+    -fx-background-color: gray;
+	
+}
+
+.columnHeaderTitleLabel{
+	-fx-font-size: 20px;	
+
+
+}
+
+.columnHeaderTitleTextField{
+	-fx-font-size: 20px;
+}
+
+.columnHeaderEditSaveButton{
+	
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;	
+	
+}
+.columnHeaderEditSaveButton:hover {
+   
+    -fx-background-color: linear-gradient(#2DFE2F, #027201);
+}
+
+
+.columnHeaderRemoveButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#FF0F0A, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
+
+.columnHeaderRemoveButton:hover {
+   
+	-fx-background-color: linear-gradient(#FF0F0A, #A5240B);  
+}
+
+
+.columnHeaderChangeCapacityButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
+
+.columnHeaderChangeCapacityButton:hover {
+	-fx-background-color: linear-gradient(#2DFE2F, #027201);
+}
+
+.columnTaskVBox{
+	-fx-background-color: white;
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-padding: 10px;
+	-fx-alignment: top-center;
+	-fx-height: 100%;
+	-fx-spacing: 10px;
+}
+
+.taskGridPane{
+	/* Task Color defined in Code */
+	
+	-fx-border-color: black;
+	-fx-border-radius: 10px;
+	-fx-border-width: 4px;
+	-fx-padding: 20px;
+	-fx-background-radius: 11px;
+    -fx-font-family: "Arial Narrow";
+	-fx-spacing: 10px;
+	-fx-alignment: top-center;
+	-fx-height: 100%;
+}
+
+.taskTitleLabel{
+	-fx-alignment: center;
+	-fx-font-size: 30px;
+}
+
+.taskTitleTextField{
+   -fx-border-color: black;
+   -fx-font-family: "Arial Narrow";
+}
+
+.taskEditSaveButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
+.taskEditSaveButton:hover{
+	-fx-background-color: linear-gradient(#2DFE2F, #027201);
+}
+
+.taskDeleteButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#FF0F0A, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
+.taskDeleteButton:hover{
+ -fx-background-color: linear-gradient(#FF0F0A, #A5240B); 
+}
+
+.taskArchiveButton{
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: black;
+}
+.taskArchiveButton:hover{
+	-fx-background-color: linear-gradient(#2DFE2F, #027201);
+	
+}
+
+.taskDescriptionLabel{
+	-fx-alignment: center;
+	-fx-font-size: 18px;
+}
+
+.taskDescriptionTextArea{
+	-fx-border-color: black;
+}
+
+.taskColorPicker{
+	-fx-border-color: black;
+}
+
+.taskCategoryLabel{
+	-fx-border-color: black;
+}
+
+.taskCategoryDropDown{
+	-fx-border-color: black; 
+}
+/**
+********************************
+* OLD Stylesheet
+********************************
+
+.columnsHBox{
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-padding: 10px;
+	-fx-alignment: top-center;
+	-fx-height: 100%;
+}
+
+.columnVBox{
+	-fx-padding: 10px;
+}
+
+.columnHeaderGridPane{
+	-fx-alignment: top-center;
+   	-fx-font-family: "Arial ";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: green;
+    -fx-text-fill: white;
+}
+
+.columnTextField{
+	-fx-alignment: center;
+	-fx-font-size: 30px;
+}
+
+.columnEditNameButton{
+	
+	-fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#23BF2E, #000000);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-border-color: green;
+  
+}
+.columnEditNameButton:hover {
+    -fx-background-color: linear-gradient(#2DFE2F, #027201);
+    
+}
+
+.columnTaskVBox{
+	-fx-vgap: 10px;
+	-fx-hgap: 10px;
+	-fx-padding: 10px;
+	-fx-alignment: top-center;
+}
+
+.task{
+	-fx-border-color: black;
+	-fx-border-radius: 10px;
+	-fx-border-width: 3px;
+	-fx-padding: 20px;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+	-fx-background-radius: 11px;
+    -fx-font-family: "Arial Narrow";
+}
+.task:hover{
+-fx-background-color: linear-gradient(#BF6123, #C56E07);
+
+}
+
+.taskTitleLabel{
+	-fx-font-size: 30px;
+}
+
+.taskTitleTextField{
+	-fx-font-size: 30px;
+}
+
+.taskDescriptionLabel{
+	-fx-font-size: 20px;
+}
+
+.taskDescriptionTextArea{
+-fx-font-size: 20px;
+}
+
+.taskEditSaveButton{
+
+}
+
+.taskGridPane{
+	-fx-border-color: black;
+	-fx-border-radius: 10px;
+	-fx-border-width: 3px;
+	-fx-padding: 200px;
+	-fx-background-radius: 11px;
+    -fx-font-family: "Arial Narrow";
+	-fx-font.size: 300px;
+}
+.taskTitleLabel{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+	
+}
+
+.taskTitleTextField{
+    -fx-font-family: "Arial Narrow";
+	
+}
+
+.taskEditSaveButton{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+
+}
+
+.taskDeleteButton{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+
+}
+
+.taskArchiveButton{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+
+}
+
+.taskDescriptionLabel{
+	
+    -fx-font-family: "Arial Narrow";
+	
+
+}
+
+.taskDescriptionTextArea{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+	
+
+}
+
+.taskColorPicker{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+}
+
+.taskCategoryLabel{
+	-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";
+}
+
+.taskCategoryDropDown{
+-fx-border-color: black;
+    -fx-font-family: "Arial Narrow";	
+}
+
+.taskShowHistoryButton{
+	
+}
+
+
