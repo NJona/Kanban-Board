@@ -21,7 +21,35 @@
 	-fx-background: #ffffff;
 }
 
-.columnsHBox{
+.projectHBox{
+	
+}
+
+.menuHBox{
+	
+}
+
+.menuAddColumnButton{
+	
+}
+
+.menuAddTaskButton{
+	
+}
+
+.menuAddCategoryButton{
+	
+}
+
+.menuChangeDoingColumnButton{
+	
+}
+
+.menuShowHistoryButton{
+	
+}
+
+.menuShowStatisticsButton{
 	
 }
 
@@ -270,15 +298,13 @@
 }
 
 .taskGridPane{
-	/* Task Color defined in Code */
-	/*
 	-fx-border-color: black;
 	-fx-border-radius: 10px;
 	-fx-border-width: 3px;
 	-fx-padding: 200px;
 	-fx-background-radius: 11px;
     -fx-font-family: "Arial Narrow";
--fx-font.size: 300px;
+	-fx-font.size: 300px;
 }
 .taskTitleLabel{
 	-fx-border-color: black;
@@ -336,6 +362,10 @@
 .taskCategoryDropDown{
 -fx-border-color: black;
     -fx-font-family: "Arial Narrow";	
+}
+
+.taskShowHistoryButton{
+	
 }
 
 

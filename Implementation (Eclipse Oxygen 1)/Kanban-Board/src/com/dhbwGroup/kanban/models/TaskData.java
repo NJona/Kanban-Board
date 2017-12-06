@@ -15,11 +15,11 @@ public class TaskData implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TaskData(String columnName) {
+	public TaskData(String columnNameInWhichTaskIsAdded) {
     	this.id = UUID.randomUUID();
     	this.timestamp = System.currentTimeMillis();
     	this.changeLog = new ArrayList<TaskChangeLog>();
-    	this.changeLog.add(new TaskChangeLog(columnName));
+    	this.changeLog.add(new TaskChangeLog(columnNameInWhichTaskIsAdded));
     }
 
     @SerializedName("uuid")

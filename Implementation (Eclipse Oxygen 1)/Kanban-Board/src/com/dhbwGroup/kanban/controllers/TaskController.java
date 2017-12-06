@@ -1,163 +1,285 @@
 package com.dhbwGroup.kanban.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.dhbwGroup.kanban.exceptions.TooManyCharsException;
+import com.dhbwGroup.kanban.models.CategoryData;
+import com.dhbwGroup.kanban.models.ColumnData;
 import com.dhbwGroup.kanban.models.Project;
+import com.dhbwGroup.kanban.models.TaskChangeLog;
 import com.dhbwGroup.kanban.models.TaskData;
-import com.dhbwGroup.kanban.services.KanbanService;
-import com.dhbwGroup.kanban.views.Task;
+import com.dhbwGroup.kanban.views.TaskView;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 
-public class TaskController{
+public class TaskController extends Controller{
+	private TaskView taskView;
 	
-	private List<TaskData> tasksData;
+	private TaskData taskData;
 	
-	private List<Task> tasks;
+	private ColumnData columnData;
 	
-	private CategoryController categoryController;
+	private CategoryData categoryData;
 	
-	private KanbanService kanbanService;
-	
-	private Project project;
-	
-	public final static DataFormat TASK_DATA_FORMAT = new DataFormat("com.dhbwGroup.kanban.models.TaskData");
-
-	public TaskController(CategoryController categoryController, KanbanService kanbanService, Project project) {
-		this.categoryController = categoryController;
-		this.kanbanService = kanbanService;
-		this.project = project;
-		tasks = new ArrayList<Task>();
-	}
-	
-	public void createTaskViews(List<TaskData> tasksData) {
-		this.tasksData = tasksData;
-		tasks = new ArrayList<Task>();
-		if(!tasksData.isEmpty()) {
-			tasksData.forEach((activeTaskData) -> {
-				createNewTaskView(activeTaskData);
-			});			
-		}
-	}
-	
-	public Task createNewTaskDataAndTaskView(String columnName){	
-		TaskData newTaskData = new TaskData(columnName);
-		if(tasksData.size() < Controller.MAX_TASKS_IN_HISTORY) {
-			tasksData.add(newTaskData);
-		}else{
-			tasksData.remove(0);
-			tasksData.add(newTaskData);
-		}
-		kanbanService.saveProject(project);
-		return createNewTaskView(newTaskData);
-
-	}
-	
-	public Task createNewTaskView(TaskData taskData) {
-		Task taskToAdd;
+	public TaskController(Project projectData, TaskData taskData) {
+		super();
+		this.setProjectData(projectData);
+		this.taskData = taskData;
 		if(taskData.getCategoryUUID() != null) {
-			taskToAdd = new Task(taskData, taskData.getCategoryUUID(), categoryController.getCategoryData(), kanbanService, project);
-		}else {
-			taskToAdd = new Task(taskData, categoryController.getCategoryData(), kanbanService, project);
+			Iterator<CategoryData> categoryDataIterator = this.getProjectData().getCategoriesData().iterator();
+			while(categoryDataIterator.hasNext()) {
+				CategoryData activeCategoryData = categoryDataIterator.next();
+				if(activeCategoryData.getId().equals(taskData.getCategoryUUID())) {
+					this.categoryData = activeCategoryData;
+					break;
+				}
+					
+			}
 		}
-		createDragAndDropHandlerForTask(taskToAdd);
-		createArchiveHandlerForTask(taskToAdd);
-		createDeleteHandlerForTask(taskToAdd);
-		tasks.add(taskToAdd);
-		return taskToAdd;		
+		initialize();
 	}
 
 	
-//---------------------------------------------------------------------------
-//--------------------Drag and Drop Handler----------------------------------
-//---------------------------------------------------------------------------
 	
-	private void createDeleteHandlerForTask(Task taskToAdd) {
-		taskToAdd.getDeleteButton().setOnAction(new EventHandler<ActionEvent>() {
+	private void initialize() {
+		this.taskView = new TaskView();
+		
+		taskView.getTitleLabel().setText(this.taskData.getTitle());
+		taskView.getTitleTextField().setText(this.taskData.getTitle());
+		
+		taskView.getEditSaveButton().setText("Edit");
+		taskView.getEditSaveButton().setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {
+    	    	try {
+					handleEditSaveButtonEvent();
+				} catch (TooManyCharsException e1) {
+					e1.printStackTrace();
+				}
+    	    }
+		});
+		
+		taskView.getDeleteButton().setText("Delete");
+		taskView.getDeleteButton().setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				tasksData.remove(taskToAdd.getTaskData());
-				kanbanService.saveProject(project);
-				if(taskToAdd.getColumnData() != null) {
-					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
-					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
-				}else {
-					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
-				}
+				handleDeleteButton();
+			}
+		});
+		taskView.getArchiveButton().setText("Archive");
+		taskView.getArchiveButton().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				handleArchiveButton();
+			}
+		});
+		
+		taskView.getDescriptionLabel().setText(this.taskData.getDescription());
+		taskView.getDescriptionTextArea().setText(this.taskData.getDescription());
+		
+		taskView.getColorPicker().setValue(Color.web(this.taskData.getColor()));
+		taskView.getColorPicker().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				taskView.getTaskGridPane().setStyle("-fx-background-color: #" + getRGBCode(taskView.getColorPicker().getValue()));
+			}
+        });
+		
+		this.getProjectData().getCategoriesData().forEach((activeCategory) -> {
+			taskView.getCategoryDropDown().getItems().add(activeCategory);
+		});
+		
+		taskView.getCategoryDropDown().setConverter(new StringConverter<CategoryData>() {
+
+			@Override
+			public CategoryData fromString(String string) {
+				return taskView.getCategoryDropDown().getItems().stream().filter(categoryData -> 
+						categoryData.getTitle().equals(string)).findFirst().orElse(null);
+			}
+
+			@Override
+			public String toString(CategoryData categoryData) {
+				return categoryData.getTitle();
 			}
 			
 		});
 		
-	}
-
-	private void createArchiveHandlerForTask(Task taskToAdd) {
-		taskToAdd.getArchiveButton().setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				if(taskToAdd.getColumnData() != null) {
-					taskToAdd.getColumnData().getTaskUUIDs().remove(taskToAdd.getTaskData().getId());
-					kanbanService.saveProject(project);
-					((VBox) taskToAdd.getTaskGridPane().getParent()).getChildren().remove(taskToAdd.getTaskGridPane());
-				}
-			}
-			
-		});	
-	}
-
-	private void createDragAndDropHandlerForTask(Task task) {
-		task.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
+		if(categoryData != null) {
+			taskView.getCategoryLabel().setText(categoryData.getTitle());
+			taskView.getCategoryDropDown().setValue(categoryData);
+		}
+		
+		taskView.getShowHistoryButton().setText("Show History");
+		taskView.getShowHistoryButton().setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {
+					showHistory();
+    	    }
+		});
+		
+		taskView.getDescriptionLabel().setWrapText(true);
+		taskView.getDescriptionTextArea().setWrapText(true);
+		taskView.getDescriptionTextArea().setPrefRowCount(3);
+		taskView.getDescriptionTextArea().setPrefColumnCount(20);
+		
+		taskView.getTaskGridPane().setStyle("-fx-background-color: #" + this.taskData.getColor());
+		taskView.getTaskGridPane().setOnDragDetected(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-		        Dragboard db = task.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
-		        
-		        ClipboardContent content = new ClipboardContent();
-		        content.put(TASK_DATA_FORMAT, task.getTaskData());
-		        db.setContent(content);
-		        
-		        mouseEvent.consume();
-			}
-			
+				handleDragAndDrop(mouseEvent);
+			}			
 		});
 	}
 	
+	private void handleEditSaveButtonEvent() throws TooManyCharsException {
+        if(this.taskView.getEditSaveButton().getText().equals("Edit")) {
+        	this.taskView.getEditSaveButton().setText("Save");
+        	toggleAllVisibilitys();
+		}else {
+			if(taskView.getTitleTextField().getText().length() > ProjectController.MAX_ALLOWED_CHARS_IN_TITEL)
+				throw new TooManyCharsException();			
+			this.taskView.getEditSaveButton().setText("Edit");
+			updateLabels();
+			updateTaskData();
+			toggleAllVisibilitys();
+		}		
+	}
 	
+	public void addNewCategoryToDropDown(CategoryData newCategoryData) {
+		this.taskView.getCategoryDropDown().getItems().add(newCategoryData);
+	}
+
+	private void updateTaskData() {
+		this.taskData.setTitle(taskView.getTitleLabel().getText());
+		this.taskData.setDescription(taskView.getDescriptionLabel().getText());
+		this.taskData.setColor(getRGBCode(taskView.getColorPicker().getValue()));
+		if(taskView.getCategoryDropDown().getValue() != null)
+			this.taskData.setCategoryUUID(this.taskView.getCategoryDropDown().getValue().getId());
+		this.saveProject();
+	}
+
+	private void updateLabels() {
+		taskView.getTitleLabel().setText(taskView.getTitleTextField().getText());
+		taskView.getDescriptionLabel().setText(taskView.getDescriptionTextArea().getText());
+		if(taskView.getCategoryDropDown().getValue() != null)
+			taskView.getCategoryLabel().setText(taskView.getCategoryDropDown().getValue().getTitle());
+	}
+
+	private void toggleAllVisibilitys() {
+		taskView.getTitleLabel().setVisible(!taskView.getTitleLabel().isVisible());
+		taskView.getTitleTextField().setVisible(!taskView.getTitleTextField().isVisible());
+		
+		taskView.getDeleteButton().setVisible(!taskView.getDeleteButton().isVisible());
+		taskView.getArchiveButton().setVisible(!taskView.getArchiveButton().isVisible());
+		
+		taskView.getDescriptionLabel().setVisible(!taskView.getDescriptionLabel().isVisible());
+		taskView.getDescriptionTextArea().setVisible(!taskView.getDescriptionTextArea().isVisible());
+		
+		taskView.getColorPicker().setVisible(!taskView.getColorPicker().isVisible());
+		
+		taskView.getCategoryLabel().setVisible(!taskView.getCategoryLabel().isVisible());
+		taskView.getCategoryDropDown().setVisible(!taskView.getCategoryDropDown().isVisible());
+		
+		taskView.getShowHistoryButton().setVisible(!taskView.getShowHistoryButton().isVisible());
+	}
+	
+	private String getRGBCode(Color color) {
+		return String.format( "%02X%02X%02X%02X",
+	            (int)( color.getRed() * 255 ),
+	            (int)( color.getGreen() * 255 ),
+	            (int)( color.getBlue() * 255 ),
+	            (int)(color.getOpacity() * 255));
+	}
+	
+	private void showHistory() {
+		if(taskData.getChangeLog() != null && !taskData.getChangeLog().isEmpty()) {
+			String message = "History: \n- Task added in ";
+			Iterator<TaskChangeLog> changeLogIterator = taskData.getChangeLog().iterator();
+			while(changeLogIterator.hasNext()) {
+				TaskChangeLog activeChangeLog = changeLogIterator.next();
+				String changeLogDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date(activeChangeLog.getTimestamp()));
+				message += activeChangeLog.getColumnName() + " at " + changeLogDate + " \n";
+				if(changeLogIterator.hasNext())
+					message += "- Task moved from " + activeChangeLog.getColumnName() + " to ";
+			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle(taskData.getTitle() + " History");
+			alert.setHeaderText(null);
+			alert.setContentText(message);
+			alert.setResizable(true);
+			alert.getDialogPane().setMinWidth(500);
+
+			alert.showAndWait();	
+		}
+	}
+	
+	private void handleDeleteButton() {
+		this.getProjectData().getTasksData().remove(this.taskData);
+		this.saveProject();
+		if(this.columnData != null) {
+			columnData.getTaskUUIDs().remove(taskData.getId());
+			((VBox) taskView.getTaskGridPane().getParent()).getChildren().remove(taskView.getTaskGridPane());
+		}else {
+			((VBox) taskView.getTaskGridPane().getParent()).getChildren().remove(taskView.getTaskGridPane());
+		}
+	}
+	
+	private void handleArchiveButton() {
+		if(columnData != null) {
+			columnData.getTaskUUIDs().remove(taskData.getId());
+			this.saveProject();
+			((VBox) taskView.getTaskGridPane().getParent()).getChildren().remove(taskView.getTaskGridPane());
+		}
+	}
+	
+	private void handleDragAndDrop(MouseEvent mouseEvent) {
+        Dragboard db = taskView.getTaskGridPane().startDragAndDrop(TransferMode.MOVE);
+        
+        ClipboardContent content = new ClipboardContent();
+        content.put(ProjectController.TASK_DATA_FORMAT, taskData);
+        db.setContent(content);
+        
+        mouseEvent.consume();
+	}
+
 //---------------------------------------------------------------------------
 //--------------------Getter and Setter--------------------------------------
 //---------------------------------------------------------------------------
-	
-	public List<TaskData> getTasksData() {
-		return tasksData;
+
+	public TaskView getTaskView() {
+		return taskView;
 	}
 
-	public void setTasksData(List<TaskData> tasksData) {
-		this.tasksData = tasksData;
-	}	
-	
-	public List<Task> getTasks() {
-		return tasks;
+	public TaskData getTaskData() {
+		return taskData;
 	}
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setTaskView(TaskView taskView) {
+		this.taskView = taskView;
 	}
 
-	public CategoryController getCategoryController() {
-		return categoryController;
+	public void setTaskData(TaskData taskData) {
+		this.taskData = taskData;
 	}
 
-	public void setCategoryController(CategoryController categoryController) {
-		this.categoryController = categoryController;
+	public ColumnData getColumnData() {
+		return columnData;
+	}
+
+	public void setColumnData(ColumnData columnData) {
+		this.columnData = columnData;
 	}
 }
