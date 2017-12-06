@@ -1,15 +1,16 @@
 package com.dhbwGroup.kanban.views;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
 
 public class ColumnHeaderView {
 
-	private HBox columnHeaderHBox;
+	private GridPane columnHeaderGridPane;
 	
-	private Text titleLabel;
+	private Label titleLabel;
 	private TextField titleTextField;
 	private Button editSaveButton;
 	private Button removeButton;
@@ -17,9 +18,9 @@ public class ColumnHeaderView {
 	private Button changeCapacityButton;
 	
 	public ColumnHeaderView() {
-		this.columnHeaderHBox = new HBox();
+		this.columnHeaderGridPane = new GridPane();
 		
-		this.titleLabel = new Text();
+		this.titleLabel = new Label();
 		this.titleTextField = new TextField();
 		
 		this.editSaveButton = new Button();
@@ -41,39 +42,46 @@ public class ColumnHeaderView {
 	}
 	
 	private void addStyleClasses() {
-		this.columnHeaderHBox.getStyleClass().add("columnHeaderGridPane");
-		this.columnHeaderHBox.setMinWidth(450);
-		this.columnHeaderHBox.setPrefWidth(450);
-		this.columnHeaderHBox.setMaxWidth(450);
+		this.columnHeaderGridPane.getStyleClass().add("columnHeaderGridPane");
+		this.columnHeaderGridPane.setMinWidth(450);
+		this.columnHeaderGridPane.setPrefWidth(450);
+		this.columnHeaderGridPane.setMaxWidth(450);
 		
 		this.titleLabel.getStyleClass().add("columnHeaderTitleLabel");
+		this.titleLabel.setMinWidth(240);
+		this.titleLabel.setAlignment(Pos.CENTER);
 		this.titleTextField.getStyleClass().add("columnHeaderTitleTextField");
+		this.titleTextField.setMinWidth(240);
+		this.titleTextField.setAlignment(Pos.CENTER);
 		
 		this.editSaveButton.getStyleClass().add("columnHeaderEditSaveButton");
+		this.editSaveButton.setMinWidth(90);
 		
 		this.removeButton.getStyleClass().add("columnHeaderRemoveButton");
+		this.removeButton.setMinWidth(90);
 		this.changeCapacityButton.getStyleClass().add("columnHeaderChangeCapacityButton");
+		this.changeCapacityButton.setMinWidth(90);
 	}
 
 	private void addNodesToGridPane() {
-		columnHeaderHBox.getChildren().add(titleLabel);
-		columnHeaderHBox.getChildren().add(titleTextField);
+		columnHeaderGridPane.add(titleLabel, 0, 0);
+		columnHeaderGridPane.add(titleTextField, 0, 0);
 		
-		columnHeaderHBox.getChildren().add(editSaveButton);
+		columnHeaderGridPane.add(editSaveButton, 1, 0);
 		
-		columnHeaderHBox.getChildren().add(removeButton);
-		columnHeaderHBox.getChildren().add(changeCapacityButton);
+		columnHeaderGridPane.add(removeButton, 2, 0);
+		columnHeaderGridPane.add(changeCapacityButton, 2, 0);
 	}
 	
 //---------------------------------------------------------------------------
 //--------------------Getter and Setter--------------------------------------
 //---------------------------------------------------------------------------
 	
-	public HBox getColumnHeaderHBox() {
-		return columnHeaderHBox;
+	public GridPane getColumnHeaderGridPane() {
+		return columnHeaderGridPane;
 	}
 
-	public Text getTitleLabel() {
+	public Label getTitleLabel() {
 		return titleLabel;
 	}
 
@@ -93,11 +101,11 @@ public class ColumnHeaderView {
 		return changeCapacityButton;
 	}
 
-	public void setColumnHeaderHBox(HBox columnHeaderHBox) {
-		this.columnHeaderHBox = columnHeaderHBox;
+	public void setColumnHeaderGridPane(GridPane columnHeaderGridPane) {
+		this.columnHeaderGridPane = columnHeaderGridPane;
 	}
 
-	public void setTitleLabel(Text titleLabel) {
+	public void setTitleLabel(Label titleLabel) {
 		this.titleLabel = titleLabel;
 	}
 

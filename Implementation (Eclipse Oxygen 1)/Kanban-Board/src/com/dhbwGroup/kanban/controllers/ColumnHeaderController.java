@@ -45,7 +45,7 @@ public class ColumnHeaderController extends Controller{
 		});
 		
 		columnHeaderView.getRemoveButton().setText("Remove");
-		columnHeaderView.getChangeCapacityButton().setText("Change Column Capacity");
+		columnHeaderView.getChangeCapacityButton().setText("Max Tasks");
 		columnHeaderView.getChangeCapacityButton().setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {
     	    	handleChangeCapacityButton();

@@ -18,7 +18,7 @@ public class ProjectController extends Controller{
 	
 	public final static int MAXCOLUMNS = 10;
 	public final static int MAX_DEFAULT_TASKS = 8;
-	public final static int MAX_ALLOWED_CHARS_IN_TITEL = 20;
+	public final static int MAX_ALLOWED_CHARS_IN_TITEL = 15;
 	public final static int MIN_COLUMNS = 3;
 	public static final int MAX_TASKS_IN_HISTORY = 10000;
 	public final static DataFormat TASK_DATA_FORMAT = new DataFormat("com.dhbwGroup.kanban.models.TaskData");

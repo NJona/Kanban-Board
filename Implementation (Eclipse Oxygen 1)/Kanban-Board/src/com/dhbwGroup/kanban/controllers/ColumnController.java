@@ -24,7 +24,7 @@ public class ColumnController extends Controller{
 	private void initialize() {
 		columnView = new ColumnView();
 		
-		columnView.getColumnVBox().getChildren().add(columnHeaderController.getColumnHeaderView().getColumnHeaderHBox());
+		columnView.getColumnVBox().getChildren().add(columnHeaderController.getColumnHeaderView().getColumnHeaderGridPane());
 		columnView.getColumnVBox().getChildren().add(columnTaskListController.getColumnTaskListView().getColumnTaskVBox());
 	}
 
