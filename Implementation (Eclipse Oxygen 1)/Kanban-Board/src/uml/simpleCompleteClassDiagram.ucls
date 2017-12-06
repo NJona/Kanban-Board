@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.dhbwGroup.kanban.models.ColumnData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/ColumnData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="190" x="941" y="997"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.dhbwGroup.kanban.views.ColumnTaskListView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnTaskListView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="741" y="797"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.dhbwGroup.kanban.controllers.ProjectController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ProjectController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1231" y="597"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.dhbwGroup.kanban.controllers.Controller" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1399" y="-3"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.dhbwGroup.kanban.views.ColumnView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="1044" y="797"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.dhbwGroup.kanban.views.ProjectView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ProjectView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="743" y="697"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.dhbwGroup.kanban.models.CategoryData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/CategoryData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="190" x="2251" y="997"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.dhbwGroup.kanban.controllers.ColumnHeaderController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnHeaderController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1263" y="797"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException" 
+    project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/CategoryNameAlreadyTakenException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="294" x="1376" y="397"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.dhbwGroup.kanban.controllers.CategoriesListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/CategoriesListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1486" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.dhbwGroup.kanban.controllers.TaskController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/TaskController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="2193" y="497"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.dhbwGroup.kanban.models.Project" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="190" x="1595" y="897"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.dhbwGroup.kanban.models.TaskData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/TaskData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="190" x="2021" y="997"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.dhbwGroup.kanban.services.KanbanService" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/services/KanbanService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="194" x="507" y="797"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/ColumnNotEmptyException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="217" x="1871" y="697"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.dhbwGroup.kanban.views.MenuView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/MenuView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="244" y="697"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.dhbwGroup.kanban.exceptions.TaskNotReusableException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TaskNotReusableException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="220" x="628" y="397"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.dhbwGroup.kanban.controllers.TaskListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/TaskListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1962" y="397"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.dhbwGroup.kanban.controllers.ColumnTaskListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnTaskListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="209" x="1106" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.dhbwGroup.kanban.exceptions.MinColumnsException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/MinColumnsException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="207" x="1624" y="697"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.dhbwGroup.kanban.exceptions.TooManyTasksInActiveDoingColumn" 
+    project="Kanban-Board" file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TooManyTasksInActiveDoingColumn.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="282" x="349" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.dhbwGroup.kanban.models.TaskChangeLog" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/TaskChangeLog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="190" x="2021" y="1097"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.dhbwGroup.kanban.controllers.MenuController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="734" y="197"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.dhbwGroup.kanban.views.TaskView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/TaskView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="2483" y="597"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException" 
+    project="Kanban-Board" file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/MaxTasksAlreadyReachedException.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="280" x="888" y="397"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.dhbwGroup.kanban.controllers.ColumnController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="962" y="697"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.dhbwGroup.kanban.exceptions.TooManyCharsException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TooManyCharsException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="207" x="2171" y="897"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.dhbwGroup.kanban.controllers.ColumnListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="1859" y="97"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.dhbwGroup.kanban.views.ColumnHeaderView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnHeaderView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="179" x="983" y="897"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.dhbwGroup.kanban.ProjectInitializer" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/ProjectInitializer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="60" width="145" x="244" y="97"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.dhbwGroup.kanban.controllers.HistoryController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/HistoryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="60" width="206" x="2439" y="297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <dependency id="32">    
+    <bendpoint x="1931" y="197"/>    
+    <bendpoint x="1931" y="297"/>    
+    <bendpoint x="1931" y="397"/>    
+    <bendpoint x="1993" y="497"/>    
+    <bendpoint x="2055" y="597"/>    
+    <bendpoint x="2118" y="697"/>    
+    <bendpoint x="2097" y="797"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="35">    
+    <bendpoint x="1784" y="197"/>    
+    <bendpoint x="1784" y="297"/>    
+    <bendpoint x="1784" y="397"/>    
+    <bendpoint x="1652" y="497"/>    
+    <bendpoint x="1530" y="597"/>    
+    <bendpoint x="1488" y="697"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <association id="36">    
+    <bendpoint x="971" y="597"/>    
+    <bendpoint x="971" y="497"/>    
+    <bendpoint x="1198" y="397"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="37" name="columnTaskListController"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="40" name="columnView"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="42">    
+    <bendpoint x="2202" y="597"/>    
+    <bendpoint x="2202" y="697"/>    
+    <bendpoint x="2160" y="797"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="43">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="44">    
+    <bendpoint x="2265" y="597"/>    
+    <bendpoint x="2265" y="697"/>    
+    <bendpoint x="2265" y="797"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <generalization id="45">    
+    <bendpoint x="1408" y="197"/>    
+    <bendpoint x="1408" y="97"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="46">    
+    <bendpoint x="950" y="797"/>    
+    <bendpoint x="950" y="897"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="47">    
+    <bendpoint x="1240" y="697"/>    
+    <bendpoint x="992" y="797"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="48">    
+    <bendpoint x="2135" y="197"/>    
+    <bendpoint x="2177" y="297"/>    
+    <bendpoint x="2219" y="397"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="49">    
+    <bendpoint x="1013" y="797"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="50">    
+    <bendpoint x="2198" y="97"/>    
+    <bendpoint x="2198" y="197"/>    
+    <bendpoint x="2198" y="297"/>    
+    <bendpoint x="2198" y="397"/>    
+    <bendpoint x="2162" y="497"/>    
+    <bendpoint x="2160" y="597"/>    
+    <bendpoint x="2181" y="697"/>    
+    <bendpoint x="2139" y="797"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="51" name="projectData"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="54" name="taskListController"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="56">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="57">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="58" name="columnHeaderController"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="61" name="columnListController"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="63">    
+    <bendpoint x="555" y="597"/>    
+    <bendpoint x="513" y="497"/>    
+    <bendpoint x="405" y="397"/>    
+    <bendpoint x="297" y="297"/>    
+    <bendpoint x="358" y="197"/>    
+    <bendpoint x="419" y="97"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="64">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="65">    
+    <bendpoint x="724" y="297"/>    
+    <bendpoint x="555" y="397"/>    
+    <bendpoint x="784" y="497"/>    
+    <bendpoint x="1013" y="597"/>    
+    <bendpoint x="1219" y="697"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <association id="66">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="67" name="changeLog"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="69">    
+    <bendpoint x="2492" y="697"/>    
+    <bendpoint x="2492" y="797"/>    
+    <bendpoint x="2492" y="897"/>    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="70">    
+    <bendpoint x="1763" y="397"/>    
+    <bendpoint x="1763" y="497"/>    
+    <bendpoint x="1889" y="597"/>    
+    <bendpoint x="2139" y="697"/>    
+    <bendpoint x="2181" y="797"/>    
+    <bendpoint x="2119" y="897"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="71">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="72">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="73" name="taskControllers"/>      
+      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="76" name="categoriesData"/>      
+      <multiplicity id="77" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="79" name="categoriesListController"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="81">    
+    <bendpoint x="276" y="297"/>    
+    <bendpoint x="276" y="397"/>    
+    <bendpoint x="255" y="497"/>    
+    <bendpoint x="213" y="597"/>    
+    <bendpoint x="213" y="697"/>    
+    <bendpoint x="334" y="797"/>    
+    <bendpoint x="455" y="897"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="82">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="83" name="projectView"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="85">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="86">    
+    <bendpoint x="2368" y="597"/>    
+    <bendpoint x="2381" y="697"/>    
+    <bendpoint x="2394" y="797"/>    
+    <bendpoint x="2408" y="897"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="87" name="taskData"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="89">    
+    <bendpoint x="255" y="197"/>    
+    <bendpoint x="255" y="297"/>    
+    <bendpoint x="297" y="397"/>    
+    <bendpoint x="415" y="497"/>    
+    <bendpoint x="534" y="597"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="90">    
+    <bendpoint x="2120" y="497"/>    
+    <bendpoint x="2139" y="597"/>    
+    <bendpoint x="2160" y="697"/>    
+    <bendpoint x="2118" y="797"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="91">    
+    <bendpoint x="1889" y="197"/>    
+    <bendpoint x="1889" y="297"/>    
+    <bendpoint x="1889" y="397"/>    
+    <bendpoint x="1879" y="497"/>    
+    <bendpoint x="1868" y="597"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <generalization id="92">    
+    <bendpoint x="1324" y="497"/>    
+    <bendpoint x="1324" y="397"/>    
+    <bendpoint x="1366" y="297"/>    
+    <bendpoint x="1366" y="197"/>    
+    <bendpoint x="1366" y="97"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="93">    
+    <bendpoint x="1847" y="397"/>    
+    <bendpoint x="2429" y="497"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="94">    
+    <bendpoint x="1742" y="397"/>    
+    <bendpoint x="1673" y="497"/>    
+    <bendpoint x="1633" y="597"/>    
+    <bendpoint x="1593" y="697"/>    
+    <bendpoint x="1604" y="797"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="95">    
+    <bendpoint x="703" y="197"/>    
+    <bendpoint x="703" y="297"/>    
+    <bendpoint x="576" y="397"/>    
+    <bendpoint x="992" y="497"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="96" name="projectController"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="98">    
+    <bendpoint x="513" y="397"/>    
+    <bendpoint x="492" y="497"/>    
+    <bendpoint x="492" y="597"/>    
+    <bendpoint x="453" y="697"/>    
+    <bendpoint x="444" y="797"/>    
+    <bendpoint x="434" y="897"/>    
+    <bendpoint x="434" y="997"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="99">    
+    <bendpoint x="1387" y="197"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="100">    
+    <bendpoint x="1429" y="197"/>    
+    <bendpoint x="1387" y="297"/>    
+    <bendpoint x="1282" y="397"/>    
+    <bendpoint x="1137" y="497"/>    
+    <bendpoint x="992" y="597"/>    
+    <bendpoint x="712" y="697"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="101">    
+    <bendpoint x="597" y="397"/>    
+    <bendpoint x="597" y="497"/>    
+    <bendpoint x="597" y="597"/>    
+    <bendpoint x="597" y="697"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="102" name="columnTaskListView"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="104">    
+    <bendpoint x="2431" y="597"/>    
+    <bendpoint x="2436" y="697"/>    
+    <bendpoint x="2463" y="797"/>    
+    <bendpoint x="2471" y="897"/>    
+    <bendpoint x="2471" y="997"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <generalization id="105">    
+    <bendpoint x="1509" y="697"/>    
+    <bendpoint x="1601" y="597"/>    
+    <bendpoint x="1694" y="497"/>    
+    <bendpoint x="1805" y="397"/>    
+    <bendpoint x="1763" y="297"/>    
+    <bendpoint x="1721" y="197"/>    
+    <bendpoint x="1721" y="97"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="106">    
+    <bendpoint x="1198" y="697"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="107">    
+    <bendpoint x="1075" y="97"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="108">    
+    <bendpoint x="1262" y="197"/>    
+    <bendpoint x="1262" y="97"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="109">    
+    <bendpoint x="2429" y="397"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <association id="110">    
+    <bendpoint x="733" y="897"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="111" name="standardColumns"/>      
+      <multiplicity id="112" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="113">    
+    <bendpoint x="1261" y="697"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <association id="114">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="115" name="taskListController"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="117">    
+    <bendpoint x="1261" y="397"/>    
+    <bendpoint x="1303" y="497"/>    
+    <bendpoint x="1467" y="597"/>    
+    <bendpoint x="1467" y="697"/>    
+    <bendpoint x="1499" y="797"/>    
+    <bendpoint x="1525" y="897"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="118">    
+    <bendpoint x="2141" y="497"/>    
+    <bendpoint x="2181" y="597"/>    
+    <bendpoint x="2244" y="697"/>    
+    <bendpoint x="2244" y="797"/>    
+    <bendpoint x="2140" y="897"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="119">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="120">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="121">    
+    <bendpoint x="1446" y="697"/>    
+    <bendpoint x="1520" y="797"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="122">    
+    <bendpoint x="1952" y="197"/>    
+    <bendpoint x="1952" y="297"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="123" name="taskListController"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="125">    
+    <bendpoint x="234" y="197"/>    
+    <bendpoint x="234" y="297"/>    
+    <bendpoint x="234" y="397"/>    
+    <bendpoint x="234" y="497"/>    
+    <bendpoint x="234" y="597"/>    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="126">    
+    <bendpoint x="2177" y="197"/>    
+    <bendpoint x="2293" y="297"/>    
+    <bendpoint x="2408" y="397"/>    
+    <bendpoint x="2450" y="497"/>    
+    <bendpoint x="2452" y="597"/>    
+    <bendpoint x="2457" y="697"/>    
+    <bendpoint x="2442" y="797"/>    
+    <bendpoint x="2429" y="897"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="127">    
+    <bendpoint x="213" y="97"/>    
+    <bendpoint x="213" y="197"/>    
+    <bendpoint x="213" y="297"/>    
+    <bendpoint x="255" y="397"/>    
+    <bendpoint x="297" y="497"/>    
+    <bendpoint x="406" y="597"/>    
+    <bendpoint x="516" y="697"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="128" name="kanbanService"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="130">    
+    <bendpoint x="2389" y="597"/>    
+    <bendpoint x="2405" y="697"/>    
+    <bendpoint x="2421" y="797"/>    
+    <bendpoint x="2450" y="897"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="131" name="categoryData"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="133">    
+    <bendpoint x="2387" y="397"/>    
+    <bendpoint x="2387" y="297"/>    
+    <bendpoint x="2387" y="197"/>    
+    <bendpoint x="2387" y="97"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="134">    
+    <bendpoint x="1910" y="197"/>    
+    <bendpoint x="1910" y="297"/>    
+    <bendpoint x="1910" y="397"/>    
+    <bendpoint x="1910" y="497"/>    
+    <bendpoint x="1910" y="597"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="135">    
+    <bendpoint x="534" y="397"/>    
+    <bendpoint x="534" y="497"/>    
+    <bendpoint x="513" y="597"/>    
+    <bendpoint x="495" y="697"/>    
+    <bendpoint x="476" y="797"/>    
+    <bendpoint x="476" y="897"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="136" name="columnData"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="138">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <generalization id="139">    
+    <bendpoint x="2408" y="197"/>    
+    <bendpoint x="2408" y="97"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="140">    
+    <bendpoint x="1240" y="397"/>    
+    <bendpoint x="1240" y="497"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="141">    
+    <bendpoint x="1488" y="597"/>    
+    <bendpoint x="1784" y="497"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <association id="142">    
+    <bendpoint x="1219" y="497"/>    
+    <bendpoint x="1219" y="397"/>    
+    <bendpoint x="1075" y="297"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="143" name="menuController"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="145">    
+    <bendpoint x="1192" y="897"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="146" name="columnData"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="149" name="tasksData"/>      
+      <multiplicity id="150" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="151">    
+    <bendpoint x="2513" y="397"/>    
+    <bendpoint x="2513" y="497"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="152">    
+    <bendpoint x="971" y="797"/>    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="153">    
+    <bendpoint x="2366" y="197"/>    
+    <bendpoint x="2408" y="297"/>    
+    <bendpoint x="2450" y="397"/>    
+    <bendpoint x="2492" y="497"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="154">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="155" name="columnsData"/>      
+      <multiplicity id="156" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="157">    
+    <bendpoint x="2156" y="297"/>    
+    <bendpoint x="2156" y="197"/>    
+    <bendpoint x="2156" y="97"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="158">    
+    <bendpoint x="1530" y="497"/>    
+    <bendpoint x="1721" y="397"/>    
+    <bendpoint x="1732" y="297"/>    
+    <bendpoint x="1742" y="197"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="159" name="columnListController"/>      
+      <multiplicity id="160" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="161">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <dependency id="162">    
+    <bendpoint x="1345" y="297"/>    
+    <bendpoint x="1345" y="397"/>    
+    <bendpoint x="1551" y="497"/>    
+    <bendpoint x="1551" y="597"/>    
+    <bendpoint x="1551" y="697"/>    
+    <bendpoint x="1583" y="797"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="163">    
+    <bendpoint x="2471" y="397"/>    
+    <bendpoint x="2471" y="497"/>    
+    <bendpoint x="2410" y="597"/>    
+    <bendpoint x="2317" y="697"/>    
+    <bendpoint x="2223" y="797"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="164">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="165">    
+    <bendpoint x="1826" y="397"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="166">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="167">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="168">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <association id="169">    
+    <bendpoint x="318" y="297"/>    
+    <bendpoint x="318" y="397"/>    
+    <bendpoint x="318" y="497"/>    
+    <bendpoint x="318" y="597"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="170" name="menuView"/>      
+      <multiplicity id="171" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="172">    
+    <bendpoint x="1868" y="197"/>    
+    <bendpoint x="1868" y="297"/>    
+    <bendpoint x="1868" y="397"/>    
+    <bendpoint x="1805" y="497"/>    
+    <bendpoint x="1689" y="597"/>    
+    <bendpoint x="1572" y="697"/>    
+    <bendpoint x="1541" y="797"/>    
+    <bendpoint x="1504" y="897"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="173">    
+    <bendpoint x="1700" y="197"/>    
+    <bendpoint x="1700" y="297"/>    
+    <bendpoint x="1700" y="397"/>    
+    <bendpoint x="1418" y="497"/>    
+    <bendpoint x="1200" y="597"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="174" name="columnControllers"/>      
+      <multiplicity id="175" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="176">    
+    <bendpoint x="1715" y="497"/>    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="177">    
+    <bendpoint x="661" y="297"/>    
+    <bendpoint x="471" y="397"/>    
+    <bendpoint x="471" y="497"/>    
+    <bendpoint x="471" y="597"/>    
+    <bendpoint x="474" y="697"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="178">    
+    <bendpoint x="2223" y="597"/>    
+    <bendpoint x="2223" y="697"/>    
+    <bendpoint x="2202" y="797"/>    
+    <bendpoint x="2098" y="897"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="179" name="columnData"/>      
+      <multiplicity id="180" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <dependency id="181">    
+    <bendpoint x="1303" y="397"/>    
+    <bendpoint x="1439" y="497"/>    
+    <bendpoint x="1509" y="597"/>    
+    <bendpoint x="1530" y="697"/>    
+    <bendpoint x="1562" y="797"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="182">    
+    <bendpoint x="682" y="297"/>    
+    <bendpoint x="492" y="397"/>    
+    <bendpoint x="555" y="497"/>    
+    <bendpoint x="618" y="597"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <dependency id="183">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="184">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="185" name="taskView"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="188" name="columnHeaderView"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>

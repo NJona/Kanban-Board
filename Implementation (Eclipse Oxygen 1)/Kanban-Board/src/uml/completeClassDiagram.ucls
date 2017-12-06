@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.dhbwGroup.kanban.models.ColumnData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/ColumnData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="209" x="3981" y="3040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.dhbwGroup.kanban.views.ColumnTaskListView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnTaskListView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="213" x="4731" y="2100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.dhbwGroup.kanban.controllers.ProjectController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ProjectController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="358" width="318" x="4837" y="272"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.dhbwGroup.kanban.controllers.Controller" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="206" x="4395" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.dhbwGroup.kanban.views.ColumnView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="186" x="4858" y="1792"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.dhbwGroup.kanban.views.ProjectView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ProjectView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="245" x="4877" y="670"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="7" language="java" name="com.dhbwGroup.kanban.exceptions" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="277" x="205" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="8" language="java" name="com.dhbwGroup.kanban.models.CategoryData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/CategoryData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="190" x="4542" y="3040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.dhbwGroup.kanban.controllers.ColumnHeaderController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnHeaderController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="268" width="304" x="4028" y="1792"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException" 
+    project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/CategoryNameAlreadyTakenException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="294" x="522" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.dhbwGroup.kanban.controllers.CategoriesListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/CategoriesListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="289" x="4456" y="996"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="12" language="java" name="com.dhbwGroup.kanban.services" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/services" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="260" x="856" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="13" language="java" name="com.dhbwGroup.kanban.Main" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="145" x="1156" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.dhbwGroup.kanban.controllers.TaskController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/TaskController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="394" width="309" x="4553" y="2606"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.dhbwGroup.kanban.models.Project" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="283" x="4230" y="2606"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.dhbwGroup.kanban.models.TaskData" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/TaskData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="272" x="4230" y="3040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="17" language="java" name="com.dhbwGroup.kanban" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="195" x="1341" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="18" language="java" name="com.dhbwGroup.kanban.services.KanbanService" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/services/KanbanService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="258" x="3681" y="272"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.dhbwGroup.kanban.exceptions.ColumnNotEmptyException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/ColumnNotEmptyException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="217" x="1576" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.dhbwGroup.kanban.views.MenuView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/MenuView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="502" width="275" x="5193" y="996"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.dhbwGroup.kanban.exceptions.TaskNotReusableException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TaskNotReusableException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="220" x="1833" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.dhbwGroup.kanban.controllers.TaskListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/TaskListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="317" x="4353" y="2100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.dhbwGroup.kanban.controllers.ColumnTaskListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnTaskListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="214" width="404" x="4414" y="1792"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.dhbwGroup.kanban.exceptions.MinColumnsException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/MinColumnsException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="207" x="2093" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.dhbwGroup.kanban.exceptions.TooManyTasksInActiveDoingColumn" 
+    project="Kanban-Board" file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TooManyTasksInActiveDoingColumn.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="282" x="2340" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="26" language="java" name="com.dhbwGroup.kanban.controllers" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="276" x="2662" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="27" language="java" name="com.dhbwGroup.kanban.models.TaskChangeLog" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models/TaskChangeLog.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="190" x="4230" y="3870"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.dhbwGroup.kanban.controllers.MenuController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="318" x="4498" y="670"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.dhbwGroup.kanban.views.TaskView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/TaskView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="790" width="348" x="4772" y="3040"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException" 
+    project="Kanban-Board" file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/MaxTasksAlreadyReachedException.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="280" x="2978" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.dhbwGroup.kanban.controllers.ColumnController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="372" x="4435" y="1538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.dhbwGroup.kanban.exceptions.TooManyCharsException" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/exceptions/TooManyCharsException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="207" x="3298" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.dhbwGroup.kanban.controllers.ColumnListController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/ColumnListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="368" x="4785" y="996"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.dhbwGroup.kanban.views.ColumnHeaderView" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views/ColumnHeaderView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="271" x="4042" y="2100"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="35" language="java" name="com.dhbwGroup.kanban.views" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/views" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="240" x="3545" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="36" language="java" name="com.dhbwGroup.kanban.styles" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/styles" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="240" x="3825" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="37" language="java" name="com.dhbwGroup.kanban.ProjectInitializer" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/ProjectInitializer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="231" x="4837" y="72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.dhbwGroup.kanban.controllers.HistoryController" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/controllers/HistoryController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="231" x="4122" y="272"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="39" language="java" name="com.dhbwGroup.kanban.models" project="Kanban-Board" 
+    file="/Kanban-Board/src/com/dhbwGroup/kanban/models" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="250" x="4105" y="72"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <association id="40">    
+    <bendpoint x="4700" y="2100"/>    
+    <bendpoint x="4199" y="2606"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="41" name="columnData"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="44" name="columnTaskListController"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="47" name="columnView"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="50" name="changeLog"/>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="53" name="columnTaskListView"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="56" name="taskView"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="5074" y="1538"/>    
+    <bendpoint x="5074" y="1792"/>    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="59" name="taskListController"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="3840" y="670"/>    
+    <bendpoint x="3840" y="996"/>    
+    <bendpoint x="3840" y="1538"/>    
+    <bendpoint x="3840" y="1792"/>    
+    <bendpoint x="3840" y="2100"/>    
+    <bendpoint x="3840" y="2606"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="62" name="standardColumns"/>      
+      <multiplicity id="63" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="65" name="taskData"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="68" name="columnHeaderView"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="71" name="kanbanService"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="73">    
+    <bendpoint x="4425" y="996"/>    
+    <bendpoint x="4425" y="670"/>    
+    <bendpoint x="4425" y="272"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="74">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="75" name="columnHeaderController"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="78" name="menuView"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="81" name="tasksData"/>      
+      <multiplicity id="82" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="83">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="84" name="columnData"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <bendpoint x="4362" y="670"/>    
+    <bendpoint x="4362" y="996"/>    
+    <bendpoint x="4362" y="1538"/>    
+    <bendpoint x="4362" y="1792"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="87" name="taskListController"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="90" name="projectView"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="92">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="93" name="categoriesData"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="96" name="projectController"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="98">    
+    <bendpoint x="4091" y="1538"/>    
+    <bendpoint x="4091" y="996"/>    
+    <bendpoint x="4091" y="670"/>    
+    <bendpoint x="4091" y="272"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="99">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="100" name="columnsData"/>      
+      <multiplicity id="101" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="102">    
+    <bendpoint x="4467" y="670"/>    
+    <bendpoint x="4467" y="272"/>    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="103">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="104" name="columnListController"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="106">    
+    <bendpoint x="4011" y="2100"/>    
+    <bendpoint x="3997" y="1792"/>    
+    <bendpoint x="3997" y="1538"/>    
+    <bendpoint x="3997" y="996"/>    
+    <bendpoint x="3997" y="670"/>    
+    <bendpoint x="3997" y="272"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="107">    
+    <bendpoint x="4488" y="272"/>    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="108">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="109" name="categoriesListController"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="111">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="112" name="columnControllers"/>      
+      <multiplicity id="113" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="114">    
+    <bendpoint x="4404" y="1538"/>    
+    <bendpoint x="4404" y="996"/>    
+    <bendpoint x="4404" y="670"/>    
+    <bendpoint x="4404" y="272"/>    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="115">    
+    <bendpoint x="3990" y="2100"/>    
+    <bendpoint x="3990" y="2606"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="116" name="columnData"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="118">    
+    <bendpoint x="4383" y="1792"/>    
+    <bendpoint x="4383" y="1538"/>    
+    <bendpoint x="4383" y="996"/>    
+    <bendpoint x="4383" y="670"/>    
+    <bendpoint x="4383" y="272"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="119">    
+    <bendpoint x="3969" y="272"/>    
+    <bendpoint x="3969" y="670"/>    
+    <bendpoint x="3969" y="996"/>    
+    <bendpoint x="3969" y="1538"/>    
+    <bendpoint x="3969" y="1792"/>    
+    <bendpoint x="3969" y="2100"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="120" name="projectData"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="122">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="123" name="categoryData"/>      
+      <multiplicity id="124" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="126" name="taskListController"/>      
+      <multiplicity id="127" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="129" name="taskControllers"/>      
+      <multiplicity id="130" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="131">    
+    <bendpoint x="4446" y="670"/>    
+    <bendpoint x="4446" y="272"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="132">    
+    <bendpoint x="4846" y="670"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="133" name="columnListController"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="135">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="136">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="137">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="138" name="menuController"/>      
+      <multiplicity id="139" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
