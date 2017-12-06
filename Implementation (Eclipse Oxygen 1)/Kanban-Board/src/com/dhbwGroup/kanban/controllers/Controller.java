@@ -79,7 +79,7 @@ public class Controller implements Initializable {
 	public final static int MAX_DEFAULT_TASKS = 8;
 	public final static int MAX_ALLOWED_CHARS = 15;
 	public final static int MIN_COLUMNS = 3;
-	public static final int MAX_TASKS_IN_HISTORY = 3;
+	public static final int MAX_TASKS_IN_HISTORY = 10000;
 	
 	public Controller() throws FileNotFoundException {
 		kanbanService = new KanbanService();

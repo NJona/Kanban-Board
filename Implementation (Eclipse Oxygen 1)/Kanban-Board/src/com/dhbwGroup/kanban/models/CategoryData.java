@@ -27,7 +27,7 @@ public class CategoryData {
     private String title = "Task";
     
     @SerializedName("color")
-    private String color;
+    private String color = "FFFFFFFF";
     
   //---------------------------------------------------------------------------
   //--------------------Getter and Setter--------------------------------------

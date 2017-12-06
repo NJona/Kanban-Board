@@ -265,10 +265,11 @@ public class Task{
 	}
 	
 	private String getRGBCode(Color color) {
-		return String.format( "%02X%02X%02X",
+		return String.format( "%02X%02X%02X%02X",
 	            (int)( color.getRed() * 255 ),
 	            (int)( color.getGreen() * 255 ),
-	            (int)( color.getBlue() * 255 ) );
+	            (int)( color.getBlue() * 255 ),
+	            (int)(color.getOpacity() * 255));
 	}
 	
 	private void showHistory() {
