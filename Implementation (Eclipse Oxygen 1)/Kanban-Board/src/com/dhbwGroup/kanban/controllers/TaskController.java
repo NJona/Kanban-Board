@@ -112,10 +112,7 @@ public class TaskController extends Controller{
 
 			@Override
 			public String toString(CategoryData categoryData) {
-				if(categoryData.getTitle() != null) {
 					return categoryData.getTitle();
-				}
-				return "Category";
 			}
 			
 		});
