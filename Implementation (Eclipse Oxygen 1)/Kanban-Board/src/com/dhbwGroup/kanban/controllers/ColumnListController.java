@@ -89,8 +89,10 @@ public class ColumnListController extends Controller{
 			firstColumn.getColumnHeaderController().getColumnData().getTaskUUIDs().add(taskControllerToAdd.getTaskData().getId());
 			this.saveProject();
 			firstColumn.getColumnTaskListController().getColumnTaskListView().getColumnTaskVBox().getChildren().add(taskControllerToAdd.getTaskView().getTaskGridPane());
+			return false;
+		}else {
+			return true;
 		}
-		return firstColumn.getColumnHeaderController().getColumnData().getTaskUUIDs().size() >= firstColumn.getColumnHeaderController().getColumnData().getMaxTasks(); //reached max Tasks?
 	}
 
 //---------------------------------------------------------------------------

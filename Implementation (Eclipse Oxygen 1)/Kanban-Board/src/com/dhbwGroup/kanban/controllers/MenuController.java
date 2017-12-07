@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 import com.dhbwGroup.kanban.exceptions.CategoryNameAlreadyTakenException;
+import com.dhbwGroup.kanban.exceptions.MaxTasksAlreadyReachedException;
 import com.dhbwGroup.kanban.exceptions.TooManyTasksInActiveDoingColumn;
 import com.dhbwGroup.kanban.models.CategoryData;
 import com.dhbwGroup.kanban.models.ColumnData;
@@ -57,7 +58,11 @@ public class MenuController extends Controller{
 
         menuView.getAddTaskButton().setOnAction(new EventHandler<ActionEvent>() {
                public void handle(ActionEvent t) {
-					addTask();
+					try {
+						addTask();
+					} catch (MaxTasksAlreadyReachedException e) {
+						e.printStackTrace();
+					}
                }
         });
         menuView.getAddCategoryButton().setOnAction(new EventHandler<ActionEvent>() {
@@ -86,8 +91,10 @@ public class MenuController extends Controller{
         });
 	}
 	
-	protected void addTask(){
-		menuView.getAddTaskButton().setDisable(columnListController.addTask());
+	protected void addTask() throws MaxTasksAlreadyReachedException{
+		if(columnListController.addTask()) {
+			throw new MaxTasksAlreadyReachedException();
+		}
     }
 	
 	private void addCategory() {
