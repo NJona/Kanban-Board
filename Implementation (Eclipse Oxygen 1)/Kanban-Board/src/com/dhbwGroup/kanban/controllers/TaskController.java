@@ -115,7 +115,7 @@ public class TaskController extends Controller{
 				if(categoryData.getTitle() != null) {
 					return categoryData.getTitle();
 				}
-				return null;
+				return "Category";
 			}
 			
 		});
